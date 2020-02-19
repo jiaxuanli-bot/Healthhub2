@@ -1,0 +1,41 @@
+server:
+  port: 8089
+
+spring:
+  datasource:
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/test03?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    # JavaMailSender 邮件发送的配置
+  mail:
+    host: smtp.qq.com
+    username: 834992304@qq.com
+    password: apcflpfoexiubdac
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    default-encoding: UTF-8
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.dentist.Healthhub.entity
+
+#showSql
+logging:
+  level:
+    com:
+      dentist:
+        dentistsys:
+          mapper : debug
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    mode: html5
+    servlet:
+      content-type: text/html
+
+
+
