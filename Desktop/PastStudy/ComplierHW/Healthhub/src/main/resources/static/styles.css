@@ -87,6 +87,17 @@ hr {
     width:inherit;
 }
 
+.navbar-green {
+    border-width:0;
+    background-color:#5cb85c;
+    color:#ffffff;
+    font-family:arial,sans-serif;
+    top:0;
+    position:fixed;
+    width:inherit;
+}
+
+
 .navbar-blue li > a,.navbar-toggle  {
    color:#efefef;
 }

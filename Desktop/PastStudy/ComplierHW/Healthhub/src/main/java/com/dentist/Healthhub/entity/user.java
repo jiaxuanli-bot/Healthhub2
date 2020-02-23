@@ -1,4 +1,4 @@
-package com.dentist.dentistsys.entity;
+package com.dentist.Healthhub.entity;
 
 public class user {
     private String id;

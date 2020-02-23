@@ -1,7 +1,7 @@
-package com.dentist.dentistsys.mapper;
+package com.dentist.Healthhub.mapper;
 
-import com.dentist.dentistsys.entity.user;
-import com.dentist.dentistsys.entity.userExample;
+import com.dentist.Healthhub.entity.user;
+import com.dentist.Healthhub.entity.userExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

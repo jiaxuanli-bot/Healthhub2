@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style type ="text/css" >
-        .i{
-            border: none;
-            border-radius: 3px;
-            padding: 15px 20px;
-            width: 100%;
-            outline: 0;
-            background-color:#C0C0C0;
-        }
-    </style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Faceboot - A Facebook style template for Bootstrap</title>
@@ -39,7 +29,7 @@
                         <a href="http://138.49.101.84">Logout</a>
                     </p>
                 </div>
-                <div class="meun-title">${UID}</div>
+                <div class="meun-title">${ID}</div>
                 <div class="meun-title">Account Management</div>
                 <div class="meun-title" id="cp">Change Password</div>
             </div>
@@ -49,7 +39,7 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-green navbar-static-top">
+                <div class="navbar navbar-blue navbar-static-top">
                     <nav class="collapse navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
                             <li>
@@ -91,6 +81,15 @@
                                 </div>
 
                                 <div id="context">
+                                </div>
+                                <div class="well">
+                                    <form class="form-horizontal" role="form">
+                                        <h4>What's New</h4>
+                                        <div class="form-group" style="padding:14px;">
+                                            <textarea id="text" class="form-control" placeholder="Update your status"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="button" onclick="send()">Post</button>
+                                    </form>
                                 </div>
                             </div>
                         </div><!--/row-->
@@ -138,10 +137,11 @@
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>
 <script>
-    $('#cp').on('click' , function() {
+    $('#messagePage').on('click' , function() {
         alert("CP");
         window.location.href="/changePW.html";
     })
+
     var ID;
     var blogs = ${blogs}
     var userID=$("#ID").val();
@@ -194,7 +194,10 @@
 
         //接收信息
         websocket.onmessage = function (msg) {
+            alert("receive");
+
             var data = JSON.parse(msg.data);
+            alert(data.id);
             var html = " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\">View all</a> <h4>"+data.name+"</h4></div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
@@ -239,7 +242,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }

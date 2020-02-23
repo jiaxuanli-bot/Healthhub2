@@ -27,6 +27,13 @@ public class UserService {
         return  arrayList;
     }
 
+    public ArrayList<user> SelAllF(){
+        userExample = new userExample();
+        userExample.createCriteria().andTypeNotEqualTo("tpatient").andTypeNotEqualTo("tdoctor").andTypeNotEqualTo("tnurse").andTypeNotEqualTo("admin");
+        arrayList = (ArrayList<user>) userMapper.selectByExample(userExample);
+        return  arrayList;
+    }
+
     public ArrayList<user> SelectByType(String type){
         userExample = new userExample();
         userExample.createCriteria().andTypeEqualTo(type);

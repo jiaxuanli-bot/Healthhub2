@@ -45,7 +45,10 @@
     </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
-
+    $('#cp').on('click' , function() {
+        alert("CP");
+        window.location.href="/changePW.html";
+    })
     var userID="admin";
     var websocket=null;
 

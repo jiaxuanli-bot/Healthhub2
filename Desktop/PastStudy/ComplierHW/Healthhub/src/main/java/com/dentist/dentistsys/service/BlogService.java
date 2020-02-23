@@ -14,13 +14,23 @@ public class BlogService {
     public blog GetBlogByID(String Id){
         return blogMapper.selectByPrimaryKey(Id);
     }
-   public ArrayList<blog> GetAll(){
+    public ArrayList<blog> GetAll(){
        blogExample blogExample = new blogExample();
        blogExample.createCriteria().andIdIsNotNull();
        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);
        return arrayList;
    }
-   public String GetBlogId(){
+
+    public ArrayList<blog> GetBlogbySeder(String sender){
+        blogExample blogExample = new blogExample();
+        blogExample.createCriteria().andSenderEqualTo(sender);
+        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);
+        return  arrayList;
+    }
+
+
+
+    public String GetBlogId(){
        blogExample blogExample = new blogExample();
        blogExample.createCriteria().andIdIsNotNull();
        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);

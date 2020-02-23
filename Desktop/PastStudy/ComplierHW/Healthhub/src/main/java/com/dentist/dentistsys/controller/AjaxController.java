@@ -38,11 +38,11 @@ public class AjaxController {
         System.out.println(id);
         user user = userservice.Sel(id);
         String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
-        String message = "您的注册验证码为："+checkCode;
+        String message = "Your verification code："+checkCode;
         System.out.println(checkCode);
         try {
             System.out.println(user.getEmail());
-            mailService.sendSimpleMail(user.getEmail()+"", "注册验证码", message);
+            mailService.sendSimpleMail(user.getEmail()+"", "Verification code", message);
         }catch (Exception e){
             return "";
         }
@@ -54,7 +54,15 @@ public class AjaxController {
         String id=request.getParameter("id");
         System.out.println(id);
         user user = userservice.Sel(id);
-        user.setType("1");
+        if (user.getType().equals("Patient")){
+            user.setType("tpatient");
+        }
+        else if (user.getType().equals("Doctor")){
+            user.setType("tdoctor");
+        }
+        else {
+            user.setType("tnurse");
+        }
         String password = getStringRandom(8);
         String message = "Your password is："+password;
         user.setPassword(password);

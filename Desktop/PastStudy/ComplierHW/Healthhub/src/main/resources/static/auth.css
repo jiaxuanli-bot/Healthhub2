@@ -160,6 +160,18 @@ body {
 	outline: 0;
 }
 
+.lowin .lowin-box .context-input{
+	background-color: var(--color-grey);
+	color: var(--color-dark);
+	border: none;
+	border-radius: 3px;
+	text-align : left;
+    height: 100px;
+	width: 100%;
+	outline: 0;
+}
+
+
 .lowin .lowin-box .lowin-btn {
 	display: inline-block;
 	width: 100%;

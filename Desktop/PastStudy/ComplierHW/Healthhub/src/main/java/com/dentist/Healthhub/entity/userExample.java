@@ -1,4 +1,4 @@
-package com.dentist.dentistsys.entity;
+package com.dentist.Healthhub.entity;
 
 import java.util.ArrayList;
 import java.util.List;

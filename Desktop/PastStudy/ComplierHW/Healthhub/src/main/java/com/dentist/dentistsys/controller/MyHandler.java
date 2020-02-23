@@ -28,12 +28,19 @@ public class MyHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-      // Map<String, String> map = JSONObject.parseObject(payload, HashMap.class);
+        Map<String, String> map = JSONObject.parseObject(payload, HashMap.class);
+        String name = map.get("name");
+        System.out.println(name);
         System.out.println("=====接受到的数据"+payload);
         for (WebSocketSession user : users) {
             try {
+                System.out.println(user.getUri());
+                System.out.println("ws://127.0.0.1:8089/myHandler/ID="+name);
+                System.out.println(user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID="+name));
+                System.out.println();
                 if (user.isOpen()) {
-                    user.sendMessage(message);
+                    if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID="+name)){
+                    user.sendMessage(message);}
                 }
             } catch (IOException e) {
                 e.printStackTrace();

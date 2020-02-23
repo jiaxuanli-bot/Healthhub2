@@ -8,6 +8,8 @@
     <result column="realName" property="realname" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="physicion" property="physicion" jdbcType="VARCHAR" />
+    <result column="additional" property="additional" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, userName, passWord, realName, email, type
+    id, userName, passWord, realName, email, type, physicion, additional
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.userExample" >
     select
@@ -102,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.dentist.dentistsys.entity.user" >
     insert into user (id, userName, passWord, 
-      realName, email, type
-      )
+      realName, email, type, 
+      physicion, additional)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
-      )
+      #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{physicion,jdbcType=VARCHAR}, #{additional,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.user" >
     insert into user
@@ -129,6 +131,12 @@
       <if test="type != null" >
         type,
       </if>
+      <if test="physicion != null" >
+        physicion,
+      </if>
+      <if test="additional != null" >
+        additional,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +156,12 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="physicion != null" >
+        #{physicion,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        #{additional,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +192,12 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.physicion != null" >
+        physicion = #{record.physicion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.additional != null" >
+        additional = #{record.additional,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +210,9 @@
       passWord = #{record.password,jdbcType=VARCHAR},
       realName = #{record.realname,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=VARCHAR},
+      physicion = #{record.physicion,jdbcType=VARCHAR},
+      additional = #{record.additional,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +235,12 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="physicion != null" >
+        physicion = #{physicion,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        additional = #{additional,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -222,7 +250,9 @@
       passWord = #{password,jdbcType=VARCHAR},
       realName = #{realname,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      physicion = #{physicion,jdbcType=VARCHAR},
+      additional = #{additional,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
