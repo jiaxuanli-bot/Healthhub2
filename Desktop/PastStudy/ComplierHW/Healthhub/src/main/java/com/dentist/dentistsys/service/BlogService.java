@@ -20,7 +20,6 @@ public class BlogService {
        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);
        return arrayList;
    }
-<<<<<<< HEAD
 
     public ArrayList<blog> GetBlogbySeder(String sender){
         blogExample blogExample = new blogExample();
@@ -33,10 +32,6 @@ public class BlogService {
 
     public String GetBlogId(){
         blogExample blogExample = new blogExample();
-=======
-   public String GetBlogId(){
-       blogExample blogExample = new blogExample();
->>>>>>> parent of fa834d9... Second Iteration
        blogExample.createCriteria().andIdIsNotNull();
        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);
        String num = arrayList.get(arrayList.size()-1).getId();
