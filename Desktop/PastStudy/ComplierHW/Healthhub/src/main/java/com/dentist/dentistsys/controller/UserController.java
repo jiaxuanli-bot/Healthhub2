@@ -111,7 +111,6 @@ public class UserController {
         if(user != null){
             if (user.getPassword().equals(password) ) {
                 mav.addObject("user",user);
-<<<<<<< HEAD
                 if (user.getType().equals("tpatient")){
                     disseminations = disseminationService.getdesseminationforPatient();
                     mav.addObject("ID",user.getPhysicion());
@@ -146,26 +145,6 @@ public class UserController {
                     mav.addObject("UName",user.getRealname());
                     mav.addObject("UID",user.getId());
                     ArrayList<user> users =  userService.SelAllF();
-=======
-                if (user.getType().equals("1")){
-                    blogs = blogService.GetAll();
-                    mav.addObject("ID",user.getId());
-
-                    mav.addObject("blogID",blogService.GetBlogId());
-                    
-                    JSONArray array = (JSONArray) JSONArray.toJSON(blogs);
-                    String jsonblogs = array.toString();
-                    mav.addObject("blogs",jsonblogs);
-                    
-                    System.out.println("userID:    "+user.getId());
-                    mav.setViewName("Main");
-                } else if (user.getType().equals("3")){
-                    mav.setViewName("dentist-index");
-                } else if (user.getType().equals("2")){
-                    mav.setViewName("hygienist-index");
-               }else if(user.getType().equals("admin")){
-                    ArrayList<user> users =  userService.SelectByType("-1");
->>>>>>> parent of fa834d9... Second Iteration
                     mav.addObject("users", JSON.toJSONString(users));
                     mav.setViewName("admin");
                 }else {
