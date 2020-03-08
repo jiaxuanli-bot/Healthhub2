@@ -26,7 +26,6 @@
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
                 <div id="personInfor">
                     <p>
-                        <a href="http://138.49.101.84">Logout</a>
                     </p>
                 </div>
                 <div class="meun-title">${ID}</div>
@@ -58,20 +57,6 @@
                             <!-- main col left -->
                             <div class="col-sm-5">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading"><h4>Labels</h4></div>
-                                    <div class="panel-body pl-2">
-                                        <div class="list-group" id="label">
-                                            <button class="btn-sm btn-info label">shengti</button>
-                                            <button class="btn-sm btn-primary label">shengti</button>
-                                            <button class="btn-sm btn-success label">shengti</button>
-                                            <button class="btn-sm btn-warning label">shengti</button>
-                                            <button class="btn-sm btn-danger label">shengti</button>
-                                            <button class="btn-sm btn-warning label">shengti</button>
-                                            <button class="btn-sm btn-success label">shengti</button>
-                                            <button class="btn-sm btn-info label">shengti</button>
-                                            <button class="btn-sm btn-primary label">shengti</button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -149,14 +134,16 @@
     $(function(){
         ID=parseInt(""+${blogID});
         for (var i=0;i<blogs.length;i++){
-            var inner = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"#\" class=\"pull-right\">View all</a> <h4>"+blogs[i].sender+"</h4></div>\n" +
+            var html = " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\">View all</a> <h4>"+blogs[i].distopic+"</h4></div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4>Label:</p4><button class=\"btn-sm btn-info\">XXX</button>\n" +
+                "                                        <p4>Keyword:</p4><button class=\"btn-sm btn-info\">"+blogs[i].diskeyword+"</button>\n" +
+                "                                        <hr>\n" +
+
                 "                                        <div class=\"clearfix\"></div>\n" +
+                "                                        <p>"+blogs[i].disname+":"+blogs[i].dismessage+"</p>\n" +
                 "                                        <hr>\n" +
-                "                                        <p>"+blogs[i].context+"</p>\n" +
-                "                                        <hr>\n" +
+                "                                        <p>"+blogs[i].disdate+"</p>\n" +
                 "                                        <form>\n" +
                 "                                            <div class=\"input-group\">\n" +
                 "                                                <div class=\"input-group-btn\">\n" +
@@ -168,6 +155,7 @@
                 "\n" +
                 "                                    </div>\n" +
                 "                                </div>";
+            $("#context").append(html);
             $("#indatabase").append(inner);
         }
         connectWebSocket();

@@ -1,13 +1,14 @@
 package com.dentist.dentistsys.controller;
 
 import com.dentist.dentistsys.entity.blog;
+import com.dentist.dentistsys.entity.disscussion;
+import com.dentist.dentistsys.entity.dissemination;
 import com.dentist.dentistsys.entity.user;
-import com.dentist.dentistsys.service.BlogService;
-import com.dentist.dentistsys.service.MailService;
+import com.dentist.dentistsys.service.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.dentist.dentistsys.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,10 @@ public class AjaxController {
     private UserService userservice;
     @Autowired
     private BlogService blogService;
-
+    @Autowired
+    private DisseminationService disseminationService;
+    @Autowired
+    private DisscussionService disscussionService;
 
     @RequestMapping(value = "/mail", method = {RequestMethod.GET})
     @ResponseBody
@@ -101,6 +105,95 @@ public class AjaxController {
         userservice.Del(id);
         return "1";
     }
+    @RequestMapping(value = "/admin/dissemination", method = {RequestMethod.POST})
+    @ResponseBody
+    public String insertDissemination(HttpServletRequest request){
+        System.out.println("ajax dissemination");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        String username=request.getParameter("username");
+        System.out.println(username);
+        String message=request.getParameter("message");
+        System.out.println(message);
+        String topic=request.getParameter("topic");
+        System.out.println(topic);
+        String keyword=request.getParameter("keyword");
+        System.out.println(keyword);
+       String group=request.getParameter("group");
+        System.out.println(group);
+        String status=request.getParameter("status");
+        dissemination dissemination=new dissemination();
+        dissemination.setDisstate(status);
+        dissemination.setDisdate(time);
+        dissemination.setDisname(username);
+        dissemination.setDismessage(message);
+        dissemination.setDistopic(topic);
+        dissemination.setDiskeyword(keyword);
+        dissemination.setDisgroup(group);
+        dissemination.setDisid(status);
+        disseminationService.ins(dissemination);
+        return "1";
+    }
+    @RequestMapping(value = "/approvedis", method = {RequestMethod.POST})
+    @ResponseBody
+    public String approvedis(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println(id);
+        disseminationService.approve(id);
+        return "1";
+    }
+    @RequestMapping(value = "/refusedis", method = {RequestMethod.POST})
+    @ResponseBody
+    public String refusedis(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println(id);
+        disseminationService.DeleteByID(id);
+        return "1";
+    }
 
-
+    @RequestMapping(value = "/approvedisc", method = {RequestMethod.POST})
+    @ResponseBody
+    public String approvedisc(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println(id);
+        disscussionService.approve(id);
+        return "1";
+    }
+    @RequestMapping(value = "/refusedisc", method = {RequestMethod.POST})
+    @ResponseBody
+    public String refusedisc(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println(id);
+        disscussionService.DeleteByID(id);
+        return "1";
+    }
+    @RequestMapping(value = "/admin/disscussion", method = {RequestMethod.POST})
+    @ResponseBody
+    public String insertDisscussion(HttpServletRequest request){
+        System.out.println("ajax dissemination");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        String username=request.getParameter("username");
+        System.out.println(username);
+        String message=request.getParameter("message");
+        System.out.println(message);
+        String topic=request.getParameter("topic");
+        System.out.println(topic);
+        String keyword=request.getParameter("keyword");
+        System.out.println(keyword);
+        String group=request.getParameter("group");
+        System.out.println(group);
+        String status=request.getParameter("status");
+        disscussion disscussion =new disscussion();
+        disscussion.setDisdate(time);
+        disscussion.setDisname(username);
+        disscussion.setDismessage(message);
+        disscussion.setDistopic(topic);
+        disscussion.setDiskeyword(keyword);
+        disscussion.setDisgroup(group);
+        disscussion.setDisstate(status);
+        disscussionService.ins(disscussion);
+        //disseminationService.ins(dissemination);
+        return "1";
+    }
 }

@@ -31,7 +31,7 @@ public class BlogService {
 
 
     public String GetBlogId(){
-       blogExample blogExample = new blogExample();
+        blogExample blogExample = new blogExample();
        blogExample.createCriteria().andIdIsNotNull();
        arrayList = (ArrayList<blog>) blogMapper.selectByExample(blogExample);
        String num = arrayList.get(arrayList.size()-1).getId();

@@ -11,6 +11,7 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/bootstrap.min.css" />
     <link href="/styles.css" rel="stylesheet">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/common.css" />
@@ -24,27 +25,159 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
-                    <div id="personInfor">
-                        <p>
-                            <a href="http://138.49.101.84">Logout</a>
-                        </p>
+                <div id="personInfor">
+                </div>
+                <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
+                <div class="btn" data-toggle="modal" id="cp">Change Password</div>
+                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
+                <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+            </div>
+            <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Create Discussion</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Name:</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >${UID}</div>
+                                            <input type="hidden" id="duname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Type of posting:</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >Disscussion</div>
+                                            <input type="hidden" id="uname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Date: </label>
+                                        <div class="col-xs-4 ">
+                                            <div id="dtime" class="duiqi" id="ddate"></div>
+                                            <input type="hidden" id="ddate" name="type">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Group:</label>
+                                        <div class="col-xs-5 ">
+                                            <select class="form-control col-xs-5 input-sm duiqi" id="dsel2" name="type">
+                                                <option>physicians, patients and administrators</option>
+                                                <option>physicians, nurses and administrators</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Topic:</label>
+                                        <div class="col-xs-3">
+                                            <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Message:</label>
+                                        <div class="col-xs-3">
+                                            <textarea name="message" id="dmessage" class="duiqi" rows="4" cols="25"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                            <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal" id="dsenddis">Send</button>
+                        </div>
                     </div>
-                    <div class="meun-title">${ID}</div>
-                <div class="meun-title">Account Management</div>
-                <div class="meun-title" id="cp">Change Password</div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+            <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Create Dissemination</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Name:</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >${UID}</div>
+                                            <input type="hidden" id="uname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Date: </label>
+                                        <div class="col-xs-4 ">
+                                            <div id="time" class="duiqi" id="date"></div>
+                                            <input type="hidden" id="date" name="type">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="sel1">
+                                        <label class="col-xs-3 control-label">Type of posting:</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >Dissemination</div>
+                                            <input type="hidden" id="uname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="sel2">
+                                        <label class="col-xs-3 control-label">Group:</label>
+                                        <div class="col-xs-5 ">
+                                            <select class="form-control col-xs-5 input-sm duiqi" id="sel1" name="type">
+                                                <option>physicians, patients and administrators</option>
+                                                <option>physicians, nurses and administrators</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Topic:</label>
+                                        <div class="col-xs-3">
+                                            <input type="input" name="topic" id="topic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Message:</label>
+                                        <div class="col-xs-3">
+                                            <textarea name="message" id="message" class="duiqi" rows="4" cols="25"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                            <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal" id="sendpost">Send</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
             </div>
             <!-- /sidebar -->
 
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
-
                 <!-- top nav -->
                 <div class="navbar navbar-blue navbar-static-top">
                     <nav class="collapse navbar-collapse" role="navigation">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
+                        <h4>Dissemination View</h4>
+                        <ul class="nav navbar-nav" id="namebar">
+                            <span id="unamebar">${UID}</span>
+                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>
                         </ul>
                     </nav>
                 </div>
@@ -58,20 +191,7 @@
                             <!-- main col left -->
                             <div class="col-sm-5">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading"><h4>Labels</h4></div>
-                                    <div class="panel-body pl-2">
-                                        <div class="list-group" id="label">
-                                            <button class="btn-sm btn-info label">shengti</button>
-                                            <button class="btn-sm btn-primary label">shengti</button>
-                                            <button class="btn-sm btn-success label">shengti</button>
-                                            <button class="btn-sm btn-warning label">shengti</button>
-                                            <button class="btn-sm btn-danger label">shengti</button>
-                                            <button class="btn-sm btn-warning label">shengti</button>
-                                            <button class="btn-sm btn-success label">shengti</button>
-                                            <button class="btn-sm btn-info label">shengti</button>
-                                            <button class="btn-sm btn-primary label">shengti</button>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -81,15 +201,6 @@
                                 </div>
 
                                 <div id="context">
-                                </div>
-                                <div class="well">
-                                    <form class="form-horizontal" role="form">
-                                        <h4>What's New</h4>
-                                        <div class="form-group" style="padding:14px;">
-                                            <textarea id="text" class="form-control" placeholder="Update your status"></textarea>
-                                        </div>
-                                        <button class="btn btn-primary pull-right" type="button" onclick="send()">Post</button>
-                                    </form>
                                 </div>
                             </div>
                         </div><!--/row-->
@@ -137,49 +248,48 @@
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>
 <script>
-    $('#messagePage').on('click' , function() {
-        alert("CP");
+    $('#cp').on('click' , function() {
         window.location.href="/changePW.html";
     })
-
+    $('#VD').on('click' , function() {
+        window.location.href="/disscussion/View";
+    })
+    $("#namebarb").on('click' , function() {
+        window.location.href="http://138.49.101.84";
+    })
+    $("#VDm").on('click' , function() {
+        window.location.href="/dissemination/uview";
+    })
     var ID;
     var blogs = ${blogs}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+        connectWebSocket();
         ID=parseInt(""+${blogID});
         for (var i=0;i<blogs.length;i++){
-            var inner = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"#\" class=\"pull-right\">View all</a> <h4>"+blogs[i].sender+"</h4></div>\n" +
+            var html =  " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4>Label:</p4><button class=\"btn-sm btn-info\">XXX</button>\n" +
+                "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
+                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
+                "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
-                "                                        <p>"+blogs[i].context+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <form>\n" +
-                "                                            <div class=\"input-group\">\n" +
-                "                                                <div class=\"input-group-btn\">\n" +
-                "                                                    <button class=\"btn btn-default\">+1</button><button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-share\"></i></button>\n" +
-                "                                                </div>\n" +
-                "                                                <input type=\"text\" class=\"form-control\" placeholder=\"Add a comment..\">\n" +
-                "                                            </div>\n" +
-                "                                        </form>\n" +
-                "\n" +
+                "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
                 "                                    </div>\n" +
                 "                                </div>";
-            $("#indatabase").append(inner);
+            $("#context").append(html);
         }
-        connectWebSocket();
+
     })
 
     //建立WebSocket连接
     function connectWebSocket(){
-
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID="+userID);
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=doc");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -194,27 +304,17 @@
 
         //接收信息
         websocket.onmessage = function (msg) {
-            alert("receive");
-
             var data = JSON.parse(msg.data);
-            alert(data.id);
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\">View all</a> <h4>"+data.name+"</h4></div>\n" +
+            // alert(data.toString());
+            var html = "<div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4>Label:</p4><button class=\"btn-sm btn-info\">Heart</button>\n" +
+                "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
+                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
+                "                                        <p><b>Time:</b>"+data.text.time+"</p>\n" +
                 "                                        <hr>\n" +
-                "                                        <p>"+data.text+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <form>\n" +
-                "                                            <div class=\"input-group\">\n" +
-                "                                                <div class=\"input-group-btn\">\n" +
-                "                                                    <button class=\"btn btn-default\">+1</button><button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-share\"></i></button>\n" +
-                "                                                </div>\n" +
-                "                                                <input type=\"text\" class=\"form-control\" placeholder=\"Add a comment..\">\n" +
-                "                                            </div>\n" +
-                "                                        </form>\n" +
-                "\n" +
+                "                                        <p><b>Message:</b>"+data.text.message+"</p>\n" +
                 "                                    </div>\n" +
                 "                                </div>";
             $("#context").append(html);
@@ -253,5 +353,168 @@
         }
     }
 </script>
+
+<script type="text/javascript">
+    Date.prototype.Format = function (fmt) { // author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, // 月份
+            "d+": this.getDate(), // 日
+            "h+": this.getHours(), // 小时
+            "m+": this.getMinutes(), // 分
+            "s+": this.getSeconds(), // 秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+            "S": this.getMilliseconds() // 毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    $(document).ready(function () {
+        $('#sendMB').on('click' , function() {
+            $("#time").empty();
+            var time2 = new Date().Format("MM/dd/yyyy hh:mm");
+            $("#date").val(time2.toString());
+            $('#time').append(""+time2);
+        })
+
+        $('#creatDis').on('click' , function() {
+            $("#dtime").empty();
+            var time2 = new Date().Format("MM/dd/yyyy hh:mm");
+            $("#ddate").val(time2.toString());
+            $('#dtime').append("  "+time2);
+        })
+        $('#dsenddis').on('click' , function() {
+            if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/admin/disscussion",
+                    data: {
+                        "time":""+$("#ddate").val(),
+                        "username":""+$("#duname").val(),
+                        "message":""+$("#dmessage").val(),
+                        "topic":""+$("#dtopic").val(),
+                        "keyword":""+$("#dkeyword").val(),
+                        "group":"nurse",
+                        "status":"0",
+                    },
+                    success:function(data){
+                        if (data == "1"){
+                            $("#"+id).remove();
+                        }
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/admin/disscussion",
+                    data: {
+                        "time":""+$("#ddate").val(),
+                        "username":""+$("#duname").val(),
+                        "message":""+$("#dmessage").val(),
+                        "topic":""+$("#dtopic").val(),
+                        "keyword":""+$("#dkeyword").val(),
+                        "group":"patient",
+                        "status":"0",
+                    },
+                    success:function(data){
+                        if (data == "1"){
+                            $("#"+id).remove();
+                        }
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }
+
+        })
+
+
+        $('#sendpost').on('click' , function() {
+            if ($("#sel2 option:selected").text()=="physicians, nurses and administrators") {
+                var postValue = {};
+                postValue.id = "1234";//$("#blogID").val();
+                postValue.name = "nurse";
+                var date = {};
+                date.time = $("#date").val();
+                date.username  = $("#uname").val();
+                date.message = $("#message").val();
+                date.topic = $("#topic").val();
+                date.keyword = $("#keyword").val();
+                date.type = "dissemination";
+                //var dateStr = JSON.stringify(date);
+                postValue.text=date;
+                websocket.send(JSON.stringify(postValue));
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/admin/dissemination",
+                    data: {
+                        "time":""+$("#date").val(),
+                        "username":""+$("#uname").val(),
+                        "message":""+$("#message").val(),
+                        "topic":""+$("#topic").val(),
+                        "keyword":""+$("#keyword").val(),
+                        "group":"nurse",
+                        "status":"1",
+                    },
+                    success:function(data){
+                        if (data == "1"){
+                            $("#"+id).remove();
+                        }
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }
+            else {
+                var postValue = {};
+                postValue.id = "1234";//$("#blogID").val();
+                postValue.name = "patient";
+                var date = {};
+                date.time = $("#date").val();
+                date.username  = $("#uname").val();
+                date.message = $("#message").val();
+                date.topic = $("#topic").val();
+                date.keyword = $("#keyword").val();
+                date.type = "dissemination";
+                //var dateStr = JSON.stringify(date);
+                // date.topic =
+                postValue.text=date;
+                websocket.send(JSON.stringify(postValue));
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/admin/dissemination",
+                    data: {
+                        "time":""+$("#date").val(),
+                        "username":""+$("#uname").val(),
+                        "message":""+$("#message").val(),
+                        "topic":""+$("#topic").val(),
+                        "keyword":""+$("#keyword").val(),
+                        "group":"patient",
+                        "status":"1",
+                    },
+                    success:function(data){
+                        if (data == "1"){
+                            $("#"+id).remove();
+                        }
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }
+        })
+    });
+</script>
+
+
 </body>
 </html>

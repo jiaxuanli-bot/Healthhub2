@@ -23,7 +23,7 @@
 
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
-                    <form id="myForm" method="post">
+                    <form id="myForm" method="get">
                         <p>Verification</p>
                         <div class="lowin-group">
                             <label>SafeCode</label>

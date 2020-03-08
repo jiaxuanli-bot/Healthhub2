@@ -314,7 +314,6 @@ select {
 .duiqi {
 	margin-left: -26px!important;
 	margin-top: 7px;
-	width: 200px!important;
 }
 .form-horizontal .form-group {
 	margin-right: -100px!important;
@@ -349,3 +348,39 @@ select {
 .right {
 	float: right;
 }
+#rightContentPost{
+	display: none;
+
+}
+#ti{
+	width: 200px;
+	height: 100px;
+}
+#unamnebtn
+{
+	color: whitesmoke;
+	position:relative;
+	left:1200px;
+}
+#signoutbtn{
+	position:relative;
+    left:1210px;
+}
+#topbar{
+	background: #4d5e70 bottom;;
+}
+#namebar{
+	font-size: 20px;
+ margin-left: 1000px;
+}
+#namebarb{
+	margin-left: 20px;
+}
+#unamebar{
+	font-size: 20px;
+}
+#unamebarl{
+	font-size: 20px;
+}
+
+

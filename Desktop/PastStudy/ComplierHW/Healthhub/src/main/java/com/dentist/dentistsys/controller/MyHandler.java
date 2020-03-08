@@ -5,6 +5,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+
 import javax.websocket.OnOpen;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,21 +30,59 @@ public class MyHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
         Map<String, String> map = JSONObject.parseObject(payload, HashMap.class);
+        System.out.println(session.getUri());
+        System.out.println(map);
+        System.out.println();
         String name = map.get("name");
         System.out.println(name);
         System.out.println("=====接受到的数据"+payload);
-        for (WebSocketSession user : users) {
-            try {
-                System.out.println(user.getUri());
-                System.out.println("ws://127.0.0.1:8089/myHandler/ID="+name);
-                System.out.println(user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID="+name));
-                System.out.println();
-                if (user.isOpen()) {
-                    if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID="+name)){
-                    user.sendMessage(message);}
+        if (name.equals("patient")) {
+            System.out.println("in dissemiantion patient");
+            for (WebSocketSession user : users) {
+                try {
+                    if (user.isOpen()) {
+                        System.out.println(user.getUri());
+                        System.out.println(session.getUri());
+//                     System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20patients%20and%20administrator"));
+                        if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=p")||user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=doc")) {
+                            System.out.println(user);
+                            user.sendMessage(message);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            }
+        } else if(name.equals("dis")){
+            for (WebSocketSession user : users) {
+                try {
+                    if (user.isOpen()) {
+                        System.out.println(user.getUri());
+                        System.out.println(session.getUri());
+//                       System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20patients%20and%20administrator"));
+                        if (user.getUri().toString().equals(session.getUri().toString())) {
+                            user.sendMessage(message);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            for (WebSocketSession user : users) {
+                try {
+                    if (user.isOpen()) {
+                        System.out.println(user.getUri());
+                     System.out.println(session.getUri());
+//                        System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20nurse%20and%20administrator"));
+                        if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20nurse%20and%20administrator")||user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=doc")) {
+                            user.sendMessage(message);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

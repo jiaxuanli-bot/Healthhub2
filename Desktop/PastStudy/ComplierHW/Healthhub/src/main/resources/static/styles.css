@@ -96,7 +96,25 @@ hr {
     position:fixed;
     width:inherit;
 }
+.navbar-black{
+    border-width:0;
+    background-color:#1A1A1A;
+    color:#ffffff;
+    font-family:arial,sans-serif;
+    top:0;
+    position:fixed;
+    width:inherit;
+}
 
+.navbar-pink{
+    border-width:0;
+    background-color:#e4b9b9;
+    color:#ffffff;
+    font-family:arial,sans-serif;
+    top:0;
+    position:fixed;
+    width:inherit;
+}
 
 .navbar-blue li > a,.navbar-toggle  {
    color:#efefef;
