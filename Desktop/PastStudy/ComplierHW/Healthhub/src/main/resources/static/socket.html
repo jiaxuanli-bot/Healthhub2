@@ -26,8 +26,7 @@
 <body class="flat-blue sidebar-collapse">
 <div class="sidebar">
     <div class="menu-control toggle-sidebar">
-        <a class="navbar-brand" href="#">
-            <i class="fa fa-bar-chart"></i>Dentist</a>
+        <a class="navbar-brand" href="#"><i class="fa fa-bar-chart"></i>Dentist</a>
         <i class="fa fa-bars navicon"></i>
     </div>
 </div>
@@ -157,6 +156,7 @@
             //关闭连接
             console.log("onclose");
         }
+
         //接收信息
         websocket.onmessage = function (msg) {
             console.log(msg.data);

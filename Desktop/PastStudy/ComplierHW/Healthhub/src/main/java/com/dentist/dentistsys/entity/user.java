@@ -13,10 +13,6 @@ public class user {
 
     private String type;
 
-    private String physicion;
-
-    private String additional;
-
     public String getId() {
         return id;
     }
@@ -65,22 +61,6 @@ public class user {
         this.type = type;
     }
 
-    public String getPhysicion() {
-        return physicion;
-    }
-
-    public void setPhysicion(String physicion) {
-        this.physicion = physicion;
-    }
-
-    public String getAdditional() {
-        return additional;
-    }
-
-    public void setAdditional(String additional) {
-        this.additional = additional;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,8 +73,6 @@ public class user {
         sb.append(", realname=").append(realname);
         sb.append(", email=").append(email);
         sb.append(", type=").append(type);
-        sb.append(", physicion=").append(physicion);
-        sb.append(", additional=").append(additional);
         sb.append("]");
         return sb.toString();
     }

@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style type ="text/css" >
-        .i{
-            border: none;
-            border-radius: 3px;
-            padding: 15px 20px;
-            width: 100%;
-            outline: 0;
-            background-color:#C0C0C0;
-        }
-    </style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Faceboot - A Facebook style template for Bootstrap</title>
@@ -23,7 +13,7 @@
     <![endif]-->
     <link href="/styles.css" rel="stylesheet">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/common.css" />
+
 </head>
 <body>
 <input type="hidden" id="blogID" name="type" value=${blogID}>
@@ -34,6 +24,7 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+<<<<<<< HEAD
                 <div id="personInfor">
                     <p>
                     </p>
@@ -42,6 +33,8 @@
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+=======
+>>>>>>> parent of fa834d9... Second Iteration
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -112,7 +105,7 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-green navbar-static-top">
+                <div class="navbar navbar-blue navbar-static-top">
                     <nav class="collapse navbar-collapse" role="navigation">
                         <h4>Dissemination View</h4>
                         <ul class="nav navbar-nav" id="namebar">
@@ -141,6 +134,15 @@
                                 </div>
 
                                 <div id="context">
+                                </div>
+                                <div class="well">
+                                    <form class="form-horizontal" role="form">
+                                        <h4>What's New</h4>
+                                        <div class="form-group" style="padding:14px;">
+                                            <textarea id="text" class="form-control" placeholder="Update your status"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="button" onclick="send()">Post</button>
+                                    </form>
                                 </div>
                             </div>
                         </div><!--/row-->
@@ -188,6 +190,7 @@
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>
 <script>
+<<<<<<< HEAD
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -213,9 +216,11 @@
     $("#namebarb").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
+=======
+>>>>>>> parent of fa834d9... Second Iteration
     var ID;
     var blogs = ${blogs}
-    var userID=$("#ID").val();
+    var userID="admin";
     var websocket=null;
     $(function(){
         $('#creatDis').on('click' , function() {
@@ -276,6 +281,7 @@
         })
 
         ID=parseInt(""+${blogID});
+        alert("start");
         for (var i=0;i<blogs.length;i++){
             var html = " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
@@ -314,9 +320,17 @@
 
         //接收信息
         websocket.onmessage = function (msg) {
+            alert("receive");
+
             var data = JSON.parse(msg.data);
+<<<<<<< HEAD
             var html =" <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
+=======
+            alert(data.id);
+            var html = " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\">View all</a> <h4>"+data.name+"</h4></div>\n" +
+>>>>>>> parent of fa834d9... Second Iteration
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
                 "                                        <p><b>Type of posting:</b>dessimination</p>\n" +

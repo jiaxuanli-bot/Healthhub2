@@ -22,10 +22,7 @@
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/build.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
-   <script>
+    <script>
        $().ready(function() {
             $.validator.addMethod("phoneUS",
                 function(phone_number, element)
@@ -44,14 +41,6 @@
                 },
                 "Password has six character,and contain one number and one letter at least");
 
-           $.validator.addMethod("username",
-               function(username, element)
-               {
-                   username = username.replace(/\s+/g,"");
-                   return this.optional(element) ||
-                       username.match(/^([A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/);
-               },
-               "username must start with charcater");
 
             $("#signupForm").validate({
                 rules: {
@@ -94,65 +83,49 @@
             });
         });
     </script>
-
 </head>
 <!--<link rel="stylesheet" href="test.css" type="text/css" />-->
 <body style="background:url('/background.png') no-repeat top left; background-size: cover;">
 <div class="lowin lowin-green">
     <div class="lowin-brand">
-        <img src="/kodinger.jpg" alt="logo">
+        <img src="kodinger.jpg" alt="logo">
     </div>
-
-   <div class="lowin-wrapper">
+    <div class="lowin-wrapper">
         <div class="lowin-box lowin-login">
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
                     <form action="/users/register/id"  id="signupForm" method="post">
                         <p>Creat New Account</p>
-
                         <div class="lowin-group">
                             <label>UserName</label>
                             <input type="text" name="id" id="username" autocomplete="name" class="lowin-input">
                         </div>
-
                         <div class="lowin-group">
                             <label>Email</label>
                             <input type="text" name="email" id="email" autocomplete="name" class="lowin-input">
                         </div>
-
                         <div class="lowin-group">
                             <label>Telephone</label>
                             <input type="text" name="telephone" id="telephone" autocomplete="name" class="lowin-input phoneUS">
                         </div>
-
                         <div class="lowin-group">
-                            <label>Preferred name</label>
+                            <label>Realname</label>
                             <input type="text" name="realname" id="realname" autocomplete="name" class="lowin-input">
                         </div>
-
-                        <label for="sel1">Type:</label>
-                        <select class="form-control" id="sel1" name="type">
-                            <option>Patient</option>
-                            <option>Nurse</option>
-                            <option id="do">Doctor</option>
-                        </select>
-
-                        <div id="sel2d">
-                        <label for="sel2">Physician:</label>
-                        <select class="form-control" name="physicion" id="sel2">
-                        </select>
-                        <br>
+                        <div class="lowin-group">
+                            <label>Password</label>
+                            <input type="password" name="password" id="password" autocomplete="name" class="lowin-input">
                         </div>
-
-                        <div>
-                            <label>Additional</label>
-                            <textarea type="text" name="additional" id="additional" class="context-input"></textarea>
+                        <div class="lowin-group">
+                            <label>ConformPassword</label>
+                            <input type="password" id="confirm_password" name="confirm_password" autocomplete="name" class="lowin-input">
                         </div>
+                        <input type="hidden" name="type" value="-1" />
                         <button class="lowin-btn" id="login">
                             Register
                         </button>
                         <div class="text-foot">
-                            Don't have an account? <a href="/templates/register.html" class="register-link">Register</a>
+                            Don't have an account? <a href="/register.html" class="register-link">Register</a>
                         </div>
                     </form>
                 </div>
@@ -163,21 +136,14 @@
 
 
 <script>
-    $("#sel1").change(function(){
-        if (    $("#sel1 option:selected").text()=="Doctor"){
-            $("#sel2d").attr("style","display:none;");
-        }
-        else {
-            $("#sel2d").attr("style","display:block;");
-        }
-    })
-    var users = ${docs};
-    $(document).ready(function () {
-        var tablecontext="";
-        for (var i=0;i<users.length;i++){
-            tablecontext = tablecontext+"<option>"+users[i].id+"</option>"
-        }
-        $("#sel2").append(tablecontext);
+    $("#email").on("click",function(){
+        $("#telephone").removeClass('lowin-input').addClass('i');
+         $("#telephone").attr("disabled","disabled");
+    });
+
+    $("#telephone").on("click",function(){
+        $("#email").addClass("i");
+        $("#email").attr("disabled","disabled");
     });
 </script>
 </body>

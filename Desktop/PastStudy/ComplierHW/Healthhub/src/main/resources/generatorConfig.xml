@@ -17,13 +17,17 @@
                         userId="root"
                         password="123" />
 
-        <javaModelGenerator targetPackage="com.dentist.dentistsys.entity" targetProject="src/main/java" />
+        <javaModelGenerator targetPackage="com.dentist.Healthhub.entity" targetProject="src/main/java" />
 
         <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources" />
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dentist.dentistsys.mapper" targetProject="src/main/java" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dentist.Healthhub.mapper" targetProject="src/main/java" />
 
+<<<<<<< HEAD
         <table tableName="disscussion" domainObjectName="disscussion" />
+=======
+        <table tableName="blog" domainObjectName="blog" />
+>>>>>>> parent of fa834d9... Second Iteration
     </context>
 
 </generatorConfiguration>

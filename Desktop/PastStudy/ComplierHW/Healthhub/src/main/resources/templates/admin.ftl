@@ -28,6 +28,12 @@
     <!-- 左侧菜单栏目块 -->
     <div class="leftMeun" id="leftMeun">
         <div id="personInfor">
+<<<<<<< HEAD
+=======
+            <p>
+                <a href="http://localhost:8089">Logout</a>
+            </p>
+>>>>>>> parent of fa834d9... Second Iteration
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
@@ -191,17 +197,14 @@
                     <div class="row tableHeader">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             UserName
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            RealName
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
-                            Physician
-                        </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            Additional
+                            Email
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            RealName
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             action
@@ -225,12 +228,19 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <form class="form-horizontal">
+<<<<<<< HEAD
 
                                         <div class="form-group">
                                             <label class="col-xs-3 control-label">Name:${UID}</label>
                                             <div class="col-xs-2 ">
                                                 <div class="col-xs-2 duiqi" >${UID}</div>
                                                 <input type="hidden" id="uname" name="type" value=${UID}>
+=======
+                                        <div class="form-group ">
+                                            <label class="col-xs-3 control-label">name:</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm duiqi" placeholder="">
+>>>>>>> parent of fa834d9... Second Iteration
                                             </div>
                                         </div>
 
@@ -312,9 +322,8 @@
              tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
                  "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
                  "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
-                 "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
+                 "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].email+"</span></div>\n" +
+                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].realname+"</span></div>\n" +
                  "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
                  + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
                  "                            </div>"
@@ -445,8 +454,8 @@
 
 
         $('.approve').on('click' , function() {
+            alert(this.id);
             var id = ""+this.name;
-            $("#"+id).remove();
             $.ajax({
                 type:"POST",
                 url:"/ajax/approve",
@@ -455,6 +464,7 @@
                 },
                 success:function(data){
                     if (data == "1"){
+                        $("#"+id).remove();
                     }
                 },
                 error:function(jqXHR){

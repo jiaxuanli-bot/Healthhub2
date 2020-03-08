@@ -4,7 +4,9 @@ import com.dentist.dentistsys.entity.user;
 import com.dentist.dentistsys.entity.userExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface userMapper {
     int countByExample(userExample example);
 

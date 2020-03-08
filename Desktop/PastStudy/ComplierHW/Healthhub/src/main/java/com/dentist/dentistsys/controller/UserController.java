@@ -9,7 +9,6 @@ import com.dentist.dentistsys.entity.user;
 import com.dentist.dentistsys.service.BlogService;
 import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.UserService;
-import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +49,7 @@ public class UserController {
         user = userService.Sel(id);
         session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
+<<<<<<< HEAD
         if(user != null){
             if (user.getPassword().equals(password) ) {
                 mav.setViewName("wrongpassword");
@@ -109,10 +109,13 @@ public class UserController {
         user = userService.Sel(id);
         session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
+=======
+
+>>>>>>> parent of fa834d9... Second Iteration
         if(user != null){
             if (user.getPassword().equals(password) ) {
-                mav.setViewName("wrongpassword");
                 mav.addObject("user",user);
+<<<<<<< HEAD
                 if (user.getType().equals("tpatient")){
                     disseminations = disseminationService.getdesseminationforPatient();
                     mav.addObject("ID",user.getPhysicion());
@@ -147,6 +150,26 @@ public class UserController {
                     mav.addObject("UName",user.getRealname());
                     mav.addObject("UID",user.getId());
                     ArrayList<user> users =  userService.SelAllF();
+=======
+                if (user.getType().equals("1")){
+                    blogs = blogService.GetAll();
+                    mav.addObject("ID",user.getId());
+
+                    mav.addObject("blogID",blogService.GetBlogId());
+                    
+                    JSONArray array = (JSONArray) JSONArray.toJSON(blogs);
+                    String jsonblogs = array.toString();
+                    mav.addObject("blogs",jsonblogs);
+                    
+                    System.out.println("userID:    "+user.getId());
+                    mav.setViewName("Main");
+                } else if (user.getType().equals("3")){
+                    mav.setViewName("dentist-index");
+                } else if (user.getType().equals("2")){
+                    mav.setViewName("hygienist-index");
+               }else if(user.getType().equals("admin")){
+                    ArrayList<user> users =  userService.SelectByType("-1");
+>>>>>>> parent of fa834d9... Second Iteration
                     mav.addObject("users", JSON.toJSONString(users));
                     mav.setViewName("admin");
                 }else {
@@ -154,15 +177,12 @@ public class UserController {
                 }
                 return mav;
             }
+            mav.setViewName("wrongpassword");
             return mav;
         }
         mav.setViewName("nouser");
         return mav;
     }
-
-
-
-
     @RequestMapping(value = "/register/id", method = {RequestMethod.POST})
     public ModelAndView userregister(HttpServletRequest request, HttpSession session, @ModelAttribute("form") user user) {
         user user1 =userService.Sel(user.getId());
@@ -192,29 +212,5 @@ public class UserController {
         return  mav;
     }
 
-    @RequestMapping(value = "/register", method = {RequestMethod.GET})
-    public ModelAndView Reg(HttpServletRequest request, HttpSession session) {
-        ModelAndView mav=new ModelAndView();
-        ArrayList<user> users = userService.SelectByType("tdoctor");
-        mav.addObject("docs", JSON.toJSONString(users));
-        mav.setViewName("register");
-        return  mav;
-    }
-
-    @RequestMapping(value = "/change", method = {RequestMethod.POST})
-    public ModelAndView Changepasswd(HttpServletRequest request, HttpSession session) {
-        ModelAndView mav=new ModelAndView();
-        session.getId();
-        user user;
-        user = userService.Sel((String) session.getAttribute("userid"));
-        System.out.println("session id is sdkjansakjnda");
-        System.out.println((String) session.getAttribute("userid"));
-        System.out.println(user);
-        password = request.getParameter("password");
-        user.setPassword(password);
-        userService.Upd(user);
-        mav.setViewName("index");
-        return  mav;
-    }
 }
 
