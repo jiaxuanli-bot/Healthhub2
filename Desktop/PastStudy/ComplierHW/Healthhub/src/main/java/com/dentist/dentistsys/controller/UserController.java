@@ -49,7 +49,6 @@ public class UserController {
         user = userService.Sel(id);
         session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
-<<<<<<< HEAD
         if(user != null){
             if (user.getPassword().equals(password) ) {
                 mav.setViewName("wrongpassword");
@@ -109,9 +108,6 @@ public class UserController {
         user = userService.Sel(id);
         session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
-=======
-
->>>>>>> parent of fa834d9... Second Iteration
         if(user != null){
             if (user.getPassword().equals(password) ) {
                 mav.addObject("user",user);

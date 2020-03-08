@@ -29,7 +29,6 @@ public class MyHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-<<<<<<< HEAD
         Map<String, String> map = JSONObject.parseObject(payload, HashMap.class);
         System.out.println(session.getUri());
         System.out.println(map);
@@ -83,14 +82,6 @@ public class MyHandler extends TextWebSocketHandler {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-=======
-      // Map<String, String> map = JSONObject.parseObject(payload, HashMap.class);
-        System.out.println("=====接受到的数据"+payload);
-        for (WebSocketSession user : users) {
-            try {
-                if (user.isOpen()) {
-                    user.sendMessage(message);
->>>>>>> parent of fa834d9... Second Iteration
                 }
             }
         }
