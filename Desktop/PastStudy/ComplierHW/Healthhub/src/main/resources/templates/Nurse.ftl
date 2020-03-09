@@ -39,9 +39,10 @@
                     </p>
                 </div>
                 <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
-                <div class="btn" data-toggle="modal" id="cp">Change Password</div>
+                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -49,7 +50,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Creat Discussion</h4>
+                            <h4 class="modal-title">Create Discussion</h4>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -90,6 +91,7 @@
                                             <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">Message:</label>
                                         <div class="col-xs-3">
@@ -112,7 +114,7 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-green navbar-static-top">
+                <div class="navbar navbar-pink navbar-static-top">
                     <nav class="collapse navbar-collapse" role="navigation">
                         <h4>Dissemination View</h4>
                         <ul class="nav navbar-nav" id="namebar">
@@ -121,7 +123,6 @@
                         </ul>
                     </nav>
                 </div>
-
                 <!-- /top nav -->
                 <div class="padding">
                     <div class="full col-sm-9">
@@ -205,7 +206,8 @@
         return fmt;
     }
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
+        alert("CP");
+        window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View";
@@ -299,7 +301,7 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=p");
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=physicians, nurse and administrator");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -315,7 +317,8 @@
         //接收信息
         websocket.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
-            var html =" <div class=\"panel panel-default\">\n" +
+            // alert(data.toString());
+            var html = " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
@@ -351,7 +354,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }

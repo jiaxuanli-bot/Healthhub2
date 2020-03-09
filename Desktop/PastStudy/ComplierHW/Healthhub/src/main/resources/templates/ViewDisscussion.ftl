@@ -13,7 +13,7 @@
     </style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Faceboot - A Facebook style template for Bootstrap</title>
+    <title>ViewDisscussion</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,6 @@
     <link rel="stylesheet" type="text/css" href="/common.css" />
 </head>
 <body>
-<input type="hidden" id="blogID" name="type" value=${blogID}>
 <input type="hidden" id="ID" name="type" value=${ID}>
 <a href="/blog/view"></a>
 <div class="wrapper">
@@ -37,7 +36,7 @@
                 <div id="personInfor">
                     <p>
                     </p>
-                </div>
+               </div>
                 <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
@@ -49,7 +48,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Creat Discussion</h4>
+                            <h4 class="modal-title">Create Discussion</h4>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -58,6 +57,7 @@
                                         <label class="col-xs-3 control-label">Name:</label>
                                         <div class="col-xs-2 ">
                                             <div class="col-xs-2 duiqi" >${UID}</div>
+                                            <input type="hidden" id="utype" name="type" value=${utype}>
                                             <input type="hidden" id="duname" name="type" value=${UID}>
                                         </div>
                                     </div>
@@ -71,7 +71,6 @@
                                         <label class="col-xs-3 control-label">Date: </label>
                                         <div class="col-xs-4 ">
                                             <div id="dtime" class="duiqi" id="ddate"></div>
-                                            <input type="hidden" id="ddate" name="type">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -112,16 +111,14 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-green navbar-static-top">
+                <div class="navbar navbar-static-top" id="navtop">
                     <nav class="collapse navbar-collapse" role="navigation">
-                        <h4>Dissemination View</h4>
                         <ul class="nav navbar-nav" id="namebar">
                             <span id="unamebar">${UID}</span>
                             <button id="namebarb" class="btn-sm btn-info label">Logout</button>
                         </ul>
                     </nav>
                 </div>
-
                 <!-- /top nav -->
                 <div class="padding">
                     <div class="full col-sm-9">
@@ -205,19 +202,37 @@
         return fmt;
     }
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
-    })
-    $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View";
-    })
-    $("#namebarb").on('click' , function() {
-        window.location.href="http://138.49.101.84";
+        alert("CP");
+        window.location.href="/changePW.html";
     })
     var ID;
-    var blogs = ${blogs}
+    var blogs = ${disscussions}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+        $('#cp').on('click' , function() {
+            window.location.href="/changePW.html";
+        })
+        $('#VD').on('click' , function() {
+            window.location.href="/disscussion/View";
+        })
+        $("#namebarb").on('click' , function() {
+            window.location.href="http://138.49.101.84";
+        })
+        $("#VDm").on('click' , function() {
+            window.location.href="/dissemination/uview";
+        })
+
+        if ($("#utype").val()=="tpatient"){
+            //alert("patient")
+            $("#navtop").addClass("navbar-green");
+        }else if ($("#utype").val()=="tnurse"){
+            //alert("nurse")
+            $("#navtop").addClass("navbar-pink");
+        }else {
+            //alert("doc");
+            $("#navtop").addClass("navbar-blue");
+        }
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
             var time2 = new Date().Format("MM/dd/yyyy hh:mm");
@@ -277,8 +292,8 @@
 
         ID=parseInt(""+${blogID});
         for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
+            var html =  " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
                 "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
@@ -299,7 +314,7 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=p");
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=discussion");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -314,16 +329,28 @@
 
         //接收信息
         websocket.onmessage = function (msg) {
+            //  alert(msg.data)
             var data = JSON.parse(msg.data);
-            var html =" <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
+            // alert(data.toString());
+            var html = " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\">View all</a> <h4>"+data.text.topic+"</h4></div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+data.text.time+"</p>\n" +
+                "                                        <p4>Keyword:</p4><button class=\"btn-sm btn-info\">"+data.text.keyword+"</button>\n" +
                 "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+data.text.message+"</p>\n" +
+
+                "                                        <div class=\"clearfix\"></div>\n" +
+                "                                        <p>"+data.text.username+":"+data.text.message+"</p>\n" +
+                "                                        <hr>\n" +
+                "                                        <p>"+data.text.time+"</p>\n" +
+                "                                        <form>\n" +
+                "                                            <div class=\"input-group\">\n" +
+                "                                                <div class=\"input-group-btn\">\n" +
+                "                                                    <button class=\"btn btn-default\">+1</button><button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-share\"></i></button>\n" +
+                "                                                </div>\n" +
+                "                                                <input type=\"text\" class=\"form-control\" placeholder=\"Add a comment..\">\n" +
+                "                                            </div>\n" +
+                "                                        </form>\n" +
+                "\n" +
                 "                                    </div>\n" +
                 "                                </div>";
             $("#context").append(html);
@@ -351,7 +378,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }

@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style type ="text/css" >
-        .i{
-            border: none;
-            border-radius: 3px;
-            padding: 15px 20px;
-            width: 100%;
-            outline: 0;
-            background-color:#C0C0C0;
-        }
-    </style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Faceboot - A Facebook style template for Bootstrap</title>
+    <title></title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
@@ -23,10 +13,11 @@
     <![endif]-->
     <link href="/styles.css" rel="stylesheet">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/common.css" />
+    <link rel="stylesheet" type="text/css" href="/common.css"/>
 </head>
 <body>
-<input type="hidden" id="blogID" name="type" value=${blogID}>
+<input type="hidden" id="utype" name="type" value=${utype}>
+<input type="hidden" id="DisscussionID" name="type" value=${DisscussionID}>
 <input type="hidden" id="ID" name="type" value=${ID}>
 <a href="/blog/view"></a>
 <div class="wrapper">
@@ -38,6 +29,7 @@
                     <p>
                     </p>
                 </div>
+
                 <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
@@ -49,7 +41,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Creat Discussion</h4>
+                            <h4 class="modal-title">Create Discussion</h4>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -90,6 +82,14 @@
                                             <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Key Word:</label>
+                                        <div class="col-xs-3">
+                                            <input type="input" name="keyword" id="dkeyword" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">Message:</label>
                                         <div class="col-xs-3">
@@ -112,16 +112,14 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-green navbar-static-top">
+                <div class="navbar navbar-static-top" id="navtop">
                     <nav class="collapse navbar-collapse" role="navigation">
-                        <h4>Dissemination View</h4>
                         <ul class="nav navbar-nav" id="namebar">
                             <span id="unamebar">${UID}</span>
                             <button id="namebarb" class="btn-sm btn-info label">Logout</button>
                         </ul>
                     </nav>
                 </div>
-
                 <!-- /top nav -->
                 <div class="padding">
                     <div class="full col-sm-9">
@@ -139,10 +137,72 @@
                             <div class="col-sm-7">
                                 <div id="indatabase">
                                 </div>
-
                                 <div id="context">
+                                    <h1>Topic</h1>
                                 </div>
+                                <div>
+                                    <h1>Reply Disscussion</h1>
+                                </div>
+
+                                <div id="replys"></div>
+                                <button type="button" id="replyb" class="btn-primary text-white ml-1" data-toggle="modal" data-target="#reply">Reply</button>
+                                <div class="modal fade" id="reply" role="dialog" aria-labelledby="gridSystemModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                           <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Reply Discussion</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <form class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Name:</label>
+                                                            <div class="col-xs-2 ">
+                                                                <div class="col-xs-2 duiqi" >${UID}</div>
+                                                                <input type="hidden" id="runame" name="type" value=${UID}>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Type:</label>
+                                                            <div class="col-xs-2 ">
+                                                                <div class="col-xs-2 duiqi" >Discussion</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Date: </label>
+                                                            <div class="col-xs-4 ">
+                                                                <div id="rtime" class="duiqi" id="rdate"></div>
+                                                                <input type="hidden" id="rdate" name="type">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Topic:</label>
+                                                            <div class="col-xs-3">
+                                                                <input type="input" name="topic" id="rtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Message:</label>
+                                                            <div class="col-xs-3">
+                                                                <textarea name="message" id="rmessage" class="duiqi" rows="4" cols="25"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                                                <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal" id="rdis">Send</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
                             </div>
+
                         </div><!--/row-->
 
                         <div class="row">
@@ -204,8 +264,9 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
+        window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View";
@@ -213,16 +274,47 @@
     $("#namebarb").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
+    $("#VDm").on('click' , function() {
+        window.location.href="/dissemination/uview";
+    })
+
     var ID;
-    var blogs = ${blogs}
+    var blogs = ${disscussion}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+
+        $("#namebarb").on('click' , function() {
+            window.location.href="http://138.49.101.84";
+        })
+
+
+
+
+        if ($("#utype").val()=="tpatient"){
+           // alert("patient")
+            $("#navtop").addClass("navbar-green");
+        }else if ($("#utype").val()=="tnurse"){
+           // alert("nurse")
+            $("#navtop").addClass("navbar-pink");
+        }else  if ($("#utype").val()=="tdoctor"){
+            //alert("doc");
+            $("#navtop").addClass("navbar-blue");
+        }else {
+            $("#navtop").addClass("navbar-black");
+        }
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
             var time2 = new Date().Format("MM/dd/yyyy hh:mm");
             $("#ddate").val(time2.toString());
             $('#dtime').append("  "+time2);
+        })
+        $('#replyb').on('click' , function() {
+            $("#rtime").empty();
+            var time2 = new Date().Format("MM/dd/yyyy hh:mm");
+            $("#rdate").val(time2.toString());
+            $('#rtime').append("  "+time2);
+
         })
 
         $('#dsenddis').on('click' , function() {
@@ -275,9 +367,11 @@
 
         })
 
-        ID=parseInt(""+${blogID});
+
+
+        ID=parseInt(""+${DisscussionID});
         for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
+            var html =  " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
@@ -291,6 +385,23 @@
             $("#context").append(html);
         }
         connectWebSocket();
+
+        $('#rdis').on('click' , function() {
+            var postValue = {};
+            postValue.id = "1234";//$("#blogID").val();
+            postValue.name = "dis";
+            var date = {};
+            date.time = $("#rdate").val();
+            date.username  = $("#runame").val();
+            date.message = $("#rmessage").val();
+            date.topic = $("#rtopic").val();
+            date.keyword = $("#rkeyword").val();
+            date.type = "reply";
+            //var dateStr = JSON.stringify(date);
+            // date.topic =
+            postValue.text=date;
+            websocket.send(JSON.stringify(postValue));
+        })
     })
 
     //建立WebSocket连接
@@ -299,8 +410,7 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=p");
-
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=DIS"+$("#DisscussionID").val());
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
             console.log("onpen");
@@ -314,7 +424,9 @@
 
         //接收信息
         websocket.onmessage = function (msg) {
+            //  alert(msg.data)
             var data = JSON.parse(msg.data);
+            // alert(data.toString());
             var html =" <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
@@ -326,7 +438,7 @@
                 "                                        <p><b>Message:</b>"+data.text.message+"</p>\n" +
                 "                                    </div>\n" +
                 "                                </div>";
-            $("#context").append(html);
+            $("#replys").append(html);
         }
     }
     //发送消息
@@ -334,7 +446,7 @@
         ID=ID+1;
         var postValue = {};
         postValue.id = ID;//$("#blogID").val();
-        postValue.name = $("#ID").val();
+        postValue.name = "dis";
         postValue.text=$("#text").val();
         websocket.send(JSON.stringify(postValue));
         $.ajax({
@@ -351,7 +463,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }

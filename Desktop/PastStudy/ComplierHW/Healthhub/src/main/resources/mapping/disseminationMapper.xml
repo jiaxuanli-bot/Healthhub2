@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dentist.dentistsys.mapper.disseminationMapper" >
+  <resultMap id="BaseResultMap" type="com.dentist.dentistsys.entity.dissemination" >
+    <result column="disname" property="disname" jdbcType="VARCHAR" />
+    <result column="disdate" property="disdate" jdbcType="VARCHAR" />
+    <result column="distype" property="distype" jdbcType="VARCHAR" />
+    <result column="disgroup" property="disgroup" jdbcType="VARCHAR" />
+    <result column="distopic" property="distopic" jdbcType="VARCHAR" />
+    <result column="diskeyword" property="diskeyword" jdbcType="VARCHAR" />
+    <result column="dismessage" property="dismessage" jdbcType="VARCHAR" />
+    <result column="disstate" property="disstate" jdbcType="VARCHAR" />
+    <result column="disid" property="disid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disstate, 
+    disid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.disseminationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dissemination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.dentist.dentistsys.entity.disseminationExample" >
+    delete from dissemination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dentist.dentistsys.entity.dissemination" >
+    insert into dissemination (disname, disdate, distype, 
+      disgroup, distopic, diskeyword, 
+      dismessage, disstate, disid
+      )
+    values (#{disname,jdbcType=VARCHAR}, #{disdate,jdbcType=VARCHAR}, #{distype,jdbcType=VARCHAR}, 
+      #{disgroup,jdbcType=VARCHAR}, #{distopic,jdbcType=VARCHAR}, #{diskeyword,jdbcType=VARCHAR}, 
+      #{dismessage,jdbcType=VARCHAR}, #{disstate,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.dissemination" >
+    insert into dissemination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="disname != null" >
+        disname,
+      </if>
+      <if test="disdate != null" >
+        disdate,
+      </if>
+      <if test="distype != null" >
+        distype,
+      </if>
+      <if test="disgroup != null" >
+        disgroup,
+      </if>
+      <if test="distopic != null" >
+        distopic,
+      </if>
+      <if test="diskeyword != null" >
+        diskeyword,
+      </if>
+      <if test="dismessage != null" >
+        dismessage,
+      </if>
+      <if test="disstate != null" >
+        disstate,
+      </if>
+      <if test="disid != null" >
+        disid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="disname != null" >
+        #{disname,jdbcType=VARCHAR},
+      </if>
+      <if test="disdate != null" >
+        #{disdate,jdbcType=VARCHAR},
+      </if>
+      <if test="distype != null" >
+        #{distype,jdbcType=VARCHAR},
+      </if>
+      <if test="disgroup != null" >
+        #{disgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="distopic != null" >
+        #{distopic,jdbcType=VARCHAR},
+      </if>
+      <if test="diskeyword != null" >
+        #{diskeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="dismessage != null" >
+        #{dismessage,jdbcType=VARCHAR},
+      </if>
+      <if test="disstate != null" >
+        #{disstate,jdbcType=VARCHAR},
+      </if>
+      <if test="disid != null" >
+        #{disid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dentist.dentistsys.entity.disseminationExample" resultType="java.lang.Integer" >
+    select count(*) from dissemination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dissemination
+    <set >
+      <if test="record.disname != null" >
+        disname = #{record.disname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disdate != null" >
+        disdate = #{record.disdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distype != null" >
+        distype = #{record.distype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disgroup != null" >
+        disgroup = #{record.disgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distopic != null" >
+        distopic = #{record.distopic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diskeyword != null" >
+        diskeyword = #{record.diskeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dismessage != null" >
+        dismessage = #{record.dismessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disstate != null" >
+        disstate = #{record.disstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disid != null" >
+        disid = #{record.disid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dissemination
+    set disname = #{record.disname,jdbcType=VARCHAR},
+      disdate = #{record.disdate,jdbcType=VARCHAR},
+      distype = #{record.distype,jdbcType=VARCHAR},
+      disgroup = #{record.disgroup,jdbcType=VARCHAR},
+      distopic = #{record.distopic,jdbcType=VARCHAR},
+      diskeyword = #{record.diskeyword,jdbcType=VARCHAR},
+      dismessage = #{record.dismessage,jdbcType=VARCHAR},
+      disstate = #{record.disstate,jdbcType=VARCHAR},
+      disid = #{record.disid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

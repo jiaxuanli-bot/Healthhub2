@@ -22,7 +22,7 @@
 <body>
 <div id="topbar">
     <span id="unamnebtn" >${UID}</span>
-<button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
+    <button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
 </div>
 <div id="wrap">
     <!-- 左侧菜单栏目块 -->
@@ -177,105 +177,59 @@
     </div>
     <!-- 右侧具体内容栏目 -->
     <div id="rightContent">
-
-        <a class="toggle-btn" id="nimei">
-            <i class="glyphicon glyphicon-align-justify"></i>
-        </a>
         <!-- Tab panes -->
         <div class="tab-content">
             <!-- 资源管理模块 -->
-            <div role="tabpanel" class="tab-pane active" id="sour">
-                <div class="check-div form-inline">
-                </div>
-                <div class="data-div">
-                    <div class="row tableHeader">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
-                            UserName
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            RealName
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
-                            Physician
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            Additional
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            action
-                        </div>
-                    </div>
-                    <div class="tablebody">
-                        <div id="Usertable"></div>
-                        </div>
 
-                        <!--系统管理折叠狂-->
+            <div class="column col-sm-12 col-xs-13" id="main">
+                <!-- top nav -->
+                <!-- /top nav -->
+                <div class="padding">
+                    <div class="full col-sm-11">
 
-                    </div>
-                </div>
-                <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">add user</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
+                        <!-- content -->
+                        <div class="row">
 
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Name:${UID}</label>
-                                            <div class="col-xs-2 ">
-                                                <div class="col-xs-2 duiqi" >${UID}</div>
-                                                <input type="hidden" id="uname" name="type" value=${UID}>
-                                            </div>
-                                        </div>
+                            <!-- main col left -->
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
 
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">email:</label>
-                                            <div class="col-xs-3 ">
-                                                <input type="" class="col-xs-2 form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">password:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Type:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
-                                <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal">Save</button>
+
+                            <!-- main col right -->
+                            <div class="col-sm-8">
+                                <div id="indatabase">
+                                </div>
+
+                                <div id="context">
+                                </div>
                             </div>
+                        </div><!--/row-->
+
+                        <div class="row">
                         </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
+
+                        <div class="row" id="footer">
+                        </div>
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
             </div>
+            <!-- /.modal -->
         </div>
     </div>
+</div>
 
-    <!-- 右侧具体内容栏目 -->
+<!-- 右侧具体内容栏目 -->
 
 
 </div>
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
+    $("#signoutbtn").on('click' , function() {
+        window.location.href="http://138.49.101.84";
+    })
     function postMan() {
         window.location.href="/dissemination/man";
     }
@@ -305,24 +259,37 @@
         return fmt;
     }
 
-    var users = ${users};
     $(document).ready(function () {
+        var ID;
+        var blogs = ${disscussions}
+        var userID=$("#ID").val();
+        var websocket=null;
+        $(function(){
+            connectWebSocket();
+            ID=parseInt(""+${blogID});
+            for (var i=0;i<blogs.length;i++){
+                var html =   " <div class=\"panel panel-default\">\n" +
+                    "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
+                    "                                    <div class=\"panel-body\">\n" +
+                    "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
+                    "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                    "                                        <div class=\"clearfix\"></div>\n" +
+                    "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
+                    "                                        <hr>\n" +
+                    "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
+                    "                                    </div>\n" +
+                    "                                </div>";
+                $("#context").append(html);
+            }
+
+        })
         var tablecontext="";
-        for (var i=0;i<users.length;i++){
-             tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
-                 "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
-                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
-                 + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
-                 "                            </div>"
-        }
         $("#Usertable").append(tablecontext);
         $('#messagePage').on('click' , function() {
             window.location.href="/";
         })
+
+
 
         $('#sendMB').on('click' , function() {
             $("#time").empty();
@@ -496,7 +463,7 @@
 
         console.log("开始...");
 
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=physicians, patients and administrator");
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=?");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -555,7 +522,7 @@
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
         //var dateStr = JSON.stringify(date);
-       // date.topic =
+        // date.topic =
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
 
@@ -571,7 +538,7 @@
         date.topic = $("#topic").val();
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
-       //var dateStr = JSON.stringify(date);
+        //var dateStr = JSON.stringify(date);
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
     }
@@ -589,7 +556,7 @@
         date.type = "discussion";
         //var dateStr = JSON.stringify(date);
         postValue.text=date;
-       // websocket.send(JSON.stringify(postValue));
+        // websocket.send(JSON.stringify(postValue));
     }
     //关闭连接
     function closeWebSocket(){
