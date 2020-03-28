@@ -32,10 +32,12 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
             <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
+            <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
         </div>
         <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -215,22 +217,29 @@
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
 
-    $("#namebarb").on('click' , function() {
+    $("#signoutbtn").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
-
     function postMan() {
-        window.location.href="/dissemination/man";
+        window.location.href="/dissemination/man/${UID}";
     }
     function disMan() {
-        window.location.href="/disscussion/mana";
+        window.location.href="/disscussion/mana/${UID}";
     }
     function DMV() {
-        window.location.href="/dissemination/adminview";
+        window.location.href="/dissemination/adminview/${UID}";
     }
     $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View";
+        window.location.href="/disscussion/View/${UID}";
     })
+    $('#VCB').on('click' , function() {
+        window.location.href="/blog/View/${UID}";
+    })
+    $('#AMD').on('click' , function() {
+        window.location.href="/disscussion/retrive/${UID}";
+    })
+
+
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份

@@ -31,10 +31,12 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
             <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
+            <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -231,16 +233,22 @@
         window.location.href="http://138.49.101.84";
     })
     function postMan() {
-        window.location.href="/dissemination/man";
+        window.location.href="/dissemination/man/${UID}";
     }
     function disMan() {
-        window.location.href="/disscussion/mana";
+        window.location.href="/disscussion/mana/${UID}";
     }
     function DMV() {
-        window.location.href="/dissemination/adminview";
+        window.location.href="/dissemination/adminview/${UID}";
     }
     $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View";
+        window.location.href="/disscussion/View/${UID}";
+    })
+    $('#VCB').on('click' , function() {
+        window.location.href="/blog/View/${UID}";
+    })
+    $('#AMD').on('click' , function() {
+        window.location.href="/disscussion/retrive/${UID}";
     })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
@@ -269,7 +277,7 @@
             ID=parseInt(""+${blogID});
             for (var i=0;i<blogs.length;i++){
                 var html =   " <div class=\"panel panel-default\">\n" +
-                    "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
+                    "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                     "                                    <div class=\"panel-body\">\n" +
                     "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
                     "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
@@ -474,39 +482,6 @@
         websocket.onclose = function () {
             //关闭连接
             console.log("onclose");
-        }
-
-        //接收信息
-        websocket.onmessage = function (msg) {
-            var html = "<div class=\"  padding-top: 10px; mes\">\n" +
-                "    <div class=\"col-sm-20\">\n" +
-                "        <div class=\"row\">\n" +
-                "            <div class=\"col-sm-9\">\n" +
-                "                <div class=\"col-sm-7\">\n" +
-                "                    <div class=\"panel panel-default\">\n" +
-                "                        <div class=\"panel-heading\"><a href=\"#\" class=\"pull-right\">View all</a> <h4>Stackoverflow</h4></div>\n" +
-                "                        <div class=\"panel-body\">\n" +
-                "                            <a href=\"#\">Keyword: Bootstrap</a>\n" +
-                "                            <div class=\"clearfix\"></div>\n" +
-                "                            <hr>\n" +
-                "                            <p>"+msg.data+"</p>\n" +
-                "                            <hr>\n" +
-                "                            <form>\n" +
-                "                                <div class=\"input-group\">\n" +
-                "                                    <div class=\"input-group-btn\">\n" +
-                "                                        <button class=\"btn btn-default\">+1</button><button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-share\"></i></button>\n" +
-                "                                    </div>\n" +
-                "                                    <input type=\"text\" class=\"form-control\" placeholder=\"Add a comment..\">\n" +
-                "                                </div>\n" +
-                "                            </form>\n" +
-                "                        </div>\n" +
-                "                    </div>\n" +
-                "                </div>\n" +
-                "            </div><!--/row-->\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "</div>";
-            $("#context").append(html);
         }
     }
     function sendtoPatient(){

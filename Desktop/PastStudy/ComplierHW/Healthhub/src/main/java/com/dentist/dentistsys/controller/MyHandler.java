@@ -44,7 +44,7 @@ public class MyHandler extends TextWebSocketHandler {
                         System.out.println(user.getUri());
                         System.out.println(session.getUri());
 //                     System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20patients%20and%20administrator"));
-                        if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=p")||user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=doc")) {
+                        if (user.getUri().toString().equals("ws://138.49.101.84/myHandler/ID=p")||user.getUri().toString().equals("ws://138.49.101.84/myHandler/ID=doc")) {
                             System.out.println(user);
                             user.sendMessage(message);
                         }
@@ -76,7 +76,7 @@ public class MyHandler extends TextWebSocketHandler {
                         System.out.println(user.getUri());
                      System.out.println(session.getUri());
 //                        System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20nurse%20and%20administrator"));
-                        if (user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20nurse%20and%20administrator")||user.getUri().toString().equals("ws://127.0.0.1:8089/myHandler/ID=doc")) {
+                        if (user.getUri().toString().equals("ws://138.49.101.84/myHandler/ID=physicians,%20nurse%20and%20administrator")||user.getUri().toString().equals("ws://138.49.101.84/myHandler/ID=doc")) {
                             user.sendMessage(message);
                         }
                     }

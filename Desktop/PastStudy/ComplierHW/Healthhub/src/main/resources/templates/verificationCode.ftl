@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lowin</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/auth.css">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/Chart.min.js"></script>
@@ -13,6 +13,7 @@
 </head>
 
 <body style="background:url('/background.png') no-repeat top left; background-size: cover;">
+${UID}
 <input type="hidden" id="uid" name="type" value=${UID}>
 <div class="lowin lowin-green">
     <div class="lowin-brand">
@@ -44,7 +45,6 @@
     //验证码
     var checkCode = "";
     $("#sendCheckCode").click(function () {
-        alert("send");
         var id = $("#uid").val();
         if (id == null || id == ""){
             alert("Please enter name!!");

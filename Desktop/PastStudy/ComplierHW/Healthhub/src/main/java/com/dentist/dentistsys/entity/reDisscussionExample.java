@@ -3,14 +3,14 @@ package com.dentist.dentistsys.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class disscussionExample {
+public class reDisscussionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public disscussionExample() {
+    public reDisscussionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -594,76 +594,6 @@ public class disscussionExample {
             return (Criteria) this;
         }
 
-        public Criteria andDisstateIsNull() {
-            addCriterion("disstate is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateIsNotNull() {
-            addCriterion("disstate is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateEqualTo(String value) {
-            addCriterion("disstate =", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateNotEqualTo(String value) {
-            addCriterion("disstate <>", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateGreaterThan(String value) {
-            addCriterion("disstate >", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateGreaterThanOrEqualTo(String value) {
-            addCriterion("disstate >=", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateLessThan(String value) {
-            addCriterion("disstate <", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateLessThanOrEqualTo(String value) {
-            addCriterion("disstate <=", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateLike(String value) {
-            addCriterion("disstate like", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateNotLike(String value) {
-            addCriterion("disstate not like", value, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateIn(List<String> values) {
-            addCriterion("disstate in", values, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateNotIn(List<String> values) {
-            addCriterion("disstate not in", values, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateBetween(String value1, String value2) {
-            addCriterion("disstate between", value1, value2, "disstate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDisstateNotBetween(String value1, String value2) {
-            addCriterion("disstate not between", value1, value2, "disstate");
-            return (Criteria) this;
-        }
-
         public Criteria andDisidIsNull() {
             addCriterion("disid is null");
             return (Criteria) this;
@@ -734,73 +664,73 @@ public class disscussionExample {
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateIsNull() {
-            addCriterion("disterminate is null");
+        public Criteria andDisparentidIsNull() {
+            addCriterion("disparentid is null");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateIsNotNull() {
-            addCriterion("disterminate is not null");
+        public Criteria andDisparentidIsNotNull() {
+            addCriterion("disparentid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateEqualTo(String value) {
-            addCriterion("disterminate =", value, "disterminate");
+        public Criteria andDisparentidEqualTo(String value) {
+            addCriterion("disparentid =", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateNotEqualTo(String value) {
-            addCriterion("disterminate <>", value, "disterminate");
+        public Criteria andDisparentidNotEqualTo(String value) {
+            addCriterion("disparentid <>", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateGreaterThan(String value) {
-            addCriterion("disterminate >", value, "disterminate");
+        public Criteria andDisparentidGreaterThan(String value) {
+            addCriterion("disparentid >", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateGreaterThanOrEqualTo(String value) {
-            addCriterion("disterminate >=", value, "disterminate");
+        public Criteria andDisparentidGreaterThanOrEqualTo(String value) {
+            addCriterion("disparentid >=", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateLessThan(String value) {
-            addCriterion("disterminate <", value, "disterminate");
+        public Criteria andDisparentidLessThan(String value) {
+            addCriterion("disparentid <", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateLessThanOrEqualTo(String value) {
-            addCriterion("disterminate <=", value, "disterminate");
+        public Criteria andDisparentidLessThanOrEqualTo(String value) {
+            addCriterion("disparentid <=", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateLike(String value) {
-            addCriterion("disterminate like", value, "disterminate");
+        public Criteria andDisparentidLike(String value) {
+            addCriterion("disparentid like", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateNotLike(String value) {
-            addCriterion("disterminate not like", value, "disterminate");
+        public Criteria andDisparentidNotLike(String value) {
+            addCriterion("disparentid not like", value, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateIn(List<String> values) {
-            addCriterion("disterminate in", values, "disterminate");
+        public Criteria andDisparentidIn(List<String> values) {
+            addCriterion("disparentid in", values, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateNotIn(List<String> values) {
-            addCriterion("disterminate not in", values, "disterminate");
+        public Criteria andDisparentidNotIn(List<String> values) {
+            addCriterion("disparentid not in", values, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateBetween(String value1, String value2) {
-            addCriterion("disterminate between", value1, value2, "disterminate");
+        public Criteria andDisparentidBetween(String value1, String value2) {
+            addCriterion("disparentid between", value1, value2, "disparentid");
             return (Criteria) this;
         }
 
-        public Criteria andDisterminateNotBetween(String value1, String value2) {
-            addCriterion("disterminate not between", value1, value2, "disterminate");
+        public Criteria andDisparentidNotBetween(String value1, String value2) {
+            addCriterion("disparentid not between", value1, value2, "disparentid");
             return (Criteria) this;
         }
     }

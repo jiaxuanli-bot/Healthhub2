@@ -31,10 +31,12 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
             <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
+            <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -190,13 +192,6 @@
                         <!-- content -->
                         <div class="row">
 
-                            <!-- main col left -->
-                            <div class="col-sm-5">
-                                <div class="panel panel-default">
-
-                                </div>
-                            </div>
-
                             <!-- main col right -->
                             <div class="col-sm-8">
                                 <div id="indatabase">
@@ -227,21 +222,28 @@
 </div>
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
-    function postMan() {
-        window.location.href="/dissemination/man";
-    }
-    function disMan() {
-        window.location.href="/disscussion/mana";
-    }
-    function DMV() {
-        window.location.href="/dissemination/adminview";
-    }
-    $("#namebarb").on('click' , function() {
+    $("#signoutbtn").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
+    function postMan() {
+        window.location.href="/dissemination/man/${UID}";
+    }
+    function disMan() {
+        window.location.href="/disscussion/mana/${UID}";
+    }
+    function DMV() {
+        window.location.href="/dissemination/adminview/${UID}";
+    }
     $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View";
+        window.location.href="/disscussion/View/${UID}";
     })
+    $('#VCB').on('click' , function() {
+        window.location.href="/blog/View/${UID}";
+    })
+    $('#AMD').on('click' , function() {
+        window.location.href="/disscussion/retrive/${UID}";
+    })
+
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -273,7 +275,7 @@
                     "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                     "                                    <div class=\"panel-body\">\n" +
                     "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                    "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                    "                                        <p><b>Type of posting:</b>dissemination</p>\n" +
                     "                                        <div class=\"clearfix\"></div>\n" +
                     "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                     "                                        <hr>\n" +

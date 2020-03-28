@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Faceboot - A Facebook style template for Bootstrap</title>
+    <title>MainPage</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
@@ -55,10 +55,6 @@
                         <div class="row">
 
                             <!-- main col left -->
-                            <div class="col-sm-5">
-                                <div class="panel panel-default">
-                                </div>
-                            </div>
 
                             <!-- main col right -->
                             <div class="col-sm-7">

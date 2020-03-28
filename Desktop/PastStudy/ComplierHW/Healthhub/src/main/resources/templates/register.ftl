@@ -12,7 +12,7 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
     <link rel="stylesheet" href="/auth.css">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/Chart.min.js"></script>

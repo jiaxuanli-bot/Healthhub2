@@ -87,6 +87,10 @@ hr {
     width:inherit;
 }
 
+.navtop{
+    width: 50px;
+}
+
 .navbar-green {
     border-width:0;
     background-color:#5cb85c;
@@ -160,7 +164,7 @@ hr {
   background-color:#fff;
   color:#3B5999;
   height:28px;
-  width:28px;
+  width:50px;
   margin:9px;
   margin-right:2px;
   margin-left:15px;
@@ -325,8 +329,13 @@ small.text-muted {
     width: 33%;
     margin-left: 5px;
   }
-
+    .hiddenGid{
+        visibility: hidden;
+    }
   #sidebar, #sidebar a, #sidebar-footer a {
     padding-left:3px;
+  }
+  .citebtn{
+      background: rosybrown;
   }
 }

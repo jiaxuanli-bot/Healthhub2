@@ -11,15 +11,11 @@ import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.UserService;
 import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -44,11 +40,10 @@ public class UserController {
     private String password;
 
     @RequestMapping(value = "/login/id", method = {RequestMethod.POST})
-    public ModelAndView userlogin(HttpServletRequest request, HttpSession session) {
+    public ModelAndView userlogin(HttpServletRequest request) {
         id = request.getParameter("id");
         password = request.getParameter("password");
         user = userService.Sel(id);
-        session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
         if(user != null){
             if (user.getPassword().equals(password) ) {
@@ -104,10 +99,9 @@ public class UserController {
 
 
     @RequestMapping(value = "/verification", method = {RequestMethod.GET})
-    public ModelAndView verification(HttpServletRequest request, HttpSession session) {
+    public ModelAndView verification(HttpServletRequest request) {
         id = request.getParameter("id");
         user = userService.Sel(id);
-        session.setAttribute("userid",id);
         ModelAndView mav=new ModelAndView();
         if(user != null){
             if (user.getPassword().equals(password) ) {
@@ -164,7 +158,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/register/id", method = {RequestMethod.POST})
-    public ModelAndView userregister(HttpServletRequest request, HttpSession session, @ModelAttribute("form") user user) {
+    public ModelAndView userregister(HttpServletRequest request, @ModelAttribute("form") user user) {
         user user1 =userService.Sel(user.getId());
         ModelAndView mav=new ModelAndView();
         System.out.println("add a user");
@@ -178,7 +172,7 @@ public class UserController {
        return  mav;
     }
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public ModelAndView usersList(HttpServletRequest request, HttpSession session) {
+    public ModelAndView usersList(HttpServletRequest request) {
       ArrayList<user> users =userService.SelAll();
       ModelAndView mav=new ModelAndView();
       mav.addObject("users",users);
@@ -186,14 +180,14 @@ public class UserController {
       return  mav;
     }
     @RequestMapping(value = "/wrong", method = {RequestMethod.POST})
-    public ModelAndView WrongSafeCode(HttpServletRequest request, HttpSession session) {
+    public ModelAndView WrongSafeCode(HttpServletRequest request) {
         ModelAndView mav=new ModelAndView();
         mav.setViewName("frozen");
         return  mav;
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.GET})
-    public ModelAndView Reg(HttpServletRequest request, HttpSession session) {
+    public ModelAndView Reg(HttpServletRequest request) {
         ModelAndView mav=new ModelAndView();
         ArrayList<user> users = userService.SelectByType("tdoctor");
         mav.addObject("docs", JSON.toJSONString(users));
@@ -201,14 +195,12 @@ public class UserController {
         return  mav;
     }
 
-    @RequestMapping(value = "/change", method = {RequestMethod.POST})
-    public ModelAndView Changepasswd(HttpServletRequest request, HttpSession session) {
+    @RequestMapping(value = "/change/{pid}", method = {RequestMethod.POST})
+    public ModelAndView Changepasswd(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav=new ModelAndView();
-        session.getId();
         user user;
-        user = userService.Sel((String) session.getAttribute("userid"));
+        user = userService.Sel(pid);
         System.out.println("session id is sdkjansakjnda");
-        System.out.println((String) session.getAttribute("userid"));
         System.out.println(user);
         password = request.getParameter("password");
         user.setPassword(password);

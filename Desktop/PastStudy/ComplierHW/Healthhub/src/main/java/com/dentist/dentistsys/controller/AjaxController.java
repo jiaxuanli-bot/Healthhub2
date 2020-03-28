@@ -1,23 +1,18 @@
 package com.dentist.dentistsys.controller;
 
-import com.dentist.dentistsys.entity.blog;
-import com.dentist.dentistsys.entity.disscussion;
-import com.dentist.dentistsys.entity.dissemination;
-import com.dentist.dentistsys.entity.user;
+import com.alibaba.fastjson.JSONArray;
+import com.dentist.dentistsys.entity.*;
 import com.dentist.dentistsys.service.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
-import java.util.Random;
 
 import static com.dentist.dentistsys.service.PasswordService.getStringRandom;
 
@@ -34,7 +29,10 @@ public class AjaxController {
     private DisseminationService disseminationService;
     @Autowired
     private DisscussionService disscussionService;
-
+    @Autowired
+    private RedisscussionService redisscussionService;
+    ArrayList<dissemination> disseminations;
+    ArrayList<disscussion> disscussions;
     @RequestMapping(value = "/mail", method = {RequestMethod.GET})
     @ResponseBody
     public String getCheckCode(HttpServletRequest request){
@@ -52,6 +50,24 @@ public class AjaxController {
         }
         return checkCode;
     }
+
+    @RequestMapping(value = "/wmail", method = {RequestMethod.GET})
+    @ResponseBody
+    public String Warn(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println("warn");
+        System.out.println(id);
+        user user = userservice.Sel(id);
+        String message = "You have been reported for inappropriate remarks, and I hope you will pay attention to it in the future and follow the community rules";
+        try {
+            System.out.println(user.getEmail());
+            mailService.sendSimpleMail(user.getEmail()+"", "Warning", message);
+        }catch (Exception e){
+            return "";
+        }
+        return "1";
+    }
+
     @RequestMapping(value = "/approve", method = {RequestMethod.POST})
     @ResponseBody
     public String Approve(HttpServletRequest request){
@@ -167,6 +183,14 @@ public class AjaxController {
         disscussionService.DeleteByID(id);
         return "1";
     }
+    @RequestMapping(value = "/terdis/{pid}", method = {RequestMethod.POST})
+    @ResponseBody
+    public String terminatedis(HttpServletRequest request){
+        String id=request.getParameter("id");
+        System.out.println(id);
+        disscussionService.SetTerstatus(id,"ter");
+        return "1";
+    }
     @RequestMapping(value = "/admin/disscussion", method = {RequestMethod.POST})
     @ResponseBody
     public String insertDisscussion(HttpServletRequest request){
@@ -194,6 +218,119 @@ public class AjaxController {
         disscussion.setDisstate(status);
         disscussionService.ins(disscussion);
         //disseminationService.ins(dissemination);
+        return "1";
+    }
+
+
+    @RequestMapping(value = "/replyDisscussion", method = {RequestMethod.POST})
+    @ResponseBody
+    public String insertReply(HttpServletRequest request){
+        System.out.println("ajax Reply");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        String username=request.getParameter("username");
+        System.out.println(username);
+        String message=request.getParameter("message");
+        System.out.println(message);
+        String topic=request.getParameter("topic");
+        System.out.println(topic);
+        String keyword=request.getParameter("keyword");
+        System.out.println(keyword);
+        String parentid=request.getParameter("parentid");
+        System.out.println(parentid);
+
+        reDisscussion disscussion =new reDisscussion();
+        disscussion.setDisdate(time);
+        disscussion.setDisname(username);
+        disscussion.setDismessage(message);
+        disscussion.setDistopic(topic);
+        disscussion.setDiskeyword(keyword);
+        disscussion.setDisparentid(parentid);
+        redisscussionService.ins(disscussion);
+        //disseminationService.ins(dissemination);
+        return "1";
+    }
+
+    @RequestMapping(value = "/search/{pid}", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object Search(HttpServletRequest request, @PathVariable(name = "pid") String pid){
+        System.out.println("ajax Reply");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        String username=request.getParameter("username");
+        System.out.println(username);
+        String topic=request.getParameter("topic");
+        System.out.println(topic);
+        user user = userservice.Sel(pid);
+        disscussions = disscussionService.Searchdisscussions(user.getType(),time,username,topic);
+        disseminations = disseminationService.Searchdesseminations(user.getType(),time,username,topic);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dis",disscussions);
+        map.put("des",disseminations);
+        return map;
+    }
+
+    @RequestMapping(value = "/cite/{pid}", method = {RequestMethod.POST})
+    @ResponseBody
+    public String Cite(HttpServletRequest request, @PathVariable(name = "pid") String pid){
+        System.out.println("Cite logic");
+        System.out.println(request.getParameter("id"));
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        if (type.equals("des")) {
+            disseminationService.updateStateById(id,"cdes");
+        }else if(type.equals("dis")){
+            disscussionService.updateStateById(id,"cdis");
+        }else {
+            redisscussionService.updateStateById(id,"credis");
+        }
+        return "1";
+    }
+    @RequestMapping(value = "/cite/ref", method = {RequestMethod.POST})
+    @ResponseBody
+    public String RefCite(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        if (type.equals("cdes")) {
+            disseminationService.updateStateById(id,"des");
+        }else if(type.equals("cdis")){
+            disscussionService.updateStateById(id,"dis");
+        }else {
+            redisscussionService.updateStateById(id,"redis");
+        }
+        return "1";
+    }
+
+    @RequestMapping(value = "/cite/app", method = {RequestMethod.POST})
+    @ResponseBody
+    public String AppCite(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        if (type.equals("cdes")) {
+            disseminationService.appcite(id);
+        }else if(type.equals("cdis")){
+           disscussionService.appcite(id);
+        }else {
+            redisscussionService.DeleteByID(id);
+        }
+        return "1";
+    }
+
+    @RequestMapping(value = "/retirve", method = {RequestMethod.POST})
+    @ResponseBody
+    public String Retirve(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        disscussionService.SetTerstatus(id,"");
+        return "1";
+    }
+
+    @RequestMapping(value = "/archive", method = {RequestMethod.POST})
+    @ResponseBody
+    public String Archive(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        disscussionService.SetTerstatus(id,"archive");
         return "1";
     }
 }

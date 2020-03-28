@@ -1,6 +1,6 @@
 package com.dentist.dentistsys.entity;
 
-public class disscussion {
+public class reDisscussion {
     private String disname;
 
     private String disdate;
@@ -15,11 +15,9 @@ public class disscussion {
 
     private String dismessage;
 
-    private String disstate;
-
     private String disid;
 
-    private String disterminate;
+    private String disparentid;
 
     public String getDisname() {
         return disname;
@@ -77,14 +75,6 @@ public class disscussion {
         this.dismessage = dismessage;
     }
 
-    public String getDisstate() {
-        return disstate;
-    }
-
-    public void setDisstate(String disstate) {
-        this.disstate = disstate;
-    }
-
     public String getDisid() {
         return disid;
     }
@@ -93,12 +83,12 @@ public class disscussion {
         this.disid = disid;
     }
 
-    public String getDisterminate() {
-        return disterminate;
+    public String getDisparentid() {
+        return disparentid;
     }
 
-    public void setDisterminate(String disterminate) {
-        this.disterminate = disterminate;
+    public void setDisparentid(String disparentid) {
+        this.disparentid = disparentid;
     }
 
     @Override
@@ -114,9 +104,8 @@ public class disscussion {
         sb.append(", distopic=").append(distopic);
         sb.append(", diskeyword=").append(diskeyword);
         sb.append(", dismessage=").append(dismessage);
-        sb.append(", disstate=").append(disstate);
         sb.append(", disid=").append(disid);
-        sb.append(", disterminate=").append(disterminate);
+        sb.append(", disparentid=").append(disparentid);
         sb.append("]");
         return sb.toString();
     }

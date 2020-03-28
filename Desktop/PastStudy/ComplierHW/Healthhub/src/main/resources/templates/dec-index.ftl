@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Faceboot - A Facebook style template for Bootstrap</title>
+    <title>MainPage</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +32,7 @@
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
                 <div class="modal-dialog" role="document">
@@ -171,29 +172,52 @@
 
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
-                <!-- top nav -->
-                <div class="navbar navbar-blue navbar-static-top">
+                <div class="navbar navbar-blue navbar-static-top"  style="width: 82.2%">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="#" class="navbar-brand logo">Hub</a>
+                    </div>
                     <nav class="collapse navbar-collapse" role="navigation">
-                        <h4>Dissemination View</h4>
-                        <ul class="nav navbar-nav" id="namebar">
-                            <span id="unamebar">${UID}</span>
-                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group input-group-sm" style="max-width:360px;">
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-home"></i>Home</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a><span class="badge">${UID}</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="badge">Log Out</span></a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
+                <!-- top nav -->
+<#--                <div class="navbar navbar-blue navbar-static-top">-->
+<#--                    <nav class="collapse navbar-collapse" role="navigation">-->
+<#--                        <h4>Dissemination View</h4>-->
+<#--                        <ul class="nav navbar-nav" id="namebar">-->
+<#--                            <span id="unamebar">${UID}</span>-->
+<#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
+<#--                        </ul>-->
+<#--                    </nav>-->
+<#--                </div>-->
                 <!-- /top nav -->
                 <div class="padding">
                     <div class="full col-sm-9">
 
                         <!-- content -->
                         <div class="row">
-
-                            <!-- main col left -->
-                            <div class="col-sm-5">
-                                <div class="panel panel-default">
-
-                                </div>
-                            </div>
 
                             <!-- main col right -->
                             <div class="col-sm-7">
@@ -252,14 +276,30 @@
         window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View";
+        window.location.href="/disscussion/View/${UID}";
     })
     $("#namebarb").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
     $("#VDm").on('click' , function() {
-        window.location.href="/dissemination/uview";
+        window.location.href="/dissemination/uview/${UID}";
     })
+    $("#SP").on('click' , function() {
+        window.location.href="/disscussion/search/${UID}";
+    })
+    function cite(post) {
+        $.ajax({
+            url:"/ajax/cite/${UID}",
+            type:"POST",
+            data: {
+                "id": ""+post,
+                "type": "des",
+            },
+            success:function (text) {
+                window.location.href="/dissemination/uview/${UID}";
+            }
+        });
+    }
     var ID;
     var blogs = ${blogs}
     var userID=$("#ID").val();
@@ -277,11 +317,14 @@
                 "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
+                "                                        <hr>\n" +
+                "                                        <div class=\"input-group-btn\">\n" +
+                "                                        <button class=\"btn-danger btn-sm\" onclick='cite("+blogs[i].disid+")'>cite</button>\n" +
+                "                                    </div>" +
                 "                                    </div>\n" +
                 "                                </div>";
             $("#context").append(html);
         }
-
     })
 
     //建立WebSocket连接
@@ -289,7 +332,7 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=doc");
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=doc");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -465,9 +508,6 @@
                         "status":"1",
                     },
                     success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
                     },
                     error:function(jqXHR){
                         alert("发生错误："+ jqXHR.status);
@@ -502,9 +542,6 @@
                         "status":"1",
                     },
                     success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
                     },
                     error:function(jqXHR){
                         alert("发生错误："+ jqXHR.status);
@@ -514,7 +551,5 @@
         })
     });
 </script>
-
-
 </body>
 </html>

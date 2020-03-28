@@ -9,13 +9,13 @@ import com.dentist.dentistsys.service.CommentService;
 import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
@@ -31,12 +31,10 @@ public class DisseminationController{
     DisseminationService disseminationService;
     ArrayList<dissemination> disseminations;
     private user user;
-    @RequestMapping(value = "/man", method = {RequestMethod.GET})
-    public ModelAndView BlogDetail(HttpServletRequest request, HttpSession session) {
+    @RequestMapping(value = "/man/{id}", method = {RequestMethod.GET})
+    public ModelAndView BlogDetail(@PathVariable(name = "id") String id,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        String id = (String) session.getAttribute("userid");
         user = userService.Sel(id);
-        session.setAttribute("userid",id);
         disseminations = disseminationService.getUnUsefullDessemination();
         mav.addObject("UName",user.getRealname());
         mav.addObject("UID",user.getId());
@@ -47,19 +45,15 @@ public class DisseminationController{
         mav.setViewName("ManagePost");
         return  mav;
     }
-    @RequestMapping(value = "/adminview", method = {RequestMethod.GET})
-    public ModelAndView ViewDessimination(HttpServletRequest request, HttpSession session) {
+    @RequestMapping(value = "/adminview/{id}", method = {RequestMethod.GET})
+    public ModelAndView ViewDessimination(@PathVariable(name = "id") String id,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        String id = (String) session.getAttribute("userid");
+        System.out.println("In the Amdinvwiew id is:"+id);
         user = userService.Sel(id);
-
         mav.addObject("UName",user.getRealname());
         mav.addObject("UID",user.getId());
-
-
         mav.addObject("ID","admin");
         mav.addObject("blogID",disseminationService.getAlldessemination().size());
-        session.setAttribute("userid",id);
         disseminations = disseminationService.getAlldessemination();
         mav.addObject("UName",user.getRealname());
         mav.addObject("UID",user.getId());
@@ -70,26 +64,24 @@ public class DisseminationController{
         mav.setViewName("DisseminationView");
         return  mav;
     }
-    @RequestMapping(value = "/uview", method = {RequestMethod.GET})
-    public ModelAndView uv(HttpServletRequest request, HttpSession session) {
+    @RequestMapping(value = "/uview/{id}", method = {RequestMethod.GET})
+    public ModelAndView uv(HttpServletRequest request,@PathVariable(name = "id") String id) {
         ModelAndView mav = new ModelAndView();
-        String id = (String) session.getAttribute("userid");
         user = userService.Sel(id);
-
         mav.addObject("UName",user.getRealname());
         mav.addObject("UID",user.getId());
-
-
         if (user.getType().equals("tpatient")){
             mav.setViewName("Main");
+            disseminations = disseminationService.getdesseminationforPatient();
         } else if (user.getType().equals("tdoctor")){
             mav.setViewName("dec-index");
+            disseminations = disseminationService.getAlldessemination();
         } else{
-            mav.setViewName("Nurse");}
+            mav.setViewName("Nurse");
+            disseminations = disseminationService.getdesseminationforNurse();
+        }
         mav.addObject("ID","admin");
         mav.addObject("blogID",disseminationService.getAlldessemination().size());
-        session.setAttribute("userid",id);
-        disseminations = disseminationService.getAlldessemination();
         mav.addObject("UName",user.getRealname());
         mav.addObject("UID",user.getId());
         ArrayList<user> users =  userService.SelAllF();

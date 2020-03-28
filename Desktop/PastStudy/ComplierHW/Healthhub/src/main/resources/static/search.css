@@ -1,0 +1,89 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+input[type="color"].form-control{
+    height: calc(2.25rem + 2px) !important;
+    width: 60px;
+}
+
+.container{
+    background: #F5F5F5;
+}
+
+.guessBoard{
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.wordBackground{
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    margin-left: 5px;
+    display: inline-block;
+    text-align:center;
+    font-size: 60px;
+    width: 50px;
+    height: 100px;
+}
+
+#guessesFrom{
+    height: 20px;
+}
+
+.guessBackground{
+    text-transform: uppercase;
+    margin-right: 2px;
+    display: inline-block;
+    text-align:center;
+    font-size: 20px;
+    width: 20px;
+    height: 30px;
+}
+
+.hiddenGid{
+    visibility: hidden;
+}
+
+.exit {
+    background-color: red;
+    color: white;
+    text-align:center;
+    width: 28px;
+    height: 28px;
+}
+
+.phraseBackground{
+    text-transform: uppercase;
+    margin-right: 2px;
+    display: inline-block;
+    text-align:center;
+    font-size: 20px;
+    width: 20px;
+    height: 28px;
+}
+
+#guessText{
+    width: 50px;
+}
+
+#guessLetter{
+    margin-top: -50px;
+}
+
+#newGameBtn{
+    background-color: #0077CC;
+}
+
+#guessBtn{
+    background-color: #0077CC;
+}
+
+#game{
+    display: none;
+}

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ch">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +22,7 @@
 <body>
 <div id="topbar">
     <span id="unamnebtn" >${UID}</span>
-<button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
+    <button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
 </div>
 <div id="wrap">
     <!-- 左侧菜单栏目块 -->
@@ -37,7 +37,6 @@
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
-            <div class="btn" data-toggle="modal" id="AMD">Search Posting</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -212,68 +211,68 @@
                     </div>
                     <div class="tablebody">
                         <div id="Usertable"></div>
-                        </div>
-
-                        <!--系统管理折叠狂-->
-
                     </div>
+
+                    <!--系统管理折叠狂-->
+
                 </div>
-                <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">add user</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Name:${UID}</label>
-                                            <div class="col-xs-2 ">
-                                                <div class="col-xs-2 duiqi" >${UID}</div>
-                                                <input type="hidden" id="uname" name="type" value=${UID}>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">email:</label>
-                                            <div class="col-xs-3 ">
-                                                <input type="" class="col-xs-2 form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">password:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Type:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
-                                <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal">Save</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
             </div>
+            <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">add user</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Name:${UID}</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >${UID}</div>
+                                            <input type="hidden" id="uname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">email:</label>
+                                        <div class="col-xs-3 ">
+                                            <input type="" class="col-xs-2 form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">password:</label>
+                                        <div class="col-xs-8">
+                                            <input type="" class="form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Type:</label>
+                                        <div class="col-xs-8">
+                                            <input type="" class="form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                            <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
     </div>
+</div>
 
-    <!-- 右侧具体内容栏目 -->
+<!-- 右侧具体内容栏目 -->
 
 
 </div>
@@ -320,15 +319,15 @@
     $(document).ready(function () {
         var tablecontext="";
         for (var i=0;i<users.length;i++){
-             tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
-                 "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
-                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
-                 + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
-                 "                            </div>"
+            tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
+                "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
+                "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
+                "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
+                "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
+                + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
+                "                            </div>"
         }
         $("#Usertable").append(tablecontext);
         $('#messagePage').on('click' , function() {
@@ -507,7 +506,7 @@
 
         console.log("开始...");
 
-        websocket = new WebSocket("ws://localhost:8089/myHandler/ID=physicians, patients and administrator");
+        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=physicians, patients and administrator");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
@@ -566,7 +565,7 @@
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
         //var dateStr = JSON.stringify(date);
-       // date.topic =
+        // date.topic =
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
 
@@ -582,7 +581,7 @@
         date.topic = $("#topic").val();
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
-       //var dateStr = JSON.stringify(date);
+        //var dateStr = JSON.stringify(date);
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
     }
@@ -600,7 +599,7 @@
         date.type = "discussion";
         //var dateStr = JSON.stringify(date);
         postValue.text=date;
-       // websocket.send(JSON.stringify(postValue));
+        // websocket.send(JSON.stringify(postValue));
     }
     //关闭连接
     function closeWebSocket(){

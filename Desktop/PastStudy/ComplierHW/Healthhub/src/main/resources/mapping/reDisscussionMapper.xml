@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dentist.dentistsys.mapper.disscussionMapper" >
-  <resultMap id="BaseResultMap" type="com.dentist.dentistsys.entity.disscussion" >
+<mapper namespace="com.dentist.dentistsys.mapper.reDisscussionMapper" >
+  <resultMap id="BaseResultMap" type="com.dentist.dentistsys.entity.reDisscussion" >
     <result column="disname" property="disname" jdbcType="VARCHAR" />
     <result column="disdate" property="disdate" jdbcType="VARCHAR" />
     <result column="distype" property="distype" jdbcType="VARCHAR" />
@@ -9,9 +9,8 @@
     <result column="distopic" property="distopic" jdbcType="VARCHAR" />
     <result column="diskeyword" property="diskeyword" jdbcType="VARCHAR" />
     <result column="dismessage" property="dismessage" jdbcType="VARCHAR" />
-    <result column="disstate" property="disstate" jdbcType="VARCHAR" />
     <result column="disid" property="disid" jdbcType="VARCHAR" />
-    <result column="disterminate" property="disterminate" jdbcType="VARCHAR" />
+    <result column="disparentid" property="disparentid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,16 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disstate, 
-    disid, disterminate
+    disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disid, disparentid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.disscussionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.reDisscussionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from disscussion
+    from reDisscussion
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,24 +87,24 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.dentist.dentistsys.entity.disscussionExample" >
-    delete from disscussion
+  <delete id="deleteByExample" parameterType="com.dentist.dentistsys.entity.reDisscussionExample" >
+    delete from reDisscussion
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dentist.dentistsys.entity.disscussion" >
-    insert into disscussion (disname, disdate, distype, 
+  <insert id="insert" parameterType="com.dentist.dentistsys.entity.reDisscussion" >
+    insert into reDisscussion (disname, disdate, distype, 
       disgroup, distopic, diskeyword, 
-      dismessage, disstate, disid, 
-      disterminate)
+      dismessage, disid, disparentid
+      )
     values (#{disname,jdbcType=VARCHAR}, #{disdate,jdbcType=VARCHAR}, #{distype,jdbcType=VARCHAR}, 
       #{disgroup,jdbcType=VARCHAR}, #{distopic,jdbcType=VARCHAR}, #{diskeyword,jdbcType=VARCHAR}, 
-      #{dismessage,jdbcType=VARCHAR}, #{disstate,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, 
-      #{disterminate,jdbcType=VARCHAR})
+      #{dismessage,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, #{disparentid,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.disscussion" >
-    insert into disscussion
+  <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.reDisscussion" >
+    insert into reDisscussion
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="disname != null" >
         disname,
@@ -129,14 +127,11 @@
       <if test="dismessage != null" >
         dismessage,
       </if>
-      <if test="disstate != null" >
-        disstate,
-      </if>
       <if test="disid != null" >
         disid,
       </if>
-      <if test="disterminate != null" >
-        disterminate,
+      <if test="disparentid != null" >
+        disparentid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -161,25 +156,22 @@
       <if test="dismessage != null" >
         #{dismessage,jdbcType=VARCHAR},
       </if>
-      <if test="disstate != null" >
-        #{disstate,jdbcType=VARCHAR},
-      </if>
       <if test="disid != null" >
         #{disid,jdbcType=VARCHAR},
       </if>
-      <if test="disterminate != null" >
-        #{disterminate,jdbcType=VARCHAR},
+      <if test="disparentid != null" >
+        #{disparentid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dentist.dentistsys.entity.disscussionExample" resultType="java.lang.Integer" >
-    select count(*) from disscussion
+  <select id="countByExample" parameterType="com.dentist.dentistsys.entity.reDisscussionExample" resultType="java.lang.Integer" >
+    select count(*) from reDisscussion
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update disscussion
+    update reDisscussion
     <set >
       <if test="record.disname != null" >
         disname = #{record.disname,jdbcType=VARCHAR},
@@ -202,14 +194,11 @@
       <if test="record.dismessage != null" >
         dismessage = #{record.dismessage,jdbcType=VARCHAR},
       </if>
-      <if test="record.disstate != null" >
-        disstate = #{record.disstate,jdbcType=VARCHAR},
-      </if>
       <if test="record.disid != null" >
         disid = #{record.disid,jdbcType=VARCHAR},
       </if>
-      <if test="record.disterminate != null" >
-        disterminate = #{record.disterminate,jdbcType=VARCHAR},
+      <if test="record.disparentid != null" >
+        disparentid = #{record.disparentid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -217,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update disscussion
+    update reDisscussion
     set disname = #{record.disname,jdbcType=VARCHAR},
       disdate = #{record.disdate,jdbcType=VARCHAR},
       distype = #{record.distype,jdbcType=VARCHAR},
@@ -225,9 +214,8 @@
       distopic = #{record.distopic,jdbcType=VARCHAR},
       diskeyword = #{record.diskeyword,jdbcType=VARCHAR},
       dismessage = #{record.dismessage,jdbcType=VARCHAR},
-      disstate = #{record.disstate,jdbcType=VARCHAR},
       disid = #{record.disid,jdbcType=VARCHAR},
-      disterminate = #{record.disterminate,jdbcType=VARCHAR}
+      disparentid = #{record.disparentid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
