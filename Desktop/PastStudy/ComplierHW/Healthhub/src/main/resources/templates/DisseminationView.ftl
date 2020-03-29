@@ -477,7 +477,7 @@
 
         console.log("开始...");
 
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=?");
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=?");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {

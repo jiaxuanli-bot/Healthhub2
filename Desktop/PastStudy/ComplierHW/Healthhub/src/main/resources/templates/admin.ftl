@@ -37,7 +37,7 @@
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
-            <div class="btn" data-toggle="modal" id="AMD">Search Posting</div>
+            <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -300,6 +300,9 @@
     $('#AMD').on('click' , function() {
         window.location.href="/disscussion/retrive/${UID}";
     })
+    $('#ASP').on('click' , function() {
+        window.location.href="/disscussion/adsearch/${UID}";
+    })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -507,7 +510,7 @@
 
         console.log("开始...");
 
-        websocket = new WebSocket("ws://localhost:8089/myHandler/ID=physicians, patients and administrator");
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=physicians, patients and administrator");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {

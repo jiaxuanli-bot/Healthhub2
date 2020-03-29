@@ -113,6 +113,22 @@ public class DisscussionController<BlogService> {
         mav.setViewName("search");
         return  mav;
     }
+
+    @RequestMapping(value = "/adsearch/{pid}", method = {RequestMethod.GET})
+    public ModelAndView adSearch(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getdesseminationforNurse();
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        user = userService.Sel(pid);
+        mav.addObject("UName",user.getRealname());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        mav.setViewName("adminSearch");
+        return  mav;
+    }
     @RequestMapping(value = "/retrive/{pid}", method = {RequestMethod.GET})
     public ModelAndView Retrieve(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();

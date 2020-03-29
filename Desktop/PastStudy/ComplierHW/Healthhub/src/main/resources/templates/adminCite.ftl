@@ -195,8 +195,11 @@
                         <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                             UserName
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4">
                             Message
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            type
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             action
@@ -299,18 +302,25 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
-
     var disseminations = ${disscussions};
     $(document).ready(function () {
         var tablecontext="";
-        alert(disseminations);
         for (var i=0;i<disseminations.length;i++){
+            var type;
+            if (disseminations[i].type=="cdis") {
+                type = "Disscussion"
+            }else if(disseminations[i].type="cdes"){
+                type = "Dessemination"
+            }else {
+                type = "Replys"
+            }
             tablecontext = tablecontext+"         <div class=\"row\"id=1"+disseminations[i].id+">\n" +
                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"></div>\n" +
 
                 "                           <input type=\"hidden\" id=\"h"+disseminations[i].id+"\" name=\"type\" value="+disseminations[i].userName+">\n" +
                 "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+disseminations[i].userName+"</span></div>\n" +
-                "                            <div class=\"col-lg-7 col-md-7 col-sm-6 col-xs-6\"><span>"+disseminations[i].message+"</span></div>\n" +
+                "                            <div class=\"col-lg-5 col-md-5 col-sm-4 col-xs-4\"><span>"+disseminations[i].message+"</span></div>\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+type+"</span></div>\n" +
                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+disseminations[i].type+" class='btn btn btn-success btn-xs approve' id="+disseminations[i].id+">approve</button>"
                 + "                          <button name="+disseminations[i].type+" class='btn btn btn-danger btn-xs refuse' id="+disseminations[i].id+">refuse</button></div>\n" +
                 "                            </div>"
@@ -504,7 +514,7 @@
 
         console.log("开始...");
 
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=physicians, patients and administrator");
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=physicians, patients and administrator");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {

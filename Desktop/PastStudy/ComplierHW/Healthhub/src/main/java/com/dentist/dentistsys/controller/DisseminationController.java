@@ -1,10 +1,8 @@
 package com.dentist.dentistsys.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.dentist.dentistsys.entity.dissemination;
 import com.dentist.dentistsys.entity.user;
-import com.dentist.dentistsys.service.BlogService;
 import com.dentist.dentistsys.service.CommentService;
 import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.UserService;
@@ -25,8 +23,6 @@ public class DisseminationController{
     private UserService userService;
     @Autowired
     CommentService commentService;
-    @Autowired
-    BlogService blogService;
     @Autowired
     DisseminationService disseminationService;
     ArrayList<dissemination> disseminations;

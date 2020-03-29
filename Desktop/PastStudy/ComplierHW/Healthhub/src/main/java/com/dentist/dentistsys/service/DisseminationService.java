@@ -1,7 +1,5 @@
 package com.dentist.dentistsys.service;
 
-import com.dentist.dentistsys.entity.blog;
-import com.dentist.dentistsys.entity.blogExample;
 import com.dentist.dentistsys.entity.dissemination;
 import com.dentist.dentistsys.entity.disseminationExample;
 import org.springframework.beans.factory.annotation.Autowired;

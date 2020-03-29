@@ -104,6 +104,47 @@ public class DisscussionService {
         return res;}
         return arrayList;
     }
+    public ArrayList<disscussion> Searchardisscussions(String type,String Date,String Username,String Topic){
+        disscussionExample d = new disscussionExample();
+        if (Username.length() > 0) {
+            System.out.println("2>0");
+            d.createCriteria().andDisnameEqualTo(Username);
+        }
+        if (Topic.length() > 0) {
+            System.out.println("3>0");
+            d.createCriteria().andDistopicEqualTo(Topic);
+        }
+        if (type.length() > 0){
+            System.out.println("4>0");
+            if (type.equals("tpatient")){
+                d.createCriteria().andDisgroupEqualTo("patient");
+            }
+            else if(type.equals("tnurse")){
+                d.createCriteria().andDisgroupEqualTo("nurse");
+            }
+        }
+        d.createCriteria().andDisterminateEqualTo("ter");
+        d.createCriteria().andDisidIsNotNull();
+        arrayList = (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
+
+        if (Date.length() > 0) {
+            ArrayList res = new ArrayList();
+            for (int i = 0;i < arrayList.size(); i++) {
+//            System.out.println(Date);
+//            System.out.println(arrayList.get(i).getDisdate().substring(0,2));
+//            System.out.println(Date.substring(5,7));
+//            System.out.println(arrayList.get(i).getDisdate().substring(3,5));
+//            System.out.println(Date.substring(8,10));
+//            System.out.println(arrayList.get(i).getDisdate().substring(6,10));
+//            System.out.println(Date.substring(0,4));
+
+                if (arrayList.get(i).getDisdate().substring(0,2).equals(Date.substring(5,7))&&arrayList.get(i).getDisdate().substring(3,5).equals(Date.substring(8,10))&&arrayList.get(i).getDisdate().substring(6,10).equals(Date.substring(0,4))){
+                    res.add(arrayList.get(i));
+                }
+            }
+            return res;}
+        return arrayList;
+    }
 
 
     public ArrayList<disscussion> getAlldissscussion(){

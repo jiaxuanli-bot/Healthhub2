@@ -21,8 +21,6 @@ public class BlogController{
         @Autowired
         CommentService commentService;
         @Autowired
-        BlogService blogService;
-        @Autowired
         DisscussionService disscussionService;
         @Autowired
         UserService userService;

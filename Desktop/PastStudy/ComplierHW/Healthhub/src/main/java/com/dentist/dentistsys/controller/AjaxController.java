@@ -24,8 +24,6 @@ public class AjaxController {
     @Autowired
     private UserService userservice;
     @Autowired
-    private BlogService blogService;
-    @Autowired
     private DisseminationService disseminationService;
     @Autowired
     private DisscussionService disscussionService;
@@ -96,21 +94,23 @@ public class AjaxController {
         return "1";
     }
 
-    @RequestMapping(value = "/blog", method = {RequestMethod.POST})
+    @RequestMapping(value = "/searchar/{pid}", method = {RequestMethod.POST})
     @ResponseBody
-    public String SendBlog(HttpServletRequest request){
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH");
-        String id=request.getParameter("id");
-        String name =request.getParameter("name");
-        String text = request.getParameter("text");
-        blog blog =new blog();
-        blog.setId(id);
-        blog.setContext(text);
-        blog.setSender(name);
-        blog.setData(dateFormat.format(date));
-        blogService.Ins(blog);
-        return "1";
+    public Object Searchar(HttpServletRequest request, @PathVariable(name = "pid") String pid){
+        System.out.println("ajax Reply");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        String username=request.getParameter("username");
+        System.out.println(username);
+        String topic=request.getParameter("topic");
+        System.out.println(topic);
+        user user = userservice.Sel(pid);
+        disscussions = disscussionService.Searchardisscussions(user.getType(),time,username,topic);
+        disseminations = disseminationService.Searchdesseminations(user.getType(),"ashdjkahjd",username,topic);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dis",disscussions);
+        map.put("des",disseminations);
+        return map;
     }
 
     @RequestMapping(value = "/refuse", method = {RequestMethod.POST})

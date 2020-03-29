@@ -3,13 +3,10 @@ package com.dentist.dentistsys.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.dentist.dentistsys.entity.blog;
 import com.dentist.dentistsys.entity.dissemination;
 import com.dentist.dentistsys.entity.user;
-import com.dentist.dentistsys.service.BlogService;
 import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.UserService;
-import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,11 +27,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private BlogService blogService;
-    @Autowired
     private DisseminationService disseminationService;
     ArrayList<dissemination> disseminations;
-    ArrayList<blog> blogs;
     private user user;
     private String id;
     private String password;
@@ -44,6 +38,7 @@ public class UserController {
         id = request.getParameter("id");
         password = request.getParameter("password");
         user = userService.Sel(id);
+        String jsonblogs = "abc";
         ModelAndView mav=new ModelAndView();
         if(user != null){
             if (user.getPassword().equals(password) ) {
@@ -54,28 +49,21 @@ public class UserController {
                     mav.addObject("ID",user.getId());
                     mav.addObject("blogID",disseminationService.getAlldessemination().size());
                     mav.addObject("UID",user.getId());
-                    JSONArray array = (JSONArray) JSONArray.toJSON(disseminations);
-                    String jsonblogs = array.toString();
                     mav.addObject("blogs",jsonblogs);
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("verificationCode");
                 } else if (user.getType().equals("tdoctor")){
-                    blogs = blogService.GetAll();
                     mav.addObject("UID",user.getId());
                     mav.addObject("ID",user.getId());
-                    mav.addObject("blogID",blogService.GetBlogId());
-                    JSONArray array = (JSONArray) JSONArray.toJSON(blogs);
-                    String jsonblogs = array.toString();
+                    mav.addObject("blogID","123");
                     mav.addObject("blogs",jsonblogs);
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("verificationCode");
                 } else if (user.getType().equals("tnurse")){
-                    blogs = blogService.GetBlogbySeder(user.getId());
+
                     mav.addObject("ID",user.getPhysicion());
-                    mav.addObject("blogID",blogService.GetBlogId());
+                    mav.addObject("blogID","123");
                     mav.addObject("UID",user.getId());
-                    JSONArray array = (JSONArray) JSONArray.toJSON(blogs);
-                    String jsonblogs = array.toString();
                     mav.addObject("blogs",jsonblogs);
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("verificationCode");

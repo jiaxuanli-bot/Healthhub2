@@ -492,7 +492,7 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://127.0.0.1:8089/myHandler/ID=DIS"+$("#DisscussionID").val());
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=DIS"+$("#DisscussionID").val());
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
             console.log("onpen");

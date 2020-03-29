@@ -49,11 +49,14 @@
                     <p>
                     </p>
                 </div>
+                <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
                 <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
-                <div class="btn" data-toggle="modal" id="cp">Change Password</div>
-                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
-                <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
-                <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
+                <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
+                <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
+                <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
+                <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
+                <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -125,9 +128,9 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-static-top" id="navtop" >
+                <div class="navbar navbar-black navbar-static-top" id="navtop"  style="width: 82.2%">
                     <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse" >
                             <span class="sr-only">Toggle</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -170,6 +173,10 @@
                                                 Date:<input type="date" class="form-control" id="sdate">
                                                 Topic:<input type="text" id="stopic"class="ml-4 form-control">
                                                 Name:<input type="text" class="ml-4 form-control"id="sname">
+                                                <select class="select ml-2" id="adselect">
+                                                    <option value ="volvo">Normal</option>
+                                                    <option value ="saab">Archive</option>
+                                                </select>
                                                 <button class="btn-sm btn-primary" id="SearchPosts">
                                                     Search
                                                 </button>
@@ -262,33 +269,33 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
-    $('#cp').on('click' , function() {
-        window.location.href="/changePW.html";
-    })
-    $('#VD').on('click' , function() {
-        window.location.href="/disscussion/View/${UID}";
-    })
     $("#namebarb").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
-    $("#VDm").on('click' , function() {
-        window.location.href="/dissemination/uview/${UID}";
-    })
-    $("#SP").on('click' , function() {
-        window.location.href="/disscussion/search/${UID}";
-    })
-    if ($("#utype").val()=="tpatient"){
-        //alert("patient")
-        $("#navtop").height("50px");
-        $("#navtop").addClass("navbar-green");
-    }else if ($("#utype").val()=="tnurse"){
-        //alert("nurse")
-        $("#navtop").height("50px");
-        $("#navtop").addClass("navbar-pink");
-    }else {
-        $("#navtop").height("50px");
-        $("#navtop").addClass("navbar-blue");
+
+
+
+    function postMan() {
+        window.location.href="/dissemination/man/${UID}";
     }
+    function disMan() {
+        window.location.href="/disscussion/mana/${UID}";
+    }
+    function DMV() {
+        window.location.href="/dissemination/adminview/${UID}";
+    }
+    $('#VD').on('click' , function() {
+        window.location.href="/disscussion/View/${UID}";
+    })
+    $('#VCB').on('click' , function() {
+        window.location.href="/blog/View/${UID}";
+    })
+    $('#AMD').on('click' , function() {
+        window.location.href="/disscussion/retrive/${UID}";
+    })
+    $('#ASP').on('click' , function() {
+        window.location.href="/disscussion/adsearch/${UID}";
+    })
     var ID;
     var userID=$("#ID").val();
     var websocket=null;
@@ -303,22 +310,41 @@
         $('#SearchPosts').on('click' , function() {
             $("#Discontext").empty();
             $("#Descontext").empty();
-            $.ajax({
-                type:"POST",
-                url:"/ajax/search/${UID}",
-                data: {
-                    "time":""+$("#sdate").val() ,
-                    "username":""+$("#sname").val() ,
-                    "topic":""+$("#stopic").val() ,
-                },
-                success:function(data){
-                    updatedes(data.des);
-                    updatedis(data.dis);
-                },
-                error:function(jqXHR){
-                    alert("发生错误："+ jqXHR.status);
-                }
-            });
+            if ($("#adselect").val()=="Normal"){
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/search/${UID}",
+                    data: {
+                        "time":""+$("#sdate").val() ,
+                        "username":""+$("#sname").val() ,
+                        "topic":""+$("#stopic").val() ,
+                    },
+                    success:function(data){
+                        updatedes(data.des);
+                        updatedis(data.dis);
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }else {
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/searchar/${UID}",
+                    data: {
+                        "time":""+$("#sdate").val() ,
+                        "username":""+$("#sname").val() ,
+                        "topic":""+$("#stopic").val() ,
+                    },
+                    success:function(data){
+                        updatedes(data.des);
+                        updatedis(data.dis);
+                    },
+                    error:function(jqXHR){
+                        alert("发生错误："+ jqXHR.status);
+                    }
+                });
+            }
         })
 
         $('#dsenddis').on('click' , function() {
@@ -370,22 +396,6 @@
             }
 
         })
-
-        for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
-                "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
-                "                                    </div>\n" +
-                "                                </div>";
-            $("#Discontext").append(html);
-        }
-        connectWebSocket();
     })
 
 </script>
