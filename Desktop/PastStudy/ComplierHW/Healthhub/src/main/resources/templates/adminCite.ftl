@@ -31,11 +31,13 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
             <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
-            <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
+            <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -274,6 +276,9 @@
 </div>
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
+    $("#signoutbtn").on('click' , function() {
+        window.location.href="http://138.49.101.84";
+    })
     function postMan() {
         window.location.href="/dissemination/man/${UID}";
     }
@@ -285,6 +290,15 @@
     }
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View/${UID}";
+    })
+    $('#VCB').on('click' , function() {
+        window.location.href="/blog/View/${UID}";
+    })
+    $('#AMD').on('click' , function() {
+        window.location.href="/disscussion/retrive/${UID}";
+    })
+    $('#ASP').on('click' , function() {
+        window.location.href="/disscussion/adsearch/${UID}";
     })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
@@ -302,21 +316,22 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
-    var disseminations = ${disscussions};
+    var disseminations = ${dis};
+    <#--alert(JSON.stringify(${dis}))-->
+    <#--alert(JSON.stringify(disseminations))-->
     $(document).ready(function () {
         var tablecontext="";
-        for (var i=0;i<disseminations.length;i++){
+        for (var i=0;i< disseminations.length;i++){
             var type;
             if (disseminations[i].type=="cdis") {
                 type = "Disscussion"
-            }else if(disseminations[i].type="cdes"){
+            }else if(disseminations[i].type=="cdes"){
                 type = "Dessemination"
             }else {
-                type = "Replys"
+                type = "Messages"
             }
             tablecontext = tablecontext+"         <div class=\"row\"id=1"+disseminations[i].id+">\n" +
                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"></div>\n" +
-
                 "                           <input type=\"hidden\" id=\"h"+disseminations[i].id+"\" name=\"type\" value="+disseminations[i].userName+">\n" +
                 "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+disseminations[i].userName+"</span></div>\n" +
                 "                            <div class=\"col-lg-5 col-md-5 col-sm-4 col-xs-4\"><span>"+disseminations[i].message+"</span></div>\n" +

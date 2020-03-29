@@ -41,6 +41,7 @@
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->
@@ -254,6 +255,9 @@
         })
         $("#VDm").on('click' , function() {
             window.location.href="/dissemination/uview/${UID}";
+        })
+        $("#MMD").on('click' , function() {
+            window.location.href="/disscussion/manmy/${UID}";
         })
         if ($("#utype").val()=="tpatient"){
             //alert("patient")

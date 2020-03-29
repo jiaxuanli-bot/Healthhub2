@@ -1,5 +1,4 @@
 package com.dentist.dentistsys.service;
-
 import com.dentist.dentistsys.entity.disscussion;
 import com.dentist.dentistsys.entity.disscussionExample;
 import com.dentist.dentistsys.entity.dissemination;
@@ -66,16 +65,14 @@ public class DisscussionService {
 
     public ArrayList<disscussion> Searchdisscussions(String type,String Date,String Username,String Topic){
         disscussionExample d = new disscussionExample();
+        System.out.println("t "+type+" date "+Date+"name is"+Username+" Time"+Topic);
         if (Username.length() > 0) {
-            System.out.println("2>0");
             d.createCriteria().andDisnameEqualTo(Username);
         }
         if (Topic.length() > 0) {
-            System.out.println("3>0");
             d.createCriteria().andDistopicEqualTo(Topic);
         }
         if (type.length() > 0){
-            System.out.println("4>0");
             if (type.equals("tpatient")){
                 d.createCriteria().andDisgroupEqualTo("patient");
             }
@@ -85,9 +82,14 @@ public class DisscussionService {
         }
         d.createCriteria().andDisidIsNotNull();
         arrayList = (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
-
-        if (Date.length() > 0) {
         ArrayList res = new ArrayList();
+        if (Date.length() > 0) {
+            for (int j =0 ; j <arrayList.size();j++){
+                if (!(arrayList.get(j).getDisterminate()==null)){
+                    if (arrayList.get(j).getDisterminate().equals("archive")) {
+                        arrayList.remove(j);
+                    }}
+            }
         for (int i = 0;i < arrayList.size(); i++) {
 //            System.out.println(Date);
 //            System.out.println(arrayList.get(i).getDisdate().substring(0,2));
@@ -96,13 +98,19 @@ public class DisscussionService {
 //            System.out.println(Date.substring(8,10));
 //            System.out.println(arrayList.get(i).getDisdate().substring(6,10));
 //            System.out.println(Date.substring(0,4));
-
             if (arrayList.get(i).getDisdate().substring(0,2).equals(Date.substring(5,7))&&arrayList.get(i).getDisdate().substring(3,5).equals(Date.substring(8,10))&&arrayList.get(i).getDisdate().substring(6,10).equals(Date.substring(0,4))){
                 res.add(arrayList.get(i));
             }
         }
-        return res;}
-        return arrayList;
+        return res;
+        }
+        for (int j =0 ; j <arrayList.size();j++){
+            if (!(arrayList.get(j).getDisterminate()==null)){
+            if (arrayList.get(j).getDisterminate().equals("archive")) {
+                arrayList.remove(j);
+            }
+        }}
+        return  arrayList;
     }
     public ArrayList<disscussion> Searchardisscussions(String type,String Date,String Username,String Topic){
         disscussionExample d = new disscussionExample();

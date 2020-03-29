@@ -42,6 +42,7 @@
                  <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->
@@ -242,7 +243,10 @@
         window.location.href="/dissemination/uview/${UID}";
     })
     $("#SP").on('click' , function() {
-        window.location.href="/disscussion/search/${UID}";
+       window.location.href="/disscussion/search/${UID}";
+    })
+    $("#MMD").on('click' , function() {
+        window.location.href="/disscussion/manmy/${UID}";
     })
     function cite(post) {
         $.ajax({
@@ -362,7 +366,6 @@
         //接收信息
         websocket.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
-            alert(data.toString());
             var html = " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +

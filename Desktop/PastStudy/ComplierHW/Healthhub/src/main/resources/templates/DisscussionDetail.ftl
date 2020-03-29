@@ -31,7 +31,6 @@
                     <p>
                     </p>
                 </div>
-
                 <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
@@ -160,7 +159,7 @@
                                     <h1>Topic</h1>
                                 </div>
                                 <div>
-                                    <h1 id="replyinf">Reply Disscussion</h1>
+                                    <h1 id="replyinf">Messages</h1>
                                 </div>
                                 <div id="replys"></div>
                                 <button type="button" id="replyb" class="btn-primary text-white ml-1" data-toggle="modal" data-target="#reply">Add</button>

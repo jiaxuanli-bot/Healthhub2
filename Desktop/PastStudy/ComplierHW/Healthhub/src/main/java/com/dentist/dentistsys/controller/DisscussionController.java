@@ -40,7 +40,7 @@ public class DisscussionController<BlogService> {
         ArrayList<user> users =  userService.SelAllF();
         mav.addObject("users", JSON.toJSONString(users));
         mav.addObject("disscussions",JSON.toJSONString(disscussions));
-       System.out.println("to backend");
+        System.out.println("to backend");
         mav.setViewName("ManageDis");
         return  mav;
     }

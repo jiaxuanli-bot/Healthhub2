@@ -53,6 +53,7 @@
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->
@@ -227,7 +228,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 Update Status
             </div>
-            <div class="modal-body">
+           <div class="modal-body">
                 <form class="form center-block">
                     <div class="form-group">
                         <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
@@ -275,6 +276,9 @@
     })
     $("#SP").on('click' , function() {
         window.location.href="/disscussion/search/${UID}";
+    })
+    $("#MMD").on('click' , function() {
+        window.location.href="/disscussion/manmy/${UID}";
     })
     if ($("#utype").val()=="tpatient"){
         //alert("patient")
@@ -370,20 +374,6 @@
 
         })
 
-        for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
-                "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
-                "                                    </div>\n" +
-                "                                </div>";
-            $("#Discontext").append(html);
-        }
         connectWebSocket();
     })
 
@@ -401,10 +391,39 @@
                 "                                        <p><b>Time:</b>"+dis[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>"+dis[i].dismessage+"</p>\n" +
+                "                                        <hr>\n" +
+                "                                        <div class=\"input-group-btn\">\n" +
+                "                                        <button class=\"btn-danger btn-sm\" onclick='citedis("+dis[i].disid+")'>cite</button>\n" +
+                "                                    </div>\n" +
+
                 "                                    </div>\n" +
                 "                                </div>";
             $("#Discontext").append(html);
         }
+    }
+    function cite(post) {
+        $.ajax({
+            url:"/ajax/cite/${UID}",
+            type:"POST",
+            data: {
+                "id": ""+post,
+                "type": "des",
+            },
+            success:function (text) {
+            }
+        });
+    }
+    function citedis(post) {
+        $.ajax({
+            url:"/ajax/cite/${UID}",
+            type:"POST",
+            data: {
+                "id": ""+post,
+                "type": "dis",
+            },
+            success:function (text) {
+            }
+        });
     }
     function updatedes(des) {
         for (var j=0;j<des.length;j++){
@@ -417,6 +436,10 @@
                 "                                        <p><b>Time:</b>"+des[j].disdate+"</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>"+des[j].dismessage+"</p>\n" +
+                "                                        <hr>\n" +
+                "                                        <div class=\"input-group-btn\">\n" +
+                "                                        <button class=\"btn-danger btn-sm\" onclick='cite("+des[j].disid+")'>cite</button>\n" +
+                "                                    </div>" +
                 "                                    </div>\n" +
                 "                                </div>";
             $("#Descontext").append(html);

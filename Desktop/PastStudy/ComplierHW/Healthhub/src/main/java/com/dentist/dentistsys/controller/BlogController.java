@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
@@ -87,9 +89,11 @@ public class BlogController{
                 mancites.add(m);
             }
             for (int i =0; i<reDisscussions.size(); i++){
+                System.out.println("get the replys");
+                System.out.println(reDisscussions.get(i).getDistype());
                 mancite m =new mancite();
                 m.setMessage(reDisscussions.get(i).getDismessage());
-                m.setType(reDisscussions.get(i).getDistype());
+                m.setType("credis");
                 m.setUserName(reDisscussions.get(i).getDisname());
                 m.setId(reDisscussions.get(i).getDisid());
                 mancites.add(m);
@@ -100,7 +104,10 @@ public class BlogController{
         mav.addObject("UID",user.getId());
         ArrayList<user> users =  userService.SelAllF();
         mav.addObject("users", JSON.toJSONString(users));
-        mav.addObject("disscussions",JSON.toJSONString(mancites));
+        for (int a=0;a<mancites.size();a++) {
+            System.out.println(mancites.get(a).getType());
+        }
+        mav.addObject("dis",JSON.toJSONString(mancites));
         System.out.println("in the test");
         mav.setViewName("adminCite");
         return  mav;

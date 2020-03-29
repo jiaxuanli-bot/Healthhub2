@@ -41,6 +41,8 @@
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
                 <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
+                <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -111,11 +113,33 @@
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-                <div class="navbar navbar-static-top" id="navtop">
+                <div class="navbar navbar-static-top" id="navtop"  style="width: 82.2%">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="#" class="navbar-brand logo">Hub</a>
+                    </div>
                     <nav class="collapse navbar-collapse" role="navigation">
-                        <ul class="nav navbar-nav" id="namebar">
-                            <span id="unamebar">${UID}</span>
-                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group input-group-sm" style="max-width:360px;">
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-home"></i>Home</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a><span class="badge">${UID}</span></a>
+                            </li>
+                            <li>
+                                <a href="http://138.49.101.84"><span class="badge">Log Out</span></a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -240,6 +264,13 @@
         $("#VDm").on('click' , function() {
             window.location.href="/dissemination/uview/${UID}";
         })
+        $("#MMD").on('click' , function() {
+            window.location.href="/disscussion/manmy/${UID}";
+        })
+        $("#SP").on('click' , function() {
+            window.location.href="/disscussion/search/${UID}";
+        })
+
         if ($("#utype").val()=="tpatient"){
             //alert("patient")
             $("#navtop").addClass("navbar-green");

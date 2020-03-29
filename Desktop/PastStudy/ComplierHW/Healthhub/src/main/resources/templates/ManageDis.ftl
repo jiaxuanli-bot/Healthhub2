@@ -38,6 +38,7 @@
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
         </div>
         <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -131,15 +132,13 @@
                 </div>
                 <div class="data-div">
                     <div class="row tableHeader">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
-                        </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             Post Sender
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             Send Time
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2">
                             Group
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -238,7 +237,9 @@
     $('#AMD').on('click' , function() {
         window.location.href="/disscussion/retrive/${UID}";
     })
-
+    $('#ASP').on('click' , function() {
+        window.location.href="/disscussion/adsearch/${UID}";
+    })
 
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
@@ -268,10 +269,9 @@
                 group = "physicians,patient,administrators";
             }
             tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
-                "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+disseminations[i].disid+"</div>\n" +
                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+disseminations[i].disname+"</span></div>\n" +
                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+disseminations[i].disdate+"</span></div>\n" +
-                "                            <div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-4\"><span>"+group+"</span></div>\n" +
+                "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-2\"><span>"+group+"</span></div>\n" +
                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+disseminations[i].distopic+"</span></div>\n" +
                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+disseminations[i].disid+">approve</button>"
                 + "                          <button name="+disseminations[i].disid+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +

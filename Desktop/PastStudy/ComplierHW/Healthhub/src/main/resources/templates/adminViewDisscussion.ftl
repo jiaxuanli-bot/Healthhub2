@@ -37,6 +37,7 @@
             <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citetions</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -229,6 +230,8 @@
 </div>
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
+
+
     $("#signoutbtn").on('click' , function() {
         window.location.href="http://138.49.101.84";
     })
@@ -250,6 +253,10 @@
     $('#AMD').on('click' , function() {
         window.location.href="/disscussion/retrive/${UID}";
     })
+    $('#ASP').on('click' , function() {
+        window.location.href="/disscussion/adsearch/${UID}";
+    })
+
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份

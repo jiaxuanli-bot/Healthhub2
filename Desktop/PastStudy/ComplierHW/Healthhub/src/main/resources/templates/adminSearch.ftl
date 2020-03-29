@@ -174,7 +174,7 @@
                                                 Topic:<input type="text" id="stopic"class="ml-4 form-control">
                                                 Name:<input type="text" class="ml-4 form-control"id="sname">
                                                 <select class="select ml-2" id="adselect">
-                                                    <option value ="volvo">Normal</option>
+                                                    <option value ="Normal">Normal</option>
                                                     <option value ="saab">Archive</option>
                                                 </select>
                                                 <button class="btn-sm btn-primary" id="SearchPosts">
@@ -252,7 +252,6 @@
     </div>
 </div>
 <script>
-
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份

@@ -97,7 +97,7 @@ public class AjaxController {
     @RequestMapping(value = "/searchar/{pid}", method = {RequestMethod.POST})
     @ResponseBody
     public Object Searchar(HttpServletRequest request, @PathVariable(name = "pid") String pid){
-        System.out.println("ajax Reply");
+        System.out.println("ar search ajax Reply");
         String time=request.getParameter("time");
         System.out.println(time);
         String username=request.getParameter("username");
@@ -267,6 +267,7 @@ public class AjaxController {
         Map<String,Object> map = new HashMap<>();
         map.put("dis",disscussions);
         map.put("des",disseminations);
+        System.out.println("return ");
         return map;
     }
 
@@ -277,6 +278,7 @@ public class AjaxController {
         System.out.println(request.getParameter("id"));
         String id = request.getParameter("id");
         String type = request.getParameter("type");
+        System.out.println("in the cite :"+type);
         if (type.equals("des")) {
             disseminationService.updateStateById(id,"cdes");
         }else if(type.equals("dis")){
