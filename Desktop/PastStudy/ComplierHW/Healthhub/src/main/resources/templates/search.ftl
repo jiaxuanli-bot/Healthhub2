@@ -381,6 +381,7 @@
 
 <script>
     function updatedis(dis) {
+        $("#Discontext").empty();
         for (var i=0;i<dis.length;i++){
             var html =  " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+dis[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+dis[i].distopic+"</div>\n" +
@@ -426,6 +427,7 @@
         });
     }
     function updatedes(des) {
+        $("#Descontext").empty();
         for (var j=0;j<des.length;j++){
             var html =  " <div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+des[j].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+des[j].distopic+"</div>\n" +

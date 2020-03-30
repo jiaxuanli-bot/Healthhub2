@@ -105,7 +105,7 @@ public class AjaxController {
         String topic=request.getParameter("topic");
         System.out.println(topic);
         user user = userservice.Sel(pid);
-        disscussions = disscussionService.Searchardisscussions(user.getType(),time,username,topic);
+        disscussions = disscussionService.getAr();
         disseminations = disseminationService.Searchdesseminations(user.getType(),"ashdjkahjd",username,topic);
         Map<String,Object> map = new HashMap<>();
         map.put("dis",disscussions);
@@ -333,6 +333,7 @@ public class AjaxController {
         String id = request.getParameter("id");
         String type = request.getParameter("type");
         disscussionService.SetTerstatus(id,"archive");
+
         return "1";
     }
 }

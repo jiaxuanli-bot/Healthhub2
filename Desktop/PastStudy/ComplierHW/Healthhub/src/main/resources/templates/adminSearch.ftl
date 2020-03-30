@@ -173,10 +173,11 @@
                                                 Date:<input type="date" class="form-control" id="sdate">
                                                 Topic:<input type="text" id="stopic"class="ml-4 form-control">
                                                 Name:<input type="text" class="ml-4 form-control"id="sname">
-                                                <select class="select ml-2" id="adselect">
+                                                <select class="select ml-2" id="adsel">
                                                     <option value ="Normal">Normal</option>
                                                     <option value ="saab">Archive</option>
                                                 </select>
+                                                <div type="hidden" id="spass">Password:<input type="password" class="form-control" id="si"></div>
                                                 <button class="btn-sm btn-primary" id="SearchPosts">
                                                     Search
                                                 </button>
@@ -299,6 +300,7 @@
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+        $("#spass").css('display','none');
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
             var time2 = new Date().Format("MM/dd/yyyy hh:mm");
@@ -309,7 +311,7 @@
         $('#SearchPosts').on('click' , function() {
             $("#Discontext").empty();
             $("#Descontext").empty();
-            if ($("#adselect").val()=="Normal"){
+            if ($("#adsel").val()=="Normal"){
                 $.ajax({
                     type:"POST",
                     url:"/ajax/search/${UID}",
@@ -327,22 +329,26 @@
                     }
                 });
             }else {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/searchar/${UID}",
-                    data: {
-                        "time":""+$("#sdate").val() ,
-                        "username":""+$("#sname").val() ,
-                        "topic":""+$("#stopic").val() ,
-                    },
-                    success:function(data){
-                        updatedes(data.des);
-                        updatedis(data.dis);
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
+                if ($("#si").val()!="ad1234") {
+                    alert("Wrong Password");
+                }else {
+                    $.ajax({
+                        type:"POST",
+                        url:"/ajax/searchar/${UID}",
+                        data: {
+                            "time":""+$("#sdate").val() ,
+                            "username":""+$("#sname").val() ,
+                            "topic":""+$("#stopic").val() ,
+                        },
+                        success:function(data){
+                            updatedes(data.des);
+                            updatedis(data.dis);
+                        },
+                        error:function(jqXHR){
+                            alert("发生错误："+ jqXHR.status);
+                        }
+                    });
+                }
             }
         })
 
@@ -432,6 +438,15 @@
             $("#Descontext").append(html);
         }
     }
+    $("#adsel").change(function(){
+        if ($("#adsel").val()=="Normal"){
+            $("#spass").css('display','none');
+        }
+        else {
+            $("#spass").css('display','block');
+        }
+    })
+
 </script>
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>

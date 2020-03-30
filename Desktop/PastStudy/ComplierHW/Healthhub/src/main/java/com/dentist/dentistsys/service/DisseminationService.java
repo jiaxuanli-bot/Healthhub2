@@ -47,22 +47,23 @@ public class DisseminationService {
 
     public ArrayList<dissemination> Searchdesseminations(String type,String Date,String Username,String Topic){
         disseminationExample d = new disseminationExample();
+        disseminationExample.Criteria c =d.createCriteria();
         System.out.println("t "+type+" date "+Date+"name is"+Username+" Time"+Topic);
         if (Username.length() > 0) {
-            d.createCriteria().andDisnameEqualTo(Username);
+            c.andDisnameEqualTo(Username);
        }
         if (Topic.length() > 0) {
-            d.createCriteria().andDistopicEqualTo(Topic);
+            c.andDistopicEqualTo(Topic);
         }
         if (type.length() > 0){
             if (type.equals("tpatient")){
-                d.createCriteria().andDisgroupEqualTo("patient");
+                c.andDisgroupEqualTo("patient");
             }
             else if(type.equals("tnurse")){
-                d.createCriteria().andDisgroupEqualTo("nurse");
+                c.andDisgroupEqualTo("nurse");
             }
         }
-        d.createCriteria().andDisidIsNotNull();
+        c.andDisidIsNotNull();
         arrayList = (ArrayList<dissemination>) disseminationMapper.selectByExample(d);
         if (Date.length() > 0) {
             ArrayList res = new ArrayList();

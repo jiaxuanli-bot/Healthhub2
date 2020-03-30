@@ -65,31 +65,31 @@ public class DisscussionService {
 
     public ArrayList<disscussion> Searchdisscussions(String type,String Date,String Username,String Topic){
         disscussionExample d = new disscussionExample();
+        disscussionExample.Criteria c = d.createCriteria();
         System.out.println("t "+type+" date "+Date+"name is"+Username+" Time"+Topic);
         if (Username.length() > 0) {
-            d.createCriteria().andDisnameEqualTo(Username);
+            c.andDisnameEqualTo(Username);
         }
         if (Topic.length() > 0) {
-            d.createCriteria().andDistopicEqualTo(Topic);
+            c.andDistopicEqualTo(Topic);
         }
         if (type.length() > 0){
             if (type.equals("tpatient")){
-                d.createCriteria().andDisgroupEqualTo("patient");
+                c.andDisgroupEqualTo("patient");
             }
             else if(type.equals("tnurse")){
-                d.createCriteria().andDisgroupEqualTo("nurse");
+                c.andDisgroupEqualTo("nurse");
             }
         }
-        d.createCriteria().andDisidIsNotNull();
         arrayList = (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
+        for (int i =0 ;i<arrayList.size();i++) {
+            if (arrayList.get(i).getDisterminate()!=null) {
+                if (!arrayList.get(i).getDisterminate().equals("ter")) {
+                arrayList.remove(i);}
+            }
+        }
         ArrayList res = new ArrayList();
         if (Date.length() > 0) {
-            for (int j =0 ; j <arrayList.size();j++){
-                if (!(arrayList.get(j).getDisterminate()==null)){
-                    if (arrayList.get(j).getDisterminate().equals("archive")) {
-                        arrayList.remove(j);
-                    }}
-            }
         for (int i = 0;i < arrayList.size(); i++) {
 //            System.out.println(Date);
 //            System.out.println(arrayList.get(i).getDisdate().substring(0,2));
@@ -104,35 +104,30 @@ public class DisscussionService {
         }
         return res;
         }
-        for (int j =0 ; j <arrayList.size();j++){
-            if (!(arrayList.get(j).getDisterminate()==null)){
-            if (arrayList.get(j).getDisterminate().equals("archive")) {
-                arrayList.remove(j);
-            }
-        }}
         return  arrayList;
     }
     public ArrayList<disscussion> Searchardisscussions(String type,String Date,String Username,String Topic){
         disscussionExample d = new disscussionExample();
+        disscussionExample.Criteria c = d.createCriteria();
         if (Username.length() > 0) {
             System.out.println("2>0");
-            d.createCriteria().andDisnameEqualTo(Username);
+            c.andDisnameEqualTo(Username);
         }
         if (Topic.length() > 0) {
             System.out.println("3>0");
-            d.createCriteria().andDistopicEqualTo(Topic);
+            c.andDistopicEqualTo(Topic);
         }
         if (type.length() > 0){
             System.out.println("4>0");
             if (type.equals("tpatient")){
-                d.createCriteria().andDisgroupEqualTo("patient");
+                c.andDisgroupEqualTo("patient");
             }
             else if(type.equals("tnurse")){
-                d.createCriteria().andDisgroupEqualTo("nurse");
+                c.andDisgroupEqualTo("nurse");
             }
         }
-        d.createCriteria().andDisterminateEqualTo("ter");
-        d.createCriteria().andDisidIsNotNull();
+        c.andDisterminateEqualTo("ter");
+        c.andDisidIsNotNull();
         arrayList = (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
 
         if (Date.length() > 0) {
@@ -154,6 +149,12 @@ public class DisscussionService {
         return arrayList;
     }
 
+    public ArrayList<disscussion> getAr(){
+        disscussionExample d = new disscussionExample();
+        d.createCriteria().andDisterminateEqualTo("archive");
+        arrayList = (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
+        return arrayList;
+    }
 
     public ArrayList<disscussion> getAlldissscussion(){
         disscussionExample d = new disscussionExample();
@@ -193,6 +194,7 @@ public class DisscussionService {
         }else {
             disscussions.get(0).setDisterminate(null);
         }
+        disscussions.get(0).setDisstate("2");
         disscussionMapper.updateByExample(disscussions.get(0),d);
     }
     public ArrayList<disscussion> getByID(String id){
