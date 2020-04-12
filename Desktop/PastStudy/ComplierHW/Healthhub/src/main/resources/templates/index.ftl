@@ -32,7 +32,7 @@
                         <label>Password</label>
                         <input type="password" name="password"id="password" autocomplete="current-password" class="lowin-input">
                     </div>
-                    <button class="lowin-btn" id="loggin">
+                    <button class="lowin-btn" type="submit" id="loggin">
                         Login
                     </button>
                     <div class="text-foot">

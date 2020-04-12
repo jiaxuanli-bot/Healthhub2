@@ -149,7 +149,7 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "/register/id", method = {RequestMethod.POST})
+    @RequestMapping(value = "/reg", method = {RequestMethod.POST})
     public ModelAndView userregister(HttpServletRequest request, @ModelAttribute("form") user user) {
         user user1 =userService.Sel(user.getId());
         ModelAndView mav=new ModelAndView();
@@ -162,6 +162,7 @@ public class UserController {
         ArrayList<hospitalInfo> hospitalInfos =  hospitalService.GetCommentByID(user.getAdditional() , user.getRealname().split(" ")[0] ,lastname ,user.getPhysicion()) ;
         System.out.println(user);
         System.out.println("______________"+hospitalInfos.size());
+        System.out.println(hospitalInfos);
         if (user1 == null) {
             if (hospitalInfos.size()>0) {
             userService.Ins(user);
@@ -177,6 +178,7 @@ public class UserController {
         mav.setViewName("alreadyexist");
        return  mav;
     }
+
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public ModelAndView usersList(HttpServletRequest request) {
       ArrayList<user> users =userService.SelAll();

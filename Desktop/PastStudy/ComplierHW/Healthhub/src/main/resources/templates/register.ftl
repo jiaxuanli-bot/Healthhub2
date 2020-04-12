@@ -107,9 +107,8 @@
         <div class="lowin-box lowin-login">
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
-                    <form action="/users/register/id"  id="signupForm" method="post">
+                    <form id="myForm" action="/users/reg"  method="post">
                         <p>Creat New Account</p>
-
                         <div class="lowin-group">
                             <label>UserName</label>
                             <input type="text" name="id" id="username" autocomplete="name" class="lowin-input">
@@ -126,7 +125,7 @@
                         </div>
 
                         <div class="lowin-group">
-                            <label>Real name</label>
+                            <label>Full name</label>
                             <input type="text" name="realname" id="realname" autocomplete="name" class="lowin-input">
                         </div>
 
@@ -138,22 +137,19 @@
                         </select>
 
                         <div id="sel2d">
-                        <label for="sel2">Physician:</label>
-                        <select class="form-control" name="physicion" id="sel2">
-                        </select>
-                        <br>
+                            <label for="sel2">Physician:</label>
+                            <select class="form-control" name="physicion" id="sel2">
+                            </select>
+                            <br>
                         </div>
 
                         <div>
                             <label>Additional</label>
                             <textarea type="text" name="additional" id="additional" class="context-input"></textarea>
                         </div>
-                        <button class="lowin-btn" id="login">
-                            Register
+                        <button class="lowin-btn" type="submit" id="loggin">
+                            register
                         </button>
-                        <div class="text-foot">
-                            Don't have an account? <a href="/templates/register.html" class="register-link">Register</a>
-                        </div>
                     </form>
                 </div>
             </div>
