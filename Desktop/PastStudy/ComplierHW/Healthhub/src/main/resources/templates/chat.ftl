@@ -1,20 +1,9 @@
 <!DOCTYPE html>
-<#--<for the patient>-->
 <html lang="en">
 <head>
-    <style type ="text/css" >
-        .i{
-            border: none;
-            border-radius: 3px;
-            padding: 15px 20px;
-            width: 100%;
-            outline: 0;
-            background-color:#C0C0C0;
-        }
-    </style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>MainPage</title>
+    <title>Disscussion Details</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
@@ -23,11 +12,12 @@
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <![endif]-->
     <link href="/styles.css" rel="stylesheet">
-    <link herf="/main.css" rel="stylesheet">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/common.css" />
+    <link rel="stylesheet" type="text/css" href="/common.css"/>
 </head>
 <body>
+<input type="hidden" id="utype" name="type" value=${utype}>
+<input type="hidden" id="doc" name="type" value=${utype}>
 <input type="hidden" id="blogID" name="type" value=${blogID}>
 <input type="hidden" id="ID" name="type" value=${ID}>
 <a href="/blog/view"></a>
@@ -115,7 +105,7 @@
             </div>
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
-                <div class="navbar navbar-green navbar-static-top"  style="width: 82.2%">
+                <div class="navbar navbar-static-top" id="navtop" style="width: 82.2%">
                     <div class="navbar-header">
                         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle</span>
@@ -130,7 +120,7 @@
                             <div class="input-group input-group-sm" style="max-width:360px;">
                             </div>
                         </form>
-                        <ul class="nav navbar-nav">
+                       <ul class="nav navbar-nav ">
                             <li>
                                 <a href="#"><i class="glyphicon glyphicon-home"></i>Home</a>
                             </li>
@@ -146,15 +136,15 @@
                     </nav>
                 </div>
                 <!-- top nav -->
-<#--                <div class="navbar navbar-green navbar-static-top">-->
-<#--                    <nav class="collapse navbar-collapse" role="navigation">-->
-<#--                        <h4>Dissemination View</h4>-->
-<#--                        <ul class="nav navbar-nav" id="namebar">-->
-<#--                            <span id="unamebar">${UID}</span>-->
-<#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
-<#--                        </ul>-->
-<#--                    </nav>-->
-<#--                </div>-->
+                <#--                <div class="navbar navbar-green navbar-static-top">-->
+                <#--                    <nav class="collapse navbar-collapse" role="navigation">-->
+                <#--                        <h4>Dissemination View</h4>-->
+                <#--                        <ul class="nav navbar-nav" id="namebar">-->
+                <#--                            <span id="unamebar">${UID}</span>-->
+                <#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
+                <#--                        </ul>-->
+                <#--                    </nav>-->
+                <#--                </div>-->
 
                 <!-- /top nav -->
                 <div class="padding">
@@ -167,9 +157,16 @@
                             <div class="col-sm-7">
                                 <div id="indatabase">
                                 </div>
-
                                 <div id="context">
+                                    <h1>Private Conversation</h1>
                                 </div>
+
+                                <div id="replys">
+                                </div>
+                                <p>
+                                    <input type="text" class="form-control" id="message"> </p>
+                                <button type="button" id="replyb" class="btn-primary text-white ml-1" data-toggle="modal" data-target="#reply">Add</button>
+                                <button type="button" id="terb" class="btn-danger text-white ml-1" data-toggle="modal" data-target="#reply">Terminate</button>
                             </div>
                         </div><!--/row-->
 
@@ -236,7 +233,7 @@
         window.location.href="/disscussion/pm123/${UID}";
     })
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
+        window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View/${UID}";
@@ -252,6 +249,12 @@
     })
     $("#SP").on('click' , function() {
         window.location.href="/disscussion/search/${UID}";
+    })
+    $("#replyb").on('click' , function() {
+        send();
+    })
+    $("#terb").on('click' , function() {
+        ter();
     })
 
     function cite(post) {
@@ -269,10 +272,21 @@
     }
 
     var ID;
-    var blogs = ${blogs}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+
+        if ($("#utype").val()=="tpatient"){
+            $("#navtop").addClass("navbar-green");
+        }else if ($("#utype").val()=="tnurse"){
+            $("#navtop").addClass("navbar-pink");
+        }else  if ($("#utype").val()=="tdoctor"){
+            $("#navtop").addClass("navbar-blue");
+        }else {
+            $("#navtop").addClass("navbar-black");
+        }
+
+        connectWebSocket();
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
             var time2 = new Date().Format("MM/dd/yyyy hh:mm");
@@ -329,27 +343,6 @@
             }
 
         })
-
-        ID=parseInt(""+${blogID});
-        for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
-                "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <div class=\"input-group-btn\">\n" +
-                "                                        <button class=\"btn-danger btn-sm\" onclick='cite("+blogs[i].disid+")'>cite</button>\n" +
-                "                                    </div>" +
-                "                                    </div>\n" +
-                "                                </div>";
-            $("#context").append(html);
-        }
-        connectWebSocket();
     })
 
     //建立WebSocket连接
@@ -358,13 +351,12 @@
         console.log("开始...");
 
         //建立webSocket连接
-        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=p");
+        websocket = new WebSocket("ws://138.49.101.84/myHandler/ID=${doc}");
 
         //打开webSokcet连接时，回调该函数
         websocket.onopen = function () {
             console.log("onpen");
         }
-
         //关闭webSocket连接时，回调该函数
         websocket.onclose = function () {
             //关闭连接
@@ -374,47 +366,40 @@
         //接收信息
         websocket.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
-            var html =" <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
-                "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+data.text.time+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+data.text.message+"</p>\n" +
-                "                                    </div>\n" +
-                "                                </div>";
-            $("#context").append(html);
+            var html ="<div class=\"panel panel-default\">\n" +
+                "                                        <div class=\"panel-heading\">\n" +
+                "                                            <h4>"+data.id+"</h4>\n" +
+                "                                            <hr>\n" +
+                "                                            <div class=\"panel-body\">\n" +
+                "                                                <p><b>Message:</b>"+data.text+"</p>\n" +
+                "                                            </div>\n" +
+                "                                        </div>\n" +
+                "                                    </div>";
+            $("#replys").append(html);
         }
     }
     //发送消息
     function send(){
         ID=ID+1;
         var postValue = {};
-        postValue.id = ID;//$("#blogID").val();
-        postValue.name = $("#ID").val();
-        postValue.text=$("#text").val();
+        postValue.id = $("#ID").val();;//$("#blogID").val();
+        postValue.name = "chat";
+        postValue.text=$("#message").val();
         websocket.send(JSON.stringify(postValue));
-        $.ajax({
-            url:"/ajax/blog",
-            type:"POST",
-            data: {
-                "id": ""+postValue.id,
-                "name":""+postValue.name,
-                "text":""+postValue.text,
-            },
-            success:function (text) {
-                if (text != null && text != ""){
-                    alert("succ in database");
-                } else{
-                    alert("获取失败，请重新获取")
-                }
-           }
-        });
-        $("#text").val("");
+        $("#message").val("");
     }
     //关闭连接
+    function ter(){
+        alert("terminate")
+        ID=ID+1;
+        var postValue = {};
+        postValue.id = $("#ID").val();;//$("#blogID").val();
+        postValue.name = "chat";
+        postValue.text="I have close the chat";
+        websocket.send(JSON.stringify(postValue));
+        $("#message").val("");
+        closeWebSocket();
+    }
     function closeWebSocket(){
         if(websocket != null) {
             websocket.close();

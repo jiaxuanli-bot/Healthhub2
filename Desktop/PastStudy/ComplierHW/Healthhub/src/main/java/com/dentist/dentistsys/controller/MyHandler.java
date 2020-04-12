@@ -51,9 +51,27 @@ public class MyHandler extends TextWebSocketHandler {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+              }
             }
         } else if(name.equals("dis")){
+            for (WebSocketSession user : users) {
+                try {
+                    if (user.isOpen()) {
+                        System.out.println(user.getUri());
+                        System.out.println(session.getUri());
+//                       System.out.println((user.getUri().toString()+"").equals("ws://127.0.0.1:8089/myHandler/ID=physicians,%20patients%20and%20administrator"));
+                        if (user.getUri().toString().equals(session.getUri().toString())) {
+                            user.sendMessage(message);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(name.equals("chat")){
+            String Id = map.get("id");
+            System.out.println(Id);
+
             for (WebSocketSession user : users) {
                 try {
                     if (user.isOpen()) {

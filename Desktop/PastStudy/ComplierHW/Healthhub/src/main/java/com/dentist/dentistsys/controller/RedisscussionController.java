@@ -26,7 +26,4 @@ public class RedisscussionController {
         mav.setViewName("DisscussionDetail");
         return  mav;
     }
-
-
-
 }

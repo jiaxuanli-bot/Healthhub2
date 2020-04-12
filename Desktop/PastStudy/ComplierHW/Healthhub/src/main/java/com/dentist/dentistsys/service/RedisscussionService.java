@@ -25,6 +25,12 @@ public class RedisscussionService {
             return "0";
         }
     }
+    public ArrayList<reDisscussion> getAll(){
+        reDisscussionExample d=new reDisscussionExample();
+        d.createCriteria().andDisidIsNotNull();
+        ArrayList<reDisscussion> reDisscussions = (ArrayList<reDisscussion>) reDisscussionMapper.selectByExample(d);
+        return reDisscussions;
+    }
     public void DeleteByID(String id){
         reDisscussionExample d =new reDisscussionExample();
         d.createCriteria().andDisidEqualTo(id);

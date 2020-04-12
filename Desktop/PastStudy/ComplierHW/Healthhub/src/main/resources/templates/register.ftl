@@ -126,7 +126,7 @@
                         </div>
 
                         <div class="lowin-group">
-                            <label>Preferred name</label>
+                            <label>Real name</label>
                             <input type="text" name="realname" id="realname" autocomplete="name" class="lowin-input">
                         </div>
 

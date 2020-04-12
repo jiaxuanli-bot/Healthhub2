@@ -4,12 +4,15 @@ package com.dentist.dentistsys.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.dentist.dentistsys.entity.dissemination;
+import com.dentist.dentistsys.entity.hospitalInfo;
 import com.dentist.dentistsys.entity.user;
 import com.dentist.dentistsys.service.DisseminationService;
+import com.dentist.dentistsys.service.HospitalService;
 import com.dentist.dentistsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    private HospitalService hospitalService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -60,7 +65,6 @@ public class UserController {
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("verificationCode");
                 } else if (user.getType().equals("tnurse")){
-
                     mav.addObject("ID",user.getPhysicion());
                     mav.addObject("blogID","123");
                     mav.addObject("UID",user.getId());
@@ -149,13 +153,27 @@ public class UserController {
     public ModelAndView userregister(HttpServletRequest request, @ModelAttribute("form") user user) {
         user user1 =userService.Sel(user.getId());
         ModelAndView mav=new ModelAndView();
-        System.out.println("add a user");
+        System.out.println("add a user++++++++++++++++++++++++");
+        String lastname = "";
+        if (user.getRealname().split(" ").length > 1){
+          lastname = user.getRealname().split( " ")[1];
+        }
+        System.out.println(user.getAdditional()+user.getRealname().split(" ")[0]+lastname+user.getPhysicion());
+        ArrayList<hospitalInfo> hospitalInfos =  hospitalService.GetCommentByID(user.getAdditional() , user.getRealname().split(" ")[0] ,lastname ,user.getPhysicion()) ;
         System.out.println(user);
+        System.out.println("______________"+hospitalInfos.size());
         if (user1 == null) {
+            if (hospitalInfos.size()>0) {
             userService.Ins(user);
             mav.setViewName("index");
             return mav;
+            }else {
+                mav.setViewName("NoPower");
+                return mav;
+            }
+
         }
+
         mav.setViewName("alreadyexist");
        return  mav;
     }

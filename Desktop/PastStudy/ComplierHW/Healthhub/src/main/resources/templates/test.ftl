@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<#--<for the patient>-->
 <html lang="en">
 <head>
     <style type ="text/css" >
@@ -146,15 +145,15 @@
                     </nav>
                 </div>
                 <!-- top nav -->
-<#--                <div class="navbar navbar-green navbar-static-top">-->
-<#--                    <nav class="collapse navbar-collapse" role="navigation">-->
-<#--                        <h4>Dissemination View</h4>-->
-<#--                        <ul class="nav navbar-nav" id="namebar">-->
-<#--                            <span id="unamebar">${UID}</span>-->
-<#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
-<#--                        </ul>-->
-<#--                    </nav>-->
-<#--                </div>-->
+                <#--                <div class="navbar navbar-green navbar-static-top">-->
+                <#--                    <nav class="collapse navbar-collapse" role="navigation">-->
+                <#--                        <h4>Dissemination View</h4>-->
+                <#--                        <ul class="nav navbar-nav" id="namebar">-->
+                <#--                            <span id="unamebar">${UID}</span>-->
+                <#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
+                <#--                        </ul>-->
+                <#--                    </nav>-->
+                <#--                </div>-->
 
                 <!-- /top nav -->
                 <div class="padding">
@@ -236,7 +235,7 @@
         window.location.href="/disscussion/pm123/${UID}";
     })
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
+        window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View/${UID}";
@@ -272,6 +271,97 @@
     var blogs = ${blogs}
     var userID=$("#ID").val();
     var websocket=null;
+
+    $('#SearchPosts').on('click' , function() {
+        $("#reportResults").empty();
+        var numReports = []
+        var dateFrom = $("#fdate").val();
+        var dateTo = $("#tdate").val();
+
+        var getDaysArray = function(start, end) {
+            for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
+                arr.push(new Date(dt));
+            }
+            return arr;
+        };
+
+
+
+        var getDates = getDaysArray(new Date(dateFrom),new Date(dateTo))
+
+        var stringDates = [];
+
+        getDates.forEach(function (d) {
+            var month = d.getMonth()+1;
+            stringDates.push(d.getFullYear()+"-"+month+"-"+d.getDate())
+        })
+
+
+        //check disseminations
+        if($("#typeSel").val() == "Dissemination")
+        {
+
+
+            //a name has been typed to search
+            if($("#sname").val() != "")
+            {
+                var nameCheck = $("#sname").val();
+                numReports = countDiss(stringDates,nameCheck, dateFrom, dateTo);
+            }
+            //name has not been typed
+            else
+            {
+                numReports = countDissNoName(stringDates, dateFrom, dateTo);
+                console.log(numReports)
+            }
+
+            var html =  " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\">" +
+                "                                        <h4>Number of Dissemination Postings:</h4>"+numReports +"\n"+
+                "                                     </div>\n"
+            $("#reportResults").append(html);
+
+
+        }
+        //check discussions
+        else if($("#typeSel").val() == "Discussion")
+        {
+
+            console.log(dateFrom, dateTo)
+
+            if($("#sname").val() != "")
+            {
+                var nameCheck = $("#sname").val();
+                numReports = countDiscussion(nameCheck, dateFrom, dateTo);
+            }
+            else
+            {
+                numReports = countDiscussionNoName(dateFrom, dateTo);
+            }
+
+            var html =  " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\">" +
+                "                                        <h4>Number of Discussions:</h4>"+numReports +"\n"+
+                "                                     </div>\n"
+            $("#reportResults").append(html);
+
+
+        }
+        //check discussion replies
+        else {
+
+            var disTopic = $("#disTopic").val();
+
+            numReports = countReplies(disTopic);
+
+            var html =  " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\">" +
+                "                                        <h4>Number of Users in the Discussion Post: " +disTopic +" is</h4>"+numReports +"\n"+
+                "                                     </div>\n"
+            $("#reportResults").append(html);
+        }
+    })
+
     $(function(){
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
@@ -410,7 +500,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }
@@ -420,6 +510,24 @@
             websocket.close();
         }
     }
+</script>
+
+<script>
+     var mockPhysData = [
+        {id:'John', type:'tdoctor'},
+        {id:'Jerry', type:'tpatient'},
+        {id:'Jane', type:'tnurse'},
+        {id:'Joey', type:'tdoctor'},
+        {id:'Tommy', type:'tdoctor'},
+    ]
+    mockPhysData.forEach(function (d) {
+        if(d.type == 'tdoctor') {
+            var option = document.createElement("option");
+            option.text = d.id;
+            option.value = d.id
+            document.getElementById("physSel").appendChild(option);
+        }
+    })
 </script>
 </body>
 </html>

@@ -1,9 +1,7 @@
 package com.dentist.dentistsys.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.dentist.dentistsys.entity.disscussion;
-import com.dentist.dentistsys.entity.dissemination;
-import com.dentist.dentistsys.entity.user;
+import com.dentist.dentistsys.entity.*;
 import com.dentist.dentistsys.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +24,11 @@ public class DisscussionController<BlogService> {
     DisscussionService disscussionService;
     @Autowired
     private DisseminationService disseminationService;
+    @Autowired
+    private RedisscussionService redisscussionService;
+    @Autowired
+    private chatService chatService;
+    ArrayList<reDisscussion> reDisscussions;
     ArrayList<disscussion> disscussions;
     private com.dentist.dentistsys.entity.user user;
     ArrayList<dissemination> disseminations;
@@ -44,6 +47,132 @@ public class DisscussionController<BlogService> {
         mav.setViewName("ManageDis");
         return  mav;
     }
+    @RequestMapping(value = "/pm123/{pid}", method = {RequestMethod.GET})
+    public ModelAndView BlogD(@PathVariable(name = "pid") String pid, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName",user.getId());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        ArrayList<user> doctors = userService.SelectByType("tdoctor");
+        mav.addObject("doctor",JSON.toJSONString(doctors));
+        mav.setViewName("privateM");
+        return  mav;
+    }
+
+    @RequestMapping(value = "/pm1234/{pid}", method = {RequestMethod.GET})
+    public ModelAndView BlogDar(@PathVariable(name = "pid") String pid, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName",user.getId());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        ArrayList<chat> chats;
+        chats = chatService.getByReceiver(pid);
+        mav.addObject("chats",JSON.toJSONString(chats));
+        mav.setViewName("DocManagePM");
+        return  mav;
+    }
+
+    @RequestMapping(value = "/chat/{pid}", method = {RequestMethod.GET})
+    public ModelAndView chat(@PathVariable(name = "pid") String pid, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName",user.getId());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        ArrayList<chat> chats;
+        chats = chatService.getByReceiver(pid);
+        mav.addObject("chats",JSON.toJSONString(chats));
+        mav.setViewName("DocManagePM");
+        return  mav;
+    }
+
+    @RequestMapping(value = "/pchat/{pid}/{did}", method = {RequestMethod.GET})
+    public ModelAndView pchat(@PathVariable(name = "pid") String pid, @PathVariable(name = "did") String did, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        System.out.println("did is_____________"+did);
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        mav.addObject("doc",did);
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName",user.getId());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        ArrayList<chat> chats;
+        chats = chatService.getByReceiver(pid);
+        mav.addObject("chats",JSON.toJSONString(chats));
+        mav.setViewName("chat");
+        return  mav;
+    }
+
+    @RequestMapping(value = "/ampm123456/{pid}", method = {RequestMethod.GET})
+    public ModelAndView BlogDart(@PathVariable(name = "pid") String pid, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID",user.getId());
+        mav.addObject("blogID","1");
+        mav.addObject("UID",user.getId());
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName",user.getId());
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        ArrayList<chat> chats;
+        chats = chatService.getByStatus("2");
+        mav.addObject("chats",JSON.toJSONString(chats));
+        mav.setViewName("adManPM");
+        return  mav;
+    }
+
     @RequestMapping(value = "/View/{pid}", method = {RequestMethod.GET})
     public ModelAndView ViewDetail(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
@@ -98,6 +227,8 @@ public class DisscussionController<BlogService> {
         System.out.println("to backend");
         return  mav;
     }
+
+
     @RequestMapping(value = "/search/{pid}", method = {RequestMethod.GET})
     public ModelAndView Search(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
@@ -114,6 +245,7 @@ public class DisscussionController<BlogService> {
         return  mav;
     }
 
+
     @RequestMapping(value = "/adsearch/{pid}", method = {RequestMethod.GET})
     public ModelAndView adSearch(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
@@ -129,6 +261,29 @@ public class DisscussionController<BlogService> {
         mav.setViewName("adminSearch");
         return  mav;
     }
+
+    @RequestMapping(value = "/adreport/{pid}", method = {RequestMethod.GET})
+    public ModelAndView adReport(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        user = userService.Sel(pid);
+        disseminations = disseminationService.getAlldessemination();
+        disscussions = disscussionService.getAlldissscussion();
+        reDisscussions = redisscussionService.getAll();
+
+        mav.addObject("ID","admin");
+        mav.addObject("blogID","1");
+        mav.addObject("UID","admin");
+        user = userService.Sel(pid);
+        mav.addObject("dis",JSON.toJSONString(disscussions));
+        mav.addObject("des",JSON.toJSONString(disseminations));
+        mav.addObject("rep",JSON.toJSONString(reDisscussions));
+        mav.addObject("UName","admin");
+        mav.addObject("UID","admin");
+        mav.addObject("utype","admin");
+        mav.setViewName("reportPage");
+        return  mav;
+    }
+
     @RequestMapping(value = "/retrive/{pid}", method = {RequestMethod.GET})
     public ModelAndView Retrieve(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();

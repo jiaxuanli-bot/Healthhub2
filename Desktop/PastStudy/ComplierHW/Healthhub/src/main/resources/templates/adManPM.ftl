@@ -18,11 +18,11 @@
     <link rel="stylesheet" type="text/css" href="/flat-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="/jquery.nouislider.css">
 </head>
-<#--for the admin-->
+
 <body>
 <div id="topbar">
     <span id="unamnebtn" >${UID}</span>
-<button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
+    <button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
 </div>
 <div id="wrap">
     <!-- 左侧菜单栏目块 -->
@@ -38,8 +38,6 @@
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
-            <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-            <div class="btn" data-toggle="modal" id="123456">Manage Private Mes</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -194,19 +192,13 @@
                 </div>
                 <div class="data-div">
                     <div class="row tableHeader">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
-                            UserName
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            RealName
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
-                            Physician
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            Additional
+                            sender
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            receiver
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             action
@@ -214,68 +206,68 @@
                     </div>
                     <div class="tablebody">
                         <div id="Usertable"></div>
-                        </div>
-
-                        <!--系统管理折叠狂-->
-
                     </div>
+
+                    <!--系统管理折叠狂-->
+
                 </div>
-                <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">add user</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Name:${UID}</label>
-                                            <div class="col-xs-2 ">
-                                                <div class="col-xs-2 duiqi" >${UID}</div>
-                                                <input type="hidden" id="uname" name="type" value=${UID}>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">email:</label>
-                                            <div class="col-xs-3 ">
-                                                <input type="" class="col-xs-2 form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">password:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label">Type:</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" placeholder="">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
-                                <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal">Save</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
             </div>
+            <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">add user</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Name:${UID}</label>
+                                        <div class="col-xs-2 ">
+                                            <div class="col-xs-2 duiqi" >${UID}</div>
+                                            <input type="hidden" id="uname" name="type" value=${UID}>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">email:</label>
+                                        <div class="col-xs-3 ">
+                                            <input type="" class="col-xs-2 form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">password:</label>
+                                        <div class="col-xs-8">
+                                            <input type="" class="form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Type:</label>
+                                        <div class="col-xs-8">
+                                            <input type="" class="form-control input-sm duiqi" placeholder="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                            <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
     </div>
+</div>
 
-    <!-- 右侧具体内容栏目 -->
+<!-- 右侧具体内容栏目 -->
 
 
 </div>
@@ -305,13 +297,6 @@
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
     })
-    $('#AGP').on('click' , function() {
-        window.location.href="/disscussion/adreport/${UID}";
-    })
-    $('#123456').on('click' , function() {
-       // alert("ampm")
-        window.location.href="/disscussion/ampm123456/${UID}";
-    })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -328,20 +313,25 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
-    var users = ${users};
+    var disseminations =${chats};
+    <#--alert(JSON.stringify(${dis}))-->
+    <#--alert(JSON.stringify(disseminations))-->
     $(document).ready(function () {
         var tablecontext="";
-        for (var i=0;i<users.length;i++){
-             tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
-                 "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
-                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
-                 + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
-                 "                            </div>"
+        for (var i=0;i< disseminations.length;i++){
+            var type;
+            tablecontext = tablecontext+"         <div class=\"row\"id=1"+disseminations[i].id+">\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"></div>\n" +
+                "                           <input type=\"hidden\" id=\"h"+disseminations[i].id+"\" name=\"type\" value="+disseminations[i].sender+">\n" +
+                "                           <input type=\"hidden\" id=\"p"+disseminations[i].id+"\" name=\"type\" value="+disseminations[i].receiver+">\n" +
+                "                            <div class=\"col-lg-3 col-md-3 col-sm-2 col-xs-2\"><span>"+disseminations[i].sender+"</span></div>\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+disseminations[i].receiver+"</span></div>\n" +
+                "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+disseminations[i].type+" class='btn btn btn-success btn-xs approve' id="+disseminations[i].id+">approve</button>"
+                + "                          <button name="+disseminations[i].type+" class='btn btn btn-danger btn-xs refuse' id="+disseminations[i].id+">refuse</button></div>\n" +
+                "                            </div>"
         }
+
+
         $("#Usertable").append(tablecontext);
         $('#messagePage').on('click' , function() {
             window.location.href="/";
@@ -464,20 +454,30 @@
 
         })
 
-
-
-
         $('.approve').on('click' , function() {
-            var id = ""+this.name;
-            $("#"+id).remove();
+            var type = ""+this.name;
+            var id = ""+this.id;
+
+            $.ajax({
+                url:"/ajax/password",
+                type:"GET",
+                data: {
+                    "id": ""+$("#h"+id).val(),
+                    "id2": ""+$("#p"+id).val(),
+                },
+                success:function (text) {
+                }
+            });
+
             $.ajax({
                 type:"POST",
-                url:"/ajax/approve",
+                url:"/ajax/aappm",
                 data: {
                     "id": ""+this.id,
                 },
                 success:function(data){
                     if (data == "1"){
+                        $("#1"+id).remove();
                     }
                 },
                 error:function(jqXHR){
@@ -486,16 +486,17 @@
             });
         })
         $('.refuse').on('click' , function() {
+            var type = ""+this.name;
             var id = ""+this.id;
             $.ajax({
                 type:"POST",
-                url:"/ajax/refuse",
+                url:"/ajax/adepm",
                 data: {
-                    "id": ""+this.name,
+                    "id": ""+this.id,
                 },
                 success:function(data){
                     if (data == "1"){
-                        $("#"+id).remove();
+                        $("#1"+id).remove();
                     }
                 },
                 error:function(jqXHR){
@@ -578,7 +579,7 @@
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
         //var dateStr = JSON.stringify(date);
-       // date.topic =
+        // date.topic =
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
 
@@ -594,7 +595,7 @@
         date.topic = $("#topic").val();
         date.keyword = $("#keyword").val();
         date.type = "dissemination";
-       //var dateStr = JSON.stringify(date);
+        //var dateStr = JSON.stringify(date);
         postValue.text=date;
         websocket.send(JSON.stringify(postValue));
     }
@@ -612,7 +613,7 @@
         date.type = "discussion";
         //var dateStr = JSON.stringify(date);
         postValue.text=date;
-       // websocket.send(JSON.stringify(postValue));
+        // websocket.send(JSON.stringify(postValue));
     }
     //关闭连接
     function closeWebSocket(){

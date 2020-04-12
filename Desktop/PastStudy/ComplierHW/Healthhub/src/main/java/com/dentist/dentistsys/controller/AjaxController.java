@@ -22,6 +22,8 @@ public class AjaxController {
     @Autowired
     private MailService mailService;
     @Autowired
+    private chatService chatService;
+    @Autowired
     private UserService userservice;
     @Autowired
     private DisseminationService disseminationService;
@@ -43,6 +45,27 @@ public class AjaxController {
         try {
             System.out.println(user.getEmail());
             mailService.sendSimpleMail(user.getEmail()+"", "Verification code", message);
+        }catch (Exception e){
+            return "";
+        }
+        return checkCode;
+    }
+
+    @RequestMapping(value = "/password", method = {RequestMethod.GET})
+    @ResponseBody
+    public String getpwd(HttpServletRequest request){
+        String id=request.getParameter("id");
+        String id2 = request.getParameter("id2");
+        System.out.println(id);
+        user user = userservice.Sel(id);
+        user user1 = userservice.Sel(id2);
+        String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        String message = "Private Message Enter Password is："+checkCode;
+        System.out.println(checkCode);
+        try {
+            System.out.println(user.getEmail());
+            mailService.sendSimpleMail(user.getEmail()+"", "Private Message Password", message);
+            mailService.sendSimpleMail(user1.getEmail()+"", "Private Message Password", message);
         }catch (Exception e){
             return "";
         }
@@ -327,13 +350,65 @@ public class AjaxController {
         return "1";
     }
 
+    @RequestMapping(value = "/rese", method = {RequestMethod.POST})
+    @ResponseBody
+    public String Reserve(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String type = request.getParameter("doc");
+        System.out.println("+++++++++++++"+id+type);
+        return "1";
+    }
+
     @RequestMapping(value = "/archive", method = {RequestMethod.POST})
     @ResponseBody
     public String Archive(HttpServletRequest request){
         String id = request.getParameter("id");
         String type = request.getParameter("type");
         disscussionService.SetTerstatus(id,"archive");
-
+        return "1";
+    }
+    @RequestMapping(value = "/t", method = {RequestMethod.POST})
+    @ResponseBody
+    public String t(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String doc = request.getParameter("doc");
+        chat chat=new chat();
+        chat.setSender(id);
+        chat.setReceiver(doc);
+        chat.setStatus("3");
+        chatService.ins(chat);
+       return "1";
+    }
+    @RequestMapping(value = "/appm", method = {RequestMethod.POST})
+    @ResponseBody
+    public String ap(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println("ap++++++++++"+id);
+        chatService.setStatusByid(id,"2");
+        return "1";
+    }
+    @RequestMapping(value = "/depm", method = {RequestMethod.POST})
+    @ResponseBody
+    public String de(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println("de++++++++++"+id);
+        chatService.delById(id);
+        return "1";
+    }
+    @RequestMapping(value = "/adepm", method = {RequestMethod.POST})
+    @ResponseBody
+    public String ade(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println("de++++++++++"+id);
+        chatService.delById(id);
+        return "1";
+    }
+    @RequestMapping(value = "/aappm", method = {RequestMethod.POST})
+    @ResponseBody
+    public String dae(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println("de++++++++++"+id);
+        chatService.setStatusByid(id,"1");
         return "1";
     }
 }

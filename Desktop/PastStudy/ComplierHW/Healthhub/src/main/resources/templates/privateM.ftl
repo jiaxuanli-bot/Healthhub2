@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<#--<for the patient>-->
 <html lang="en">
 <head>
     <style type ="text/css" >
@@ -146,15 +145,15 @@
                     </nav>
                 </div>
                 <!-- top nav -->
-<#--                <div class="navbar navbar-green navbar-static-top">-->
-<#--                    <nav class="collapse navbar-collapse" role="navigation">-->
-<#--                        <h4>Dissemination View</h4>-->
-<#--                        <ul class="nav navbar-nav" id="namebar">-->
-<#--                            <span id="unamebar">${UID}</span>-->
-<#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
-<#--                        </ul>-->
-<#--                    </nav>-->
-<#--                </div>-->
+                <#--                <div class="navbar navbar-green navbar-static-top">-->
+                <#--                    <nav class="collapse navbar-collapse" role="navigation">-->
+                    <#--                        <h4>Dissemination View</h4>-->
+                    <#--                        <ul class="nav navbar-nav" id="namebar">-->
+                        <#--                            <span id="unamebar">${UID}</span>-->
+                        <#--                            <button id="namebarb" class="btn-sm btn-info label">Logout</button>-->
+                        <#--                        </ul>-->
+                    <#--                    </nav>-->
+                <#--                </div>-->
 
                 <!-- /top nav -->
                 <div class="padding">
@@ -169,6 +168,28 @@
                                 </div>
 
                                 <div id="context">
+                                    <div class="well well-sm">
+                                        <h4>Request Private Conversation</h4>
+                                        <div class="form-inline">
+                                            <div id="notReplyInfo">
+                                                Physician:
+                                                <select class="select ml-2" id="physSel">
+                                                </select>
+                                                <hr>
+                                            </div>
+
+
+
+                                            <button class="btn-sm btn-primary" id="requestPM">
+                                                Request Private Conversation
+                                            </button>
+                                            <p><b>Password:</b>
+                                                <input type="password" class="form-control" id="si"> </p>
+                                           <button class="btn-sm btn-primary" id="enBtn">
+                                                Enter Private Message
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div><!--/row-->
@@ -236,7 +257,7 @@
         window.location.href="/disscussion/pm123/${UID}";
     })
     $('#cp').on('click' , function() {
-       window.location.href="/changePW.html";
+        window.location.href="/changePW.html";
     })
     $('#VD').on('click' , function() {
         window.location.href="/disscussion/View/${UID}";
@@ -253,7 +274,27 @@
     $("#SP").on('click' , function() {
         window.location.href="/disscussion/search/${UID}";
     })
-
+    $("#enBtn").on('click' , function() {
+            if ($("#si").val() != "123456") {
+                alert("Wrong password")
+            }else {
+                window.location.href="/disscussion/pchat/${UID}/"+$("#physSel").val();
+            }
+        }
+    )
+    $("#requestPM").on('click' , function() {
+        doc = $("#physSel").val();
+        $.ajax({
+            url:"/ajax/t",
+            type:"POST",
+            data: {
+                "id": ""+$("#ID").val(),
+                "doc": ""+$("#physSel").val(),
+            },
+            success:function (text) {
+            }
+        });
+    })
     function cite(post) {
         $.ajax({
             url:"/ajax/cite/${UID}",
@@ -267,12 +308,16 @@
             }
         });
     }
-
+    var doc;
     var ID;
-    var blogs = ${blogs}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+       var docs =${doctor}
+        for (var i=0;i<docs.length;i++){
+            var html = "<option value=\""+docs[i].id+"\">"+docs[i].id+"</option>"
+            $('#physSel').append(html)
+        }
         $('#creatDis').on('click' , function() {
             $("#dtime").empty();
             var time2 = new Date().Format("MM/dd/yyyy hh:mm");
@@ -330,25 +375,8 @@
 
         })
 
-        ID=parseInt(""+${blogID});
-        for (var i=0;i<blogs.length;i++){
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
-                "                                    <div class=\"panel-body\">\n" +
-                "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
-                "                                        <div class=\"clearfix\"></div>\n" +
-                "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
-                "                                        <hr>\n" +
-                "                                        <div class=\"input-group-btn\">\n" +
-                "                                        <button class=\"btn-danger btn-sm\" onclick='cite("+blogs[i].disid+")'>cite</button>\n" +
-                "                                    </div>" +
-                "                                    </div>\n" +
-                "                                </div>";
-            $("#context").append(html);
-        }
+
+
         connectWebSocket();
     })
 
@@ -410,7 +438,7 @@
                 } else{
                     alert("获取失败，请重新获取")
                 }
-           }
+            }
         });
         $("#text").val("");
     }

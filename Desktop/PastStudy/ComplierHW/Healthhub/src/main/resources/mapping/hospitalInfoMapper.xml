@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dentist.dentistsys.mapper.hospitalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dentist.dentistsys.entity.hospitalInfo" >
+    <result column="hospitalId" property="hospitalid" jdbcType="VARCHAR" />
+    <result column="firstName" property="firstname" jdbcType="VARCHAR" />
+    <result column="lastName" property="lastname" jdbcType="VARCHAR" />
+    <result column="maillingAddress" property="maillingaddress" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="dataOfBirth" property="dataofbirth" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="departmentName" property="departmentname" jdbcType="VARCHAR" />
+    <result column="doctorName" property="doctorname" jdbcType="VARCHAR" />
+    <result column="basicDiagnosis" property="basicdiagnosis" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hospitalId, firstName, lastName, maillingAddress, email, phone, dataOfBirth, gender, 
+    departmentName, doctorName, basicDiagnosis
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.hospitalInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from HospitalInfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.dentist.dentistsys.entity.hospitalInfoExample" >
+    delete from HospitalInfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dentist.dentistsys.entity.hospitalInfo" >
+    insert into HospitalInfo (hospitalId, firstName, lastName, 
+      maillingAddress, email, phone, 
+      dataOfBirth, gender, departmentName, 
+      doctorName, basicDiagnosis)
+    values (#{hospitalid,jdbcType=VARCHAR}, #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, 
+      #{maillingaddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{dataofbirth,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
+      #{doctorname,jdbcType=VARCHAR}, #{basicdiagnosis,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.hospitalInfo" >
+    insert into HospitalInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hospitalid != null" >
+        hospitalId,
+      </if>
+      <if test="firstname != null" >
+        firstName,
+      </if>
+      <if test="lastname != null" >
+        lastName,
+      </if>
+      <if test="maillingaddress != null" >
+        maillingAddress,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="dataofbirth != null" >
+        dataOfBirth,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="departmentname != null" >
+        departmentName,
+      </if>
+      <if test="doctorname != null" >
+        doctorName,
+      </if>
+      <if test="basicdiagnosis != null" >
+        basicDiagnosis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hospitalid != null" >
+        #{hospitalid,jdbcType=VARCHAR},
+      </if>
+      <if test="firstname != null" >
+        #{firstname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastname != null" >
+        #{lastname,jdbcType=VARCHAR},
+      </if>
+      <if test="maillingaddress != null" >
+        #{maillingaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="dataofbirth != null" >
+        #{dataofbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorname != null" >
+        #{doctorname,jdbcType=VARCHAR},
+      </if>
+      <if test="basicdiagnosis != null" >
+        #{basicdiagnosis,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dentist.dentistsys.entity.hospitalInfoExample" resultType="java.lang.Integer" >
+    select count(*) from HospitalInfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update HospitalInfo
+    <set >
+      <if test="record.hospitalid != null" >
+        hospitalId = #{record.hospitalid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstname != null" >
+        firstName = #{record.firstname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastname != null" >
+        lastName = #{record.lastname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maillingaddress != null" >
+        maillingAddress = #{record.maillingaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataofbirth != null" >
+        dataOfBirth = #{record.dataofbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentname != null" >
+        departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorname != null" >
+        doctorName = #{record.doctorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicdiagnosis != null" >
+        basicDiagnosis = #{record.basicdiagnosis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update HospitalInfo
+    set hospitalId = #{record.hospitalid,jdbcType=VARCHAR},
+      firstName = #{record.firstname,jdbcType=VARCHAR},
+      lastName = #{record.lastname,jdbcType=VARCHAR},
+      maillingAddress = #{record.maillingaddress,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      dataOfBirth = #{record.dataofbirth,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      doctorName = #{record.doctorname,jdbcType=VARCHAR},
+      basicDiagnosis = #{record.basicdiagnosis,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
