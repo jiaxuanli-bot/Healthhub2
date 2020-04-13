@@ -94,7 +94,8 @@
                         equalTo: "The two passwords you entered did not match"
                     },
                     email: "Please enter a valid email",
-                }
+                },
+                errorClass: "invalid"
             });
         });
     </script>
