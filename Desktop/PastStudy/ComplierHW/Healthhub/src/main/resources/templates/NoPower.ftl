@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>You are unable to register with the following information.</h1>
+<h1 style="fill: red">You are unable to register with the following information.</h1>
 </body>
 </html>

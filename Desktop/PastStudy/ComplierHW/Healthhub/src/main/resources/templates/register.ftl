@@ -10,6 +10,11 @@
             outline: 0;
             background-color:#C0C0C0;
         }
+
+         .error {
+      color: red;
+      background-color: #acf;
+   }
     </style>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -108,7 +113,7 @@
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
                     <form action="/users/reg"  id="signupForm" method="post">
-                        <p>Creat New Account</p>
+                        <p>Create New Account</p>
 
                         <div class="lowin-group">
                             <label>UserName</label>

@@ -32,12 +32,12 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
-            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Discussion Approve</div>
+            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
-            <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
+            <div class="btn" data-toggle="modal" id="VD">View Discussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
-            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Discussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
             
         </div>

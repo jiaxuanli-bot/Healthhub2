@@ -38,11 +38,11 @@
                     <p>
                     </p>
                </div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
                  <div class="btn" data-toggle="modal" id="cp">Change Password</div>
-                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View  Discussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
-                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Discussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->

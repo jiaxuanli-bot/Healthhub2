@@ -31,9 +31,9 @@
                     <p>
                     </p>
                 </div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
-                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View  Discussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
@@ -413,7 +413,7 @@
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                "                                        <p><b>Type of posting:</b>discussion</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
@@ -427,7 +427,7 @@
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID=" +  replys[j].disid + "\" class=\"pull-right\"></a> <h4>Topic:</h4>" + replys[j].distopic + "</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:" + replys[j].disname + "</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                "                                        <p><b>Type of posting:</b>discussion</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>" + replys[j].disdate + "</p>\n" +
                 "                                        <hr>\n" +
