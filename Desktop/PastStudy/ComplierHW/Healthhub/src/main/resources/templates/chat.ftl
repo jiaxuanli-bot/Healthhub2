@@ -396,7 +396,7 @@
     }
     //关闭连接
     function ter(){
-        alert("terminate")
+        //alert("terminate")
         ID=ID+1;
         var postValue = {};
         postValue.id = $("#ID").val();;//$("#blogID").val();
