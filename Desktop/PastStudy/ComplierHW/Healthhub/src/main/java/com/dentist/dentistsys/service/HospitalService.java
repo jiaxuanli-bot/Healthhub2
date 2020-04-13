@@ -17,8 +17,12 @@ public class HospitalService {
 
         public ArrayList<hospitalInfo> GetCommentByID(String ID, String firstName, String lastName, String Physicain){
                 hospitalInfoExample = new hospitalInfoExample();
-                hospitalInfoExample.createCriteria().andHospitalidEqualTo(ID).andFirstnameEqualTo(firstName).andLastnameEqualTo(lastName);
-                if (Physicain.length()>0){hospitalInfoExample.createCriteria().andDoctornameEqualTo(Physicain); }
+                com.dentist.dentistsys.entity.hospitalInfoExample.Criteria c = hospitalInfoExample.createCriteria();
+                c.andHospitalidEqualTo(ID).andFirstnameEqualTo(firstName).andLastnameEqualTo(lastName);
+                if (Physicain.length()>0){
+                    System.out.println("_______________+++++++++"+Physicain);
+                    c.andDoctornameEqualTo(Physicain);
+                }
                 ArrayList<hospitalInfo> hospitalInfos;
                 hospitalInfos = (ArrayList<hospitalInfo>) hospitalInfoMapper.selectByExample(hospitalInfoExample);
                 return hospitalInfos;
