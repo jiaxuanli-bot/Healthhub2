@@ -310,7 +310,7 @@
             alert("Wrong password")
         }else {
             window.location.href="/disscussion/pchat/${UID}/${UID}";
-            alert("/disscussion/search/${UID}");
+            //alert("/disscussion/search/${UID}");
         }
     }
     )

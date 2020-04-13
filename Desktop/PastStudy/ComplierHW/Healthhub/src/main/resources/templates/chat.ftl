@@ -401,7 +401,7 @@
         var postValue = {};
         postValue.id = $("#ID").val();;//$("#blogID").val();
         postValue.name = "chat";
-        postValue.text="I have close the chat";
+        postValue.text="I have closed the chat";
         websocket.send(JSON.stringify(postValue));
         $("#message").val("");
         closeWebSocket();
