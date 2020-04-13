@@ -98,7 +98,7 @@ public class AjaxController {
         if (user.getType().equals("Patient")){
             user.setType("tpatient");
         }
-        else if (user.getType().equals("Doctor")){
+        else if (user.getType().equals("Physician")){
             user.setType("tdoctor");
         }
         else {
