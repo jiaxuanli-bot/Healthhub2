@@ -19,7 +19,7 @@ public class HospitalService {
                 hospitalInfoExample = new hospitalInfoExample();
                 com.dentist.dentistsys.entity.hospitalInfoExample.Criteria c = hospitalInfoExample.createCriteria();
                 c.andHospitalidEqualTo(ID).andFirstnameEqualTo(firstName).andLastnameEqualTo(lastName);
-                if (Physicain.compareTo("null") != 0){
+                if (Physicain != null){
                     System.out.println("_______________+++++++++"+Physicain);
                     c.andDoctornameEqualTo(Physicain);
                 }
