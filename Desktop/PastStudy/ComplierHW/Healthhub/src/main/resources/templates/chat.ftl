@@ -36,7 +36,6 @@
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
                 <div class="btn" data-toggle="modal" id="MMD">Manage My Discussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
-                <div class="btn" data-toggle="modal" id="pm123">Private message</div>
                 <div class="btn" data-toggle="modal" id="pm123">Private Conversation</div>
 
             </div>
