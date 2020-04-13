@@ -39,6 +39,8 @@
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
+            div class="btn" data-toggle="modal" id="AGP">Generate report</div>
+            <div class="btn" data-toggle="modal" id="123456">Manage Private Mes</div>
         </div>
         <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -239,6 +241,13 @@
     })
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
+    })
+    $('#AGP').on('click' , function() {
+        window.location.href="/disscussion/adreport/${UID}";
+    })
+    $('#123456').on('click' , function() {
+       // alert("ampm")
+        window.location.href="/disscussion/ampm123456/${UID}";
     })
 
     Date.prototype.Format = function (fmt) { // author: meizz

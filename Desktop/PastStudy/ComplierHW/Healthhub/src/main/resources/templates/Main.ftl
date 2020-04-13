@@ -46,7 +46,7 @@
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
                 <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
-                <div class="btn" data-toggle="modal" id="pm123">Private message</div>
+                <div class="btn" data-toggle="modal" id="pm123">Private Conversation</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
