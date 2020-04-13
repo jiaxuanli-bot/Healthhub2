@@ -11,7 +11,7 @@
             background-color:#C0C0C0;
         }
 
-         .error {
+         .lowin .lowin-box label.error {
       color: #ff0000;
    }
     </style>
