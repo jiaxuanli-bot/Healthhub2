@@ -139,7 +139,7 @@
                         <select class="form-control" id="sel1" name="type">
                             <option>Patient</option>
                             <option>Nurse</option>
-                            <option id="do">Doctor</option>
+                            <option id="do">Physician</option>
                         </select>
 
                         <div id="sel2d">
