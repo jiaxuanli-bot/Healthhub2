@@ -95,6 +95,7 @@ public class AjaxController {
         String id=request.getParameter("id");
         System.out.println(id);
         user user = userservice.Sel(id);
+        System.out.println(user.getType());
         if (user.getType().equals("Patient")){
             user.setType("tpatient");
         }
