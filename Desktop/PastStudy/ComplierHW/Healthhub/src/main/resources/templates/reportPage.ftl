@@ -54,6 +54,8 @@
                 <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
                 <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
                 <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
+                <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
+                <div class="btn" data-toggle="modal" id="123456">Manage Private Mes</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -291,6 +293,13 @@
     })
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
+    })
+    $('#AGP').on('click' , function() {
+        window.location.href="/disscussion/adreport/${UID}";
+    })
+    $('#123456').on('click' , function() {
+       // alert("ampm")
+        window.location.href="/disscussion/ampm123456/${UID}";
     })
     var ID;
     var userID=$("#ID").val();
