@@ -12,8 +12,7 @@
         }
 
          .error {
-      color: red;
-      background-color: #acf;
+      fill: red;
    }
     </style>
     <meta charset="UTF-8">
