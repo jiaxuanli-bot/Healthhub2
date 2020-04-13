@@ -139,7 +139,7 @@
                         <select class="form-control" id="sel1" name="type">
                             <option>Patient</option>
                             <option>Nurse</option>
-                            <option id="do">Physician</option>
+                            <option id="do">Doctor</option>
                         </select>
 
                         <div id="sel2d">
@@ -168,7 +168,7 @@
 
 <script>
     $("#sel1").change(function(){
-        if (    $("#sel1 option:selected").text()!="Physician"){
+        if (    $("#sel1 option:selected").text()=="Doctor"){
             $("#sel2d").attr("style","display:none;");
         }
         else {
