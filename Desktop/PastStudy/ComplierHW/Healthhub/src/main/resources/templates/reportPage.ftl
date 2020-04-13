@@ -55,7 +55,7 @@
                 <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
                 <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
                 <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-                <div class="btn" data-toggle="modal" id="123456">Manage Private Mes</div>
+                <div class="btn" data-toggle="modal" id="123456">Manage Private Conversations</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
