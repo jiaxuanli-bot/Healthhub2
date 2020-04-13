@@ -12,7 +12,7 @@
         }
 
          .error {
-      fill: red;
+      color: red;
    }
     </style>
     <meta charset="UTF-8">
@@ -95,7 +95,6 @@
                     },
                     email: "Please enter a valid email",
                 },
-                errorClass: "invalid"
             });
         });
     </script>
