@@ -35,6 +35,8 @@
                 <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
                 <div class="btn" data-toggle="modal" id="MPM">Private Message</div>
+                <div class="btn" data-toggle="modal" id="MPM">Private Message</div>
+
             </div>
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
                 <div class="modal-dialog" role="document">
@@ -299,6 +301,10 @@
     $("#MPM").on('click' , function() {
         window.location.href="/disscussion/pm1234/${UID}";
     })
+    
+ $("#MPM").on('click' , function() {
+        window.location.href="/disscussion/pm1234/${UID}";
+ })
 
     $("#enBtn").on('click' , function() {
         if ($("#si").val() != "123456") {
