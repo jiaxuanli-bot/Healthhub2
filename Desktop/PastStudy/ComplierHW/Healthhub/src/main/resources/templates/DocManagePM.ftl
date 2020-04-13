@@ -365,7 +365,7 @@
                 "                                    </div> <button class=\"btn-sm btn-primary\" id=\"AppPM\" onclick='appm("+chats[i].id+")'>\n" +
                 "                                                    Approve\n" +
                 "                                                </button>" +
-                "                                  <button class=\"btn-sm btn-primary\" id=\"DePM\" onclick='depm("+chats[i].id+")'>\n" +
+                "                                  <button class=\"btn-sm btn-danger\" id=\"DePM\" onclick='depm("+chats[i].id+")'>\n" +
                 "                                                    Deny\n" +
                 "                                                </button>" +
                 "                                    </div>\n" +
