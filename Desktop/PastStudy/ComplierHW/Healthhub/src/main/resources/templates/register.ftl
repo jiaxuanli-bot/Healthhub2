@@ -168,7 +168,7 @@
 
 <script>
     $("#sel1").change(function(){
-        if (    $("#sel1 option:selected").text()=="Doctor"){
+        if (    $("#sel1 option:selected").text()=="Physician"){
             $("#sel2d").attr("style","display:none;");
         }
         else {
