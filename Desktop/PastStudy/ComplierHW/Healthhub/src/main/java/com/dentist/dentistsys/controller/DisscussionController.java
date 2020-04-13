@@ -270,16 +270,16 @@ public class DisscussionController<BlogService> {
         disscussions = disscussionService.getAlldissscussion();
         reDisscussions = redisscussionService.getAll();
 
-        mav.addObject("ID","admin");
+        mav.addObject("ID","ad1234");
         mav.addObject("blogID","1");
-        mav.addObject("UID","admin");
+        mav.addObject("UID","ad1234");
         user = userService.Sel(pid);
         mav.addObject("dis",JSON.toJSONString(disscussions));
         mav.addObject("des",JSON.toJSONString(disseminations));
         mav.addObject("rep",JSON.toJSONString(reDisscussions));
-        mav.addObject("UName","admin");
-        mav.addObject("UID","admin");
-        mav.addObject("utype","admin");
+        mav.addObject("UName","ad1234");
+        mav.addObject("UID","ad1234");
+        mav.addObject("utype","ad1234");
         mav.setViewName("reportPage");
         return  mav;
     }
