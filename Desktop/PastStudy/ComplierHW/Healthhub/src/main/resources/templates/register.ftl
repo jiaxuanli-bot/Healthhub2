@@ -95,6 +95,7 @@
                     },
                     email: "Please enter a valid email",
                 },
+                errorClass: "error"
             });
         });
     </script>
