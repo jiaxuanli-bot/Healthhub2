@@ -542,7 +542,7 @@
 
     function countReplies(discussionTopic)
     {
-        var numUsers = 0;
+        var numUsers = 1;
 
         var users = [];
 
