@@ -518,9 +518,22 @@
     {
         var numReports = 0;
 
+        var userCheck = [];
+
         mockReplyData.forEach(function(d) {
             if(d.distopic == discussionTopic)
-                numReports++;
+            {
+                var check = false;
+                userCheck.forEach(function (r) {
+                    if(d.disname == r.disname)
+                    check = true;
+                })
+                if(!check)
+                {
+                  numReports++;
+                  userCheck.push(d)
+                }
+            }
         })
 
 
