@@ -333,7 +333,7 @@
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                "                                        <p><b>Type of posting:</b>Discussion</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +

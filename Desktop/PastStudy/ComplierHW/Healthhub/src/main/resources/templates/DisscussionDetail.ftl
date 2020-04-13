@@ -512,7 +512,7 @@
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
+                "                                        <p><b>Type of posting:</b>Discussion</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>"+data.text.time+"</p>\n" +
                 "                                        <hr>\n" +
