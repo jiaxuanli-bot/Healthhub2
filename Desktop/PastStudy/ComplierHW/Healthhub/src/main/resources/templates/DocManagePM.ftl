@@ -35,7 +35,6 @@
                 <div class="btn" data-toggle="modal" id="MMD">Manage My Discussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
                 <div class="btn" data-toggle="modal" id="MPM">Private Message</div>
-                <div class="btn" data-toggle="modal" id="MPM">Private Message</div>
 
             </div>
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
