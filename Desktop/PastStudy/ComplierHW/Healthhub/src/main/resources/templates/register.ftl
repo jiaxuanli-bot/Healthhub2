@@ -167,6 +167,12 @@
 
 
 <script>
+        if (    $("#sel1 option:selected").text()=="Physician"){
+            $("#sel2d").attr("style","display:none;");
+        }
+        else {
+            $("#sel2d").attr("style","display:block;");
+        }
     $("#sel1").change(function(){
         if (    $("#sel1 option:selected").text()=="Physician"){
             $("#sel2d").attr("style","display:none;");
