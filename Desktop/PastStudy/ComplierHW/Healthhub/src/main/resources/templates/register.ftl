@@ -12,7 +12,7 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Title</title>
     <link rel="stylesheet" href="/auth.css">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/Chart.min.js"></script>
@@ -107,8 +107,9 @@
         <div class="lowin-box lowin-login">
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
-                    <form id="myForm" action="/users/reg"  method="post">
+                    <form action="/users/reg"  id="signupForm" method="post">
                         <p>Creat New Account</p>
+
                         <div class="lowin-group">
                             <label>UserName</label>
                             <input type="text" name="id" id="username" autocomplete="name" class="lowin-input">
@@ -137,19 +138,21 @@
                         </select>
 
                         <div id="sel2d">
-                            <label for="sel2">Physician:</label>
-                            <select class="form-control" name="physicion" id="sel2">
-                            </select>
-                            <br>
+                        <label for="sel2">Physician:</label>
+                        <select class="form-control" name="physicion" id="sel2">
+                        </select>
+                        <br>
                         </div>
-
                         <div>
                             <label>Additional</label>
                             <textarea type="text" name="additional" id="additional" class="context-input"></textarea>
                         </div>
-                        <button class="lowin-btn" type="submit" id="loggin">
-                            register
+                        <button class="lowin-btn" id="login">
+                            Register
                         </button>
+                        <div class="text-foot">
+                            Don't have an account? <a href="/templates/register.html" class="register-link">Register</a>
+                        </div>
                     </form>
                 </div>
             </div>
