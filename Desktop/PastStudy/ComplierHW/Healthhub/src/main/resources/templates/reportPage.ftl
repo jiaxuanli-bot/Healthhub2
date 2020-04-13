@@ -181,7 +181,7 @@
                                                 <select class="select ml-2" id="typeSel">
                                                     <option value ="Dissemination">Dissemination</option>
                                                     <option value ="Discussion">Discussion</option>
-                                                    <option value ="dissReplies">Discussion Replies</option>
+                                                    <option value ="dissReplies">Discussion Activity</option>
                                                 </select>
                                                 <button class="btn-sm btn-primary" id="SearchPosts">
                                                     Search
