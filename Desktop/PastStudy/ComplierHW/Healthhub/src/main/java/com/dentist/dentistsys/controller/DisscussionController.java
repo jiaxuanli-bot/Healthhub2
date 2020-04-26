@@ -176,6 +176,7 @@ public class DisscussionController<BlogService> {
     @RequestMapping(value = "/View/{pid}", method = {RequestMethod.GET})
     public ModelAndView ViewDetail(@PathVariable(name = "pid") String pid ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        System.out.println("the pid is:++"+pid);
         user = userService.Sel(pid);
         mav.addObject("ID",user.getId());
         mav.addObject("blogID","1");
@@ -270,16 +271,16 @@ public class DisscussionController<BlogService> {
         disscussions = disscussionService.getAlldissscussion();
         reDisscussions = redisscussionService.getAll();
 
-        mav.addObject("ID","ad1234");
+        mav.addObject("ID","admin");
         mav.addObject("blogID","1");
-        mav.addObject("UID","ad1234");
+        mav.addObject("UID","admin");
         user = userService.Sel(pid);
         mav.addObject("dis",JSON.toJSONString(disscussions));
         mav.addObject("des",JSON.toJSONString(disseminations));
         mav.addObject("rep",JSON.toJSONString(reDisscussions));
-        mav.addObject("UName","ad1234");
-        mav.addObject("UID","ad1234");
-        mav.addObject("utype","ad1234");
+        mav.addObject("UName","admin");
+        mav.addObject("UID","admin");
+        mav.addObject("utype","admin");
         mav.setViewName("reportPage");
         return  mav;
     }

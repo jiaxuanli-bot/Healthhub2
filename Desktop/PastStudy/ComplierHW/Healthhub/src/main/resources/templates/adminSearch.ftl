@@ -50,15 +50,13 @@
                     </p>
                 </div>
                 <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-                <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Discussion Approve</div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+                <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
-                <div class="btn" data-toggle="modal" id="VD">View Discussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
-                <div class="btn" data-toggle="modal" id="AMD">Manage Discussion</div>
+                <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
                 <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
-                <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-                <div class="btn" data-toggle="modal" id="123456">Private Conversation</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -297,13 +295,6 @@
     })
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
-    })
-    $('#AGP').on('click' , function() {
-        window.location.href="/disscussion/adreport/${UID}";
-    })
-    $('#123456').on('click' , function() {
-       // alert("ampm")
-        window.location.href="/disscussion/ampm123456/${UID}";
     })
     var ID;
     var userID=$("#ID").val();

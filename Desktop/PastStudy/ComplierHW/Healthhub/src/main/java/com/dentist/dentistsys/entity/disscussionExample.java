@@ -803,6 +803,146 @@ public class disscussionExample {
             addCriterion("disterminate not between", value1, value2, "disterminate");
             return (Criteria) this;
         }
+
+        public Criteria andImgIsNull() {
+            addCriterion("img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIsNotNull() {
+            addCriterion("img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgEqualTo(String value) {
+            addCriterion("img =", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotEqualTo(String value) {
+            addCriterion("img <>", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThan(String value) {
+            addCriterion("img >", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThanOrEqualTo(String value) {
+            addCriterion("img >=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThan(String value) {
+            addCriterion("img <", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThanOrEqualTo(String value) {
+            addCriterion("img <=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLike(String value) {
+            addCriterion("img like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotLike(String value) {
+            addCriterion("img not like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIn(List<String> values) {
+            addCriterion("img in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotIn(List<String> values) {
+            addCriterion("img not in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgBetween(String value1, String value2) {
+            addCriterion("img between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotBetween(String value1, String value2) {
+            addCriterion("img not between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfIsNull() {
+            addCriterion("citeinf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfIsNotNull() {
+            addCriterion("citeinf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfEqualTo(String value) {
+            addCriterion("citeinf =", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotEqualTo(String value) {
+            addCriterion("citeinf <>", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfGreaterThan(String value) {
+            addCriterion("citeinf >", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfGreaterThanOrEqualTo(String value) {
+            addCriterion("citeinf >=", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLessThan(String value) {
+            addCriterion("citeinf <", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLessThanOrEqualTo(String value) {
+            addCriterion("citeinf <=", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLike(String value) {
+            addCriterion("citeinf like", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotLike(String value) {
+            addCriterion("citeinf not like", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfIn(List<String> values) {
+            addCriterion("citeinf in", values, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotIn(List<String> values) {
+            addCriterion("citeinf not in", values, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfBetween(String value1, String value2) {
+            addCriterion("citeinf between", value1, value2, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotBetween(String value1, String value2) {
+            addCriterion("citeinf not between", value1, value2, "citeinf");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

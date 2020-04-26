@@ -9,6 +9,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,9 @@ public class AjaxController {
     private DisscussionService disscussionService;
     @Autowired
     private RedisscussionService redisscussionService;
+    @Autowired
+    private LUService luService;
+
     ArrayList<dissemination> disseminations;
     ArrayList<disscussion> disscussions;
     @RequestMapping(value = "/mail", method = {RequestMethod.GET})
@@ -51,9 +55,26 @@ public class AjaxController {
         return checkCode;
     }
 
+    @RequestMapping(value = "/logout", method = {RequestMethod.POST})
+    @ResponseBody
+    public String logout(HttpServletRequest request){
+        System.out.println("id:"+request.getParameter("id"));
+        System.out.println("one user log out");
+        luService.Del(request.getParameter("id"));
+        return "1";
+    }
+    @RequestMapping(value = "/logout", method = {RequestMethod.GET})
+    @ResponseBody
+    public String logoutget(HttpServletRequest request){
+        System.out.println("id:"+request.getParameter("id"));
+        System.out.println("one user log out");
+        return "1";
+    }
+
+
     @RequestMapping(value = "/password", method = {RequestMethod.GET})
     @ResponseBody
-    public String getpwd(HttpServletRequest request){
+    public String getpwd(HttpServletRequest request) {
         String id=request.getParameter("id");
         String id2 = request.getParameter("id2");
         System.out.println(id);
@@ -95,11 +116,10 @@ public class AjaxController {
         String id=request.getParameter("id");
         System.out.println(id);
         user user = userservice.Sel(id);
-        System.out.println(user.getType());
         if (user.getType().equals("Patient")){
             user.setType("tpatient");
         }
-        else if (user.getType().equals("Physician")){
+        else if (user.getType().equals("Doctor")){
             user.setType("tdoctor");
         }
         else {
@@ -130,7 +150,7 @@ public class AjaxController {
         System.out.println(topic);
         user user = userservice.Sel(pid);
         disscussions = disscussionService.getAr();
-        disseminations = disseminationService.Searchdesseminations(user.getType(),"ashdjkahjd",username,topic);
+        disseminations = disseminationService.Searchdesseminations(user.getType(),"ashdjkahjd",username,topic,"2897137");
         Map<String,Object> map = new HashMap<>();
         map.put("dis",disscussions);
         map.put("des",disseminations);
@@ -232,6 +252,8 @@ public class AjaxController {
         String group=request.getParameter("group");
         System.out.println(group);
         String status=request.getParameter("status");
+        String pic =request.getParameter("pic");
+        System.out.println("pic is:"+pic);
         disscussion disscussion =new disscussion();
         disscussion.setDisdate(time);
         disscussion.setDisname(username);
@@ -240,6 +262,7 @@ public class AjaxController {
         disscussion.setDiskeyword(keyword);
         disscussion.setDisgroup(group);
         disscussion.setDisstate(status);
+        disscussion.setImg(pic);
         disscussionService.ins(disscussion);
         //disseminationService.ins(dissemination);
         return "1";
@@ -285,9 +308,10 @@ public class AjaxController {
         System.out.println(username);
         String topic=request.getParameter("topic");
         System.out.println(topic);
+        String hour = request.getParameter("hour");
         user user = userservice.Sel(pid);
-        disscussions = disscussionService.Searchdisscussions(user.getType(),time,username,topic);
-        disseminations = disseminationService.Searchdesseminations(user.getType(),time,username,topic);
+        disscussions = disscussionService.Searchdisscussions(user.getType(),time,username,topic,hour);
+        disseminations = disseminationService.Searchdesseminations(user.getType(),time,username,topic,hour);
         Map<String,Object> map = new HashMap<>();
         map.put("dis",disscussions);
         map.put("des",disseminations);
@@ -302,13 +326,15 @@ public class AjaxController {
         System.out.println(request.getParameter("id"));
         String id = request.getParameter("id");
         String type = request.getParameter("type");
+        String citeinf = request.getParameter("add");
         System.out.println("in the cite :"+type);
         if (type.equals("des")) {
-            disseminationService.updateStateById(id,"cdes");
+            disseminationService.updateStateById(id,"cdes",citeinf);
         }else if(type.equals("dis")){
-            disscussionService.updateStateById(id,"cdis");
+            disscussionService.updateStateById(id,"cdis",citeinf);
         }else {
-            redisscussionService.updateStateById(id,"credis");
+            System.out.println("id is++--:" + id);
+            redisscussionService.updateStateById(id,"credis",citeinf);
         }
         return "1";
     }
@@ -318,11 +344,11 @@ public class AjaxController {
         String id = request.getParameter("id");
         String type = request.getParameter("type");
         if (type.equals("cdes")) {
-            disseminationService.updateStateById(id,"des");
+            disseminationService.updateStateById(id,"des","");
         }else if(type.equals("cdis")){
-            disscussionService.updateStateById(id,"dis");
+            disscussionService.updateStateById(id,"dis","");
         }else {
-            redisscussionService.updateStateById(id,"redis");
+            redisscussionService.updateStateById(id,"redis","");
         }
         return "1";
     }
@@ -410,6 +436,12 @@ public class AjaxController {
         String id = request.getParameter("id");
         System.out.println("de++++++++++"+id);
         chatService.setStatusByid(id,"1");
+        return "1";
+    }
+    @RequestMapping(value = "/img", method = {RequestMethod.POST})
+    @ResponseBody
+    public String addimg(@RequestParam("file") MultipartFile imgFile, HttpServletRequest request){
+        System.out.println("In the add img");
         return "1";
     }
 }

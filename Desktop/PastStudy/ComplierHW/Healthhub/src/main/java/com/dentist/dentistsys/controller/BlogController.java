@@ -39,6 +39,7 @@ public class BlogController{
             String size  = redisscussionService.GetSize();
             System.out.println(reDisscussions);
             ModelAndView mav = new ModelAndView();
+            mav.addObject("replyDetail","f");
             mav.addObject("size",size);
             mav.addObject("disscussion", JSON.toJSONString(disscussion));
             mav.addObject("replys",JSON.toJSONString(reDisscussions));
@@ -63,6 +64,38 @@ public class BlogController{
             return  mav;
         }
 
+
+    @RequestMapping(value = "/rview/{pid}", method = {RequestMethod.GET})
+    public ModelAndView RBlogDetail(@PathVariable(name = "pid") String pid,HttpServletRequest request) {
+        System.out.println("blog ID is :"+request.getParameter("ID"));
+        user user = userService.Sel(pid);
+        ArrayList<reDisscussion> disscussion = redisscussionService.GetReplyByItsID(request.getParameter("ID"));
+        ArrayList<reDisscussion> reDisscussions =  redisscussionService.GetReplyByID("r"+request.getParameter("ID"));
+        String size  = redisscussionService.GetSize();
+        System.out.println(reDisscussions);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("replyDetail","t");
+        mav.addObject("size",size);
+        mav.addObject("disscussion", JSON.toJSONString(disscussion));
+        mav.addObject("replys",JSON.toJSONString(reDisscussions));
+        mav.addObject("ID",user.getId());
+        mav.addObject("DisscussionID",request.getParameter("ID"));
+        mav.addObject("UID",user.getId());
+        mav.addObject("utype",user.getType());
+        mav.addObject("dister","nter");
+        //System.out.println("blog"+ablog);
+        //JSONArray array = (JSONArray) JSONArray.toJSON(comments);
+        //String jsonblogs = array.toString();
+        //mav.addObject("comments",jsonblogs);
+
+        //System.out.println("comments is"+comments);
+        mav.setViewName("DisscussionDetail");
+        return  mav;
+    }
+
+
+
+
     @RequestMapping(value = "/View/{pid}", method = {RequestMethod.GET})
     public ModelAndView test(@PathVariable(name = "pid") String pid,HttpServletRequest request) {
             ArrayList<mancite> mancites = new ArrayList<mancite>();
@@ -78,6 +111,7 @@ public class BlogController{
                 m.setType(disscussions.get(i).getDistype());
                 m.setUserName(disscussions.get(i).getDisname());
                 m.setId(disscussions.get(i).getDisid());
+                m.setCiteinf(disscussions.get(i).getCiteinf());
                 mancites.add(m);
             }
             for (int i =0; i<disseminations.size(); i++){
@@ -86,6 +120,7 @@ public class BlogController{
                 m.setType(disseminations.get(i).getDistype());
                 m.setUserName(disseminations.get(i).getDisname());
                 m.setId(disseminations.get(i).getDisid());
+                m.setCiteinf(disseminations.get(i).getCiteinf());
                 mancites.add(m);
             }
             for (int i =0; i<reDisscussions.size(); i++){
@@ -96,6 +131,7 @@ public class BlogController{
                 m.setType("credis");
                 m.setUserName(reDisscussions.get(i).getDisname());
                 m.setId(reDisscussions.get(i).getDisid());
+                m.setCiteinf(reDisscussions.get(i).getAddinf());
                 mancites.add(m);
             }
         ModelAndView mav = new ModelAndView();

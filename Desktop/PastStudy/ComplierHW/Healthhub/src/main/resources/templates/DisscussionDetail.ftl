@@ -21,6 +21,8 @@
 <input type="hidden" id="ID" name="type" value=${ID}>
 <input type="hidden" id="disid" name="type" value=${size}>
 <input type="hidden" id="dister" name="type" value=${dister}>
+<input type="hidden" id="tid" name="type" value=${UID}>
+<input type="hidden" id="isre" name="type" value=${replyDetail}>
 <a href="/blog/view"></a>
 <div class="wrapper">
     <div class="box">
@@ -31,19 +33,61 @@
                     <p>
                     </p>
                 </div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
-                <div class="btn" data-toggle="modal" id="VD">View  Discussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
             </div>
             <!-- /sidebar -->
+            <div class="modal fade" id="reply2" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Cite</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Group:</label>
+                                        <div class="col-xs-5 ">
+                                            <select class="form-control col-xs-5 input-sm duiqi" id="ctype" name="type">
+                                                <option>Offensive</option>
+                                                <option>Inappropriate</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Additional information:</label>
+                                        <div class="col-xs-3">
+                                            <textarea name="message" id="cmessage" class="duiqi" rows="4" cols="25"></textarea>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">Cancle</button>
+                            <button type="button" class="btn btn-xs btn-xs btn-green" data-dismiss="modal" id="citeSend">Send</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Create Discussion</h4>
+                            <h4 class="modal-title">Creat Discussion</h4>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -68,6 +112,7 @@
                                             <input type="hidden" id="ddate" name="type">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">Group:</label>
                                         <div class="col-xs-5 ">
@@ -79,16 +124,19 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-xs-3 control-label">Topic:</label>
-                                        <div class="col-xs-3">
-                                            <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        <label class="col-xs-3 control-label">Photo: </label> 
+                                        <div class="col-xs-4 ">
+                                            <input id="file" type="file" name="file" text="Add Photo"  /> 
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-xs-3 control-label">Key Word:</label>
+                                        <label class="col-xs-3 control-label">Topic:</label>
                                         <div class="col-xs-3">
-                                            <input type="input" name="keyword" id="dkeyword" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                            <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi" list="kws"></input>
+                                            <datalist id="kws">
+
+                                            </datalist>
                                         </div>
                                     </div>
 
@@ -139,7 +187,7 @@
                                 <a><span class="badge">${UID}</span></a>
                             </li>
                             <li>
-                                <a href="http://138.49.101.84"><span class="badge">Log Out</span></a>
+                                <a id="herf"><span class="badge">Log Out</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -201,7 +249,10 @@
                                                         <div class="form-group">
                                                             <label class="col-xs-3 control-label">Topic:</label>
                                                             <div class="col-xs-3">
-                                                                <input type="input" name="topic" id="rtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                                                <input type="input" name="topic" id="rtopic" class="form-control col-xs-3 input-sm context-input duiqi" list="kw3"></input>
+                                                                <datalist id="kw3">
+
+                                                                </datalist>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
@@ -270,8 +321,79 @@
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>
 <script>
+    var citeid;
+    var dic = [
+        'kidney', 'renal disease','intervention' ,'lupus' ,'transplant' ,
+        'transplantation', 'anemia', 'parathyroidism', 'hyperparathyroidism','CKD',
+        'chronic kidney disease', 'kidney disease','nutrition' ,'blood pressure' ,'hypertension' ,
+        'diabetes','CVD' ,'PVD' ,'cardiovascular disease' ,'peripheral vascular disease' ,
+        'hemoglobin','calcium' ,'potassium' ,'serum calcium' ,'PTH' ,
+        'blood urea nitrogen','creatinine' ,'GFR' ,'eGFR' ,'Glomerular filteration rate' ,
+        'albumin','ischemic heart disease' ,'typhoid' ,'erythropoietin' ,'nephrology' ,
+        'nephrologist','comorbidity','atrial fibrillation','mortality','diabetology',
+        'hemodialysis','dialysis','peritoneal','nephropathy','renal',
+        'amyloidosis','angiotensin','bicarbonate','boen disease','mineral bone disease',
+        'coagulation','cyclosporine','diabetes mellitus','endothelin','endotoxin','epidemiology',
+        'erythropoiesis','fibrosis','malignancy','neuropathy','osmolarity','parathyroid','phosphate','phosphorus',
+        'proteinuria','reflux','urea','vitamin D','urinalysis','kidney biopsy','catheter','catheter tube','NKF','National Kidney Foundation'
+    ];
+    function    setCookie (name,value,iDay) {//存储cookie
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=name+'='+value+';expires='+oDate;
+    };
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isIE11 = userAgent.indexOf("rv:11.0") > -1; //判断是否是IE11浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+    if(!isIE && !isEdge && !isIE11) {//兼容chrome和firefox
+        var _beforeUnload_time = 0, _gap_time = 0;
+        var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器
+        window.onunload = function (){
+            _gap_time = new Date().getTime() - _beforeUnload_time;
+            if(_gap_time <= 5){
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//谷歌浏览器刷新
+            }
+        }
+        window.onbeforeunload = function (){
+            _beforeUnload_time = new Date().getTime();
+            if(is_fireFox){//火狐关闭执行
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//火狐浏览器刷新
+            }
+        };
+    }
+
+
     var  size= ${size};
-    size=size+1;
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -304,24 +426,51 @@
     $("#SP").on('click' , function() {
         window.location.href="/disscussion/search/${UID}";
     })
-    function cite(data) {
+    $("#herf").on('click' , function() {
+        window.location.href = "http://138.49.101.84";
+        $.ajax({
+            url:"/ajax/logout",
+            type:"POST",
+            data: {
+                "id":$("#tid").val()
+            },
+            success:function (text) {
+                if (text != null && text != ""){
+                } else{
+                    alert("获取失败，请重新获取")
+                }
+            }
+        });
+    })
+
+    $('#citeSend').on('click' , function() {
         $.ajax({
             url:"/ajax/cite/${UID}",
             type:"POST",
             data: {
-                "id": ""+data,
-                "type": "rep",
+                "id": ""+citeid,
+                "type": "rdis",
+                "add":$("#cmessage").val()
             },
             success:function (text) {
+
             }
         });
-    }
+
+    })
     var ID;
     var blogs = ${disscussion}
     var replys = ${replys}
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+        for (var i=0;i<dic.length;i++ ) {
+            $("#kws").append('<option value="'+dic[i]+'">')
+        }
+
+        for (var i=0;i<dic.length;i++ ) {
+            $("#kw3").append('<option value="'+dic[i]+'">')
+        }
         if($("#dister").val()=="ter"){
             $("#replyinf").text("Disscussion has been terminate");
             $("#replyb").remove();
@@ -356,64 +505,155 @@
             $('#rtime').append("  "+time2);
 
         })
-
         $('#dsenddis').on('click' , function() {
-            if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"nurse",
-                        "status":"0",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
+            var illegal =0;
+            var txt = $("#dtopic").val().toString();
+            for (var j=0;j < dic.length;j++){
+                if(txt.indexOf(dic[j])>=0){
+                    illegal =1;
+                }
             }
-            else {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"patient",
-                        "status":"0",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
-            }
+            if (illegal ==1){
 
+
+                var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+
+                var tokenv="ssssssss";
+
+                //var data = {"token":token,"file":fileObj};
+
+                var formData = new FormData();
+
+                formData.append("file",fileObj);
+
+                formData.append("token",tokenv);
+
+                $.ajax({
+
+                    url: '/img/upload',
+
+                    type: 'POST',
+
+                    cache: false,
+
+                    data: formData,
+
+                    processData: false,
+
+                    contentType: false
+
+                }).done(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                }).fail(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                });
+
+            }else {
+                window.alert("The topic is illegal!")
+            }
         })
 
         ID=parseInt(""+${DisscussionID});
         for (var i=0;i<blogs.length;i++){
-            var html =  " <div class=\"panel panel-default\">\n" +
+            var html =  "<div class=\"panel panel-default\">\n" +
                 "                                    <div class=\"panel-heading\"><a href=\"/blog/view?ID="+blogs[i].disid+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>discussion</p>\n" +
+                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
@@ -423,18 +663,19 @@
             $("#context").append(html);
         }
         for (var j=0;j<replys.length;j++) {
-            var html = " <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID=" +  replys[j].disid + "\" class=\"pull-right\"></a> <h4>Topic:</h4>" + replys[j].distopic + "</div>\n" +
+
+            var html =" <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/rview/${UID}?ID=" +  replys[j].disid + "\" class=\"pull-right\">Details</a> <h4>Topic:</h4>" + replys[j].distopic + "</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:" + replys[j].disname + "</p4>\n" +
-                "                                        <p><b>Type of posting:</b>discussion</p>\n" +
+                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>" + replys[j].disdate + "</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>" + replys[j].dismessage + "</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <div class=\"input-group-btn\">\n" +
-                "                                        <button class=\"btn-danger btn-sm\" onclick='cite("+replys[j].disid+")'>cite</button>\n" +
+                "                                        <button class=\"btn-danger btn-sm\" onclick='s("+replys[j].disid+")' data-toggle=\"modal\" data-target=\"#reply2\">cite</button>\n" +
                 "                                    </div>" +
                 "                                    </div>\n" +
                 "                                </div>";
@@ -445,7 +686,8 @@
         connectWebSocket();
 
         $('#rdis').on('click' , function() {
-            size = size+1;
+
+            if (dic.indexOf($("#rtopic").val())>=0){
             var postValue = {};
             postValue.id = "1234";//$("#blogID").val();
             postValue.name = "dis";
@@ -460,8 +702,13 @@
             // date.topic =
             postValue.text=date;
             websocket.send(JSON.stringify(postValue));
-
-
+            var parentid;
+            if ($("#isre").val()=="t") {
+                parentid = "r"+$("#DisscussionID").val();
+            }
+            else {
+                parentid = $("#DisscussionID").val();
+            }
             $.ajax({
                 type:"POST",
                 url:"/ajax/replyDisscussion",
@@ -471,7 +718,7 @@
                     "message":""+ $("#rmessage").val(),
                     "topic":""+$("#rtopic").val(),
                     "keyword":""+$("#rkeyword").val(),
-                    "parentid":""+$("#DisscussionID").val()
+                    "parentid": parentid
                 },
                 success:function(data){
                     if (data == "1"){
@@ -482,6 +729,10 @@
                     alert("发生错误："+ jqXHR.status);
                 }
             });
+            size = size+1;}else {
+                window.alert("the topic is illegal")
+            }
+
         })
     })
 
@@ -508,11 +759,11 @@
             //  alert(msg.data)
             var data = JSON.parse(msg.data);
             // alert(data.toString());
-            var html =" <div class=\"panel panel-default\">\n" +
-                "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+data.id+"\" class=\"pull-right\"></a> <h4>Topic:</h4>"+data.text.topic+"</div>\n" +
+            var html = " <div class=\"panel panel-default\">\n" +
+                "                                    <div class=\"panel-heading\"><a href=\"/blog/rview/${UID}?ID=" +  data.id + "\" class=\"pull-right\">Details</a> <h4>Topic:</h4>" + data.text.topic + "</div>\n" +
                 "                                    <div class=\"panel-body\">\n" +
                 "                                        <p4><b>Name</b>:"+data.text.username+"</p4>\n" +
-                "                                        <p><b>Type of posting:</b>Discussion</p>\n" +
+                "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                 "                                        <div class=\"clearfix\"></div>\n" +
                 "                                        <p><b>Time:</b>"+data.text.time+"</p>\n" +
                 "                                        <hr>\n" +
@@ -525,6 +776,9 @@
                 "                                </div>";
             $("#replys").append(html);
         }
+    }
+    function s(id) {
+        citeid = id;
     }
     //发送消息
     function send(){

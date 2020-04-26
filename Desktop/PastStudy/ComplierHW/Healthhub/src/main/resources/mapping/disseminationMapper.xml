@@ -11,6 +11,7 @@
     <result column="dismessage" property="dismessage" jdbcType="VARCHAR" />
     <result column="disstate" property="disstate" jdbcType="VARCHAR" />
     <result column="disid" property="disid" jdbcType="VARCHAR" />
+    <result column="citeinf" property="citeinf" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disstate, 
-    disid
+    disid, citeinf
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.disseminationExample" >
     select
@@ -97,12 +98,12 @@
   <insert id="insert" parameterType="com.dentist.dentistsys.entity.dissemination" >
     insert into dissemination (disname, disdate, distype, 
       disgroup, distopic, diskeyword, 
-      dismessage, disstate, disid
-      )
+      dismessage, disstate, disid, 
+      citeinf)
     values (#{disname,jdbcType=VARCHAR}, #{disdate,jdbcType=VARCHAR}, #{distype,jdbcType=VARCHAR}, 
       #{disgroup,jdbcType=VARCHAR}, #{distopic,jdbcType=VARCHAR}, #{diskeyword,jdbcType=VARCHAR}, 
-      #{dismessage,jdbcType=VARCHAR}, #{disstate,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}
-      )
+      #{dismessage,jdbcType=VARCHAR}, #{disstate,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, 
+      #{citeinf,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.dissemination" >
     insert into dissemination
@@ -134,6 +135,9 @@
       <if test="disid != null" >
         disid,
       </if>
+      <if test="citeinf != null" >
+        citeinf,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="disname != null" >
@@ -162,6 +166,9 @@
       </if>
       <if test="disid != null" >
         #{disid,jdbcType=VARCHAR},
+      </if>
+      <if test="citeinf != null" >
+        #{citeinf,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -201,6 +208,9 @@
       <if test="record.disid != null" >
         disid = #{record.disid,jdbcType=VARCHAR},
       </if>
+      <if test="record.citeinf != null" >
+        citeinf = #{record.citeinf,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -216,7 +226,8 @@
       diskeyword = #{record.diskeyword,jdbcType=VARCHAR},
       dismessage = #{record.dismessage,jdbcType=VARCHAR},
       disstate = #{record.disstate,jdbcType=VARCHAR},
-      disid = #{record.disid,jdbcType=VARCHAR}
+      disid = #{record.disid,jdbcType=VARCHAR},
+      citeinf = #{record.citeinf,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

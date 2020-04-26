@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -20,6 +20,7 @@
 <input type="hidden" id="doc" name="type" value=${utype}>
 <input type="hidden" id="blogID" name="type" value=${blogID}>
 <input type="hidden" id="ID" name="type" value=${ID}>
+<input type="hidden" id="tid" name="type" value=${UID}>
 <a href="/blog/view"></a>
 <div class="wrapper">
     <div class="box">
@@ -30,14 +31,13 @@
                     <p>
                     </p>
                 </div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="cp">Change Password</div>
-                <div class="btn" data-toggle="modal" id="VD">View  Discussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View  Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VDm">View  Dissemination</div>
-                <div class="btn" data-toggle="modal" id="MMD">Manage My Discussion</div>
+                <div class="btn" data-toggle="modal" id="MMD">Manage My Disscussion</div>
                 <div class="btn" data-toggle="modal" id="SP">Search Posting</div>
-                <div class="btn" data-toggle="modal" id="pm123">Private Conversation</div>
-
+                <div class="btn" data-toggle="modal" id="pm123">Private message</div>
             </div>
             <!-- /sidebar -->
             <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -70,6 +70,7 @@
                                             <input type="hidden" id="ddate" name="type">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">Group:</label>
                                         <div class="col-xs-5 ">
@@ -81,11 +82,22 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-xs-3 control-label">Topic:</label>
-                                        <div class="col-xs-3">
-                                            <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        <label class="col-xs-3 control-label">Photo: </label> 
+                                        <div class="col-xs-4 ">
+                                            <input id="file" type="file" name="file" text="Add Photo"  /> 
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label">Topic:</label>
+                                        <div class="col-xs-3">
+                                            <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi" list="kws"></input>
+                                            <datalist id="kws">
+
+                                            </datalist>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">Message:</label>
                                         <div class="col-xs-3">
@@ -131,7 +143,7 @@
                                 <a><span class="badge">${UID}</span></a>
                             </li>
                             <li>
-                                <a href="http://138.49.101.84"><span class="badge">Log Out</span></a>
+                                <a id="herf"><span class="badge">Log Out</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -165,7 +177,22 @@
                                 <div id="replys">
                                 </div>
                                 <p>
-                                    <input type="text" class="form-control" id="message"> </p>
+                                <div>
+                                <h4>
+                                    Topic:
+                                </h4>
+                                <div>
+                                    <input type="input" name="topic" id="chtopic" class="form-control col-xs-5 input-sm" list="kws" style="width:200px;"></input>
+                                    <datalist id="kws">
+                                    </datalist>
+                                </div>
+                                    </br>
+                                    </br>
+                                </div>
+                                <h4>
+                                  Message: <input type="text" class="form-control" id="message">
+                                </h4>
+                                </p>
                                 <button type="button" id="replyb" class="btn-primary text-white ml-1" data-toggle="modal" data-target="#reply">Add</button>
                                 <button type="button" id="terb" class="btn-danger text-white ml-1" data-toggle="modal" data-target="#reply">Terminate</button>
                             </div>
@@ -214,6 +241,76 @@
 <script src="/bootstrap.min.js"></script>
 <script src="/scripts.js"></script>
 <script>
+    var dic = [
+        'kidney', 'renal disease','intervention' ,'lupus' ,'transplant' ,
+        'transplantation', 'anemia', 'parathyroidism', 'hyperparathyroidism','CKD',
+        'chronic kidney disease', 'kidney disease','nutrition' ,'blood pressure' ,'hypertension' ,
+        'diabetes','CVD' ,'PVD' ,'cardiovascular disease' ,'peripheral vascular disease' ,
+        'hemoglobin','calcium' ,'potassium' ,'serum calcium' ,'PTH' ,
+        'blood urea nitrogen','creatinine' ,'GFR' ,'eGFR' ,'Glomerular filteration rate' ,
+        'albumin','ischemic heart disease' ,'typhoid' ,'erythropoietin' ,'nephrology' ,
+        'nephrologist','comorbidity','atrial fibrillation','mortality','diabetology',
+        'hemodialysis','dialysis','peritoneal','nephropathy','renal',
+        'amyloidosis','angiotensin','bicarbonate','boen disease','mineral bone disease',
+        'coagulation','cyclosporine','diabetes mellitus','endothelin','endotoxin','epidemiology',
+        'erythropoiesis','fibrosis','malignancy','neuropathy','osmolarity','parathyroid','phosphate','phosphorus',
+        'proteinuria','reflux','urea','vitamin D','urinalysis','kidney biopsy','catheter','catheter tube','NKF','National Kidney Foundation'
+    ];
+    function    setCookie (name,value,iDay) {//存储cookie
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=name+'='+value+';expires='+oDate;
+    };
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isIE11 = userAgent.indexOf("rv:11.0") > -1; //判断是否是IE11浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+    if(!isIE && !isEdge && !isIE11) {//兼容chrome和firefox
+        var _beforeUnload_time = 0, _gap_time = 0;
+        var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器
+        window.onunload = function (){
+            _gap_time = new Date().getTime() - _beforeUnload_time;
+            if(_gap_time <= 5){
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//谷歌浏览器刷新
+            }
+        }
+        window.onbeforeunload = function (){
+            _beforeUnload_time = new Date().getTime();
+            if(is_fireFox){//火狐关闭执行
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//火狐浏览器刷新
+            }
+        };
+    }
+
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -257,11 +354,22 @@
     $("#terb").on('click' , function() {
         ter();
     })
-    $('#pm123').on('click' , function() {
-        window.location.href="/disscussion/pm123/${UID}";
-		
+    $("#herf").on('click' , function() {
+        window.location.href = "http://138.49.101.84";
+        $.ajax({
+            url:"/ajax/logout",
+            type:"POST",
+            data: {
+                "id":$("#tid").val()
+            },
+            success:function (text) {
+                if (text != null && text != ""){
+                } else{
+                    alert("获取失败，请重新获取")
+                }
+            }
+        });
     })
-
     function cite(post) {
         $.ajax({
             url:"/ajax/cite/${UID}",
@@ -280,6 +388,9 @@
     var userID=$("#ID").val();
     var websocket=null;
     $(function(){
+        for (var i=0;i<dic.length;i++ ) {
+            $("#kws").append('<option value="'+dic[i]+'">')
+        }
 
         if ($("#utype").val()=="tpatient"){
             $("#navtop").addClass("navbar-green");
@@ -300,53 +411,145 @@
         })
 
         $('#dsenddis').on('click' , function() {
-            if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"nurse",
-                        "status":"0",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
+            var illegal =0;
+            var txt = $("#dtopic").val().toString();
+            for (var j=0;j < dic.length;j++){
+                if(txt.indexOf(dic[j])>=0){
+                    illegal =1;
+                }
             }
-            else {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"patient",
-                        "status":"0",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
-            }
+            if (illegal ==1){
 
+
+                var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+
+                var tokenv="ssssssss";
+
+                //var data = {"token":token,"file":fileObj};
+
+                var formData = new FormData();
+
+                formData.append("file",fileObj);
+
+                formData.append("token",tokenv);
+
+                $.ajax({
+
+                    url: '/img/upload',
+
+                    type: 'POST',
+
+                    cache: false,
+
+                    data: formData,
+
+                    processData: false,
+
+                    contentType: false
+
+                }).done(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                }).fail(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                });
+
+            }else {
+                window.alert("The topic is illegal!")
+            }
         })
     })
 
@@ -375,8 +578,10 @@
                 "                                        <div class=\"panel-heading\">\n" +
                 "                                            <h4>"+data.id+"</h4>\n" +
                 "                                            <hr>\n" +
+                "   <div class=\"panel-heading\"> <h4>Topic:</h4>"+data.text.topic+"</div>\n"+
+                "                                            <hr>\n" +
                 "                                            <div class=\"panel-body\">\n" +
-                "                                                <p><b>Message:</b>"+data.text+"</p>\n" +
+                "                                                <p><b>Message:</b>"+data.text.message+"</p>\n" +
                 "                                            </div>\n" +
                 "                                        </div>\n" +
                 "                                    </div>";
@@ -389,19 +594,21 @@
         var postValue = {};
         postValue.id = $("#ID").val();;//$("#blogID").val();
         postValue.name = "chat";
-        postValue.text=$("#message").val();
+        var date = {};
+        date.message = $("#message").val();
+        date.topic = $("#chtopic").val();
+        postValue.text=date;
         websocket.send(JSON.stringify(postValue));
         $("#message").val("");
     }
     //关闭连接
     function ter(){
-        //alert("terminate")
+        alert("terminate")
         ID=ID+1;
         var postValue = {};
         postValue.id = $("#ID").val();;//$("#blogID").val();
         postValue.name = "chat";
-        document.getElementById("replyb").disabled = true;
-        postValue.text="I have closed the chat";
+        postValue.text="I have close the chat";
         websocket.send(JSON.stringify(postValue));
         $("#message").val("");
         closeWebSocket();

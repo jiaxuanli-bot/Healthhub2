@@ -733,6 +733,76 @@ public class disseminationExample {
             addCriterion("disid not between", value1, value2, "disid");
             return (Criteria) this;
         }
+
+        public Criteria andCiteinfIsNull() {
+            addCriterion("citeinf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfIsNotNull() {
+            addCriterion("citeinf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfEqualTo(String value) {
+            addCriterion("citeinf =", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotEqualTo(String value) {
+            addCriterion("citeinf <>", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfGreaterThan(String value) {
+            addCriterion("citeinf >", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfGreaterThanOrEqualTo(String value) {
+            addCriterion("citeinf >=", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLessThan(String value) {
+            addCriterion("citeinf <", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLessThanOrEqualTo(String value) {
+            addCriterion("citeinf <=", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfLike(String value) {
+            addCriterion("citeinf like", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotLike(String value) {
+            addCriterion("citeinf not like", value, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfIn(List<String> values) {
+            addCriterion("citeinf in", values, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotIn(List<String> values) {
+            addCriterion("citeinf not in", values, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfBetween(String value1, String value2) {
+            addCriterion("citeinf between", value1, value2, "citeinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andCiteinfNotBetween(String value1, String value2) {
+            addCriterion("citeinf not between", value1, value2, "citeinf");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

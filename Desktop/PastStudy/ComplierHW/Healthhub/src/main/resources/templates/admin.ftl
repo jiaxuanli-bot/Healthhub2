@@ -39,7 +39,7 @@
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
             <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-            <div class="btn" data-toggle="modal" id="123456">Private Conversation</div>
+            <div class="btn" data-toggle="modal" id="123456">Manage Private Mes</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -194,7 +194,7 @@
                 </div>
                 <div class="data-div">
                     <div class="row tableHeader">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
                             UserName
@@ -329,19 +329,41 @@
         return fmt;
     }
     var users = ${users};
+    var members = ${member}
     $(document).ready(function () {
         var tablecontext="";
+        var has =0;
         for (var i=0;i<users.length;i++){
              tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\">"+i+"</div>\n" +
-                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].id+"</span></div>\n" +
-                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].realname+"</span></div>\n" +
+                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\">"+i+"</div>\n" +
+                 "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].email+"</span></div>\n" +
+                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+users[i].id+"</span></div>\n" +
                  "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+users[i].physicion+"</span></div>\n" +
                  "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+users[i].additional+"</span></div>\n" +
                  "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+i+" class='btn btn btn-success btn-xs approve' id="+users[i].id+">approve</button>"
                  + "                          <button name="+users[i].id+" class='btn btn btn-danger btn-xs refuse' id="+i+">refuse</button></div>\n" +
                  "                            </div>"
+            for (var j=0;j < members.length; j++){
+                has = 0 ;
+                if (users[i].id ==  members[j].firstname+" "+members[j].lastname){
+                    has=1;
+                    tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
+                        "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\">ID matched in Database</div>\n" +
+                        "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+members[i].email+"</span></div>\n" +
+                        "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"><span>"+members[j].firstname+" "+members[j].lastname+"</span></div>\n" +
+                        "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><span>"+members[j].doctorname+"</span></div>\n" +
+                        "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>None</span></div>\n" +
+                        "                            </div></br>"
+                }else {
+                    has = 0;
+                }
         }
+            if (has ==0) {
+                tablecontext = tablecontext+"         <div class=\"row\"id="+i+">\n" +
+                "                            <div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\">None Match</div></div> </br>\n"
+
+            }
+    }
         $("#Usertable").append(tablecontext);
         $('#messagePage').on('click' , function() {
             window.location.href="/";

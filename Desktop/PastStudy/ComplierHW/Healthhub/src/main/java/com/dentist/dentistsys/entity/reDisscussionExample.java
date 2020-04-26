@@ -733,6 +733,76 @@ public class reDisscussionExample {
             addCriterion("disparentid not between", value1, value2, "disparentid");
             return (Criteria) this;
         }
+
+        public Criteria andAddinfIsNull() {
+            addCriterion("addinf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfIsNotNull() {
+            addCriterion("addinf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfEqualTo(String value) {
+            addCriterion("addinf =", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfNotEqualTo(String value) {
+            addCriterion("addinf <>", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfGreaterThan(String value) {
+            addCriterion("addinf >", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfGreaterThanOrEqualTo(String value) {
+            addCriterion("addinf >=", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfLessThan(String value) {
+            addCriterion("addinf <", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfLessThanOrEqualTo(String value) {
+            addCriterion("addinf <=", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfLike(String value) {
+            addCriterion("addinf like", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfNotLike(String value) {
+            addCriterion("addinf not like", value, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfIn(List<String> values) {
+            addCriterion("addinf in", values, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfNotIn(List<String> values) {
+            addCriterion("addinf not in", values, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfBetween(String value1, String value2) {
+            addCriterion("addinf between", value1, value2, "addinf");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddinfNotBetween(String value1, String value2) {
+            addCriterion("addinf not between", value1, value2, "addinf");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

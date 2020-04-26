@@ -19,12 +19,20 @@ public class HospitalService {
                 hospitalInfoExample = new hospitalInfoExample();
                 com.dentist.dentistsys.entity.hospitalInfoExample.Criteria c = hospitalInfoExample.createCriteria();
                 c.andHospitalidEqualTo(ID).andFirstnameEqualTo(firstName).andLastnameEqualTo(lastName);
-                if (ID.substring(0,1).compareTo("PH") == 0){
+                if (Physicain.length()>0){
                     System.out.println("_______________+++++++++"+Physicain);
                     c.andDoctornameEqualTo(Physicain);
                 }
                 ArrayList<hospitalInfo> hospitalInfos;
                 hospitalInfos = (ArrayList<hospitalInfo>) hospitalInfoMapper.selectByExample(hospitalInfoExample);
                 return hospitalInfos;
+        }
+        public ArrayList<hospitalInfo> getAll(){
+            hospitalInfoExample = new hospitalInfoExample();
+            com.dentist.dentistsys.entity.hospitalInfoExample.Criteria c = hospitalInfoExample.createCriteria();
+            c.andFirstnameIsNotNull();
+            ArrayList<hospitalInfo> hospitalInfos;
+            hospitalInfos = (ArrayList<hospitalInfo>) hospitalInfoMapper.selectByExample(hospitalInfoExample);
+            return hospitalInfos;
         }
 }

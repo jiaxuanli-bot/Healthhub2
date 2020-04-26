@@ -38,8 +38,6 @@
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
             <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
-            <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-            <div class="btn" data-toggle="modal" id="123456">Private Conversation</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -199,11 +197,11 @@
                         <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                             UserName
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4">
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
                             Message
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            type
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            additional information
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             action
@@ -302,13 +300,6 @@
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
     })
-    $('#AGP').on('click' , function() {
-        window.location.href="/disscussion/adreport/${UID}";
-    })
-    $('#123456').on('click' , function() {
-       // alert("ampm")
-        window.location.href="/disscussion/ampm123456/${UID}";
-    })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -329,6 +320,7 @@
     <#--alert(JSON.stringify(${dis}))-->
     <#--alert(JSON.stringify(disseminations))-->
     $(document).ready(function () {
+
         var tablecontext="";
         for (var i=0;i< disseminations.length;i++){
             var type;
@@ -343,8 +335,8 @@
                 "                            <div class=\"col-lg-1 col-md-1 col-sm-1 col-xs-1\"></div>\n" +
                 "                           <input type=\"hidden\" id=\"h"+disseminations[i].id+"\" name=\"type\" value="+disseminations[i].userName+">\n" +
                 "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+disseminations[i].userName+"</span></div>\n" +
-                "                            <div class=\"col-lg-5 col-md-5 col-sm-4 col-xs-4\"><span>"+disseminations[i].message+"</span></div>\n" +
-                "                            <div class=\"col-lg-2 col-md-2 col-sm-1 col-xs-1\"><span>"+type+"</span></div>\n" +
+                "                            <div class=\"col-lg-4 col-md-4 col-sm-3 col-xs-3\"><span>"+disseminations[i].message+"</span></div>\n" +
+                "                            <div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3\"><span>"+disseminations[i].citeinf+"</span></div>\n" +
                 "                            <div id=\"add\" class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\"><button name="+disseminations[i].type+" class='btn btn btn-success btn-xs approve' id="+disseminations[i].id+">approve</button>"
                 + "                          <button name="+disseminations[i].type+" class='btn btn btn-danger btn-xs refuse' id="+disseminations[i].id+">refuse</button></div>\n" +
                 "                            </div>"

@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<input type="hidden" id="tid" name="type" value=${UID}>
 <div id="topbar">
     <span id="unamnebtn" >${UID}</span>
     <button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
@@ -32,12 +33,12 @@
             </div>
             <div role="tabpanel" class="tab-pane active" id="sour">
                 <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-                <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Discussion Approve</div>
-                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+                <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
+                <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
                 <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
-                <div class="btn" data-toggle="modal" id="VD">View Discussion</div>
+                <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
                 <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
-                <div class="btn" data-toggle="modal" id="AMD">Manage Discussion</div>
+                <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
                 <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
             </div>
             <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -248,6 +249,61 @@
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
     })
+
+    function    setCookie (name,value,iDay) {//存储cookie
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=name+'='+value+';expires='+oDate;
+    };
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isIE11 = userAgent.indexOf("rv:11.0") > -1; //判断是否是IE11浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+    if(!isIE && !isEdge && !isIE11) {//兼容chrome和firefox
+        var _beforeUnload_time = 0, _gap_time = 0;
+        var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器
+        window.onunload = function (){
+            _gap_time = new Date().getTime() - _beforeUnload_time;
+            if(_gap_time <= 5){
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//谷歌浏览器刷新
+            }
+        }
+        window.onbeforeunload = function (){
+            _beforeUnload_time = new Date().getTime();
+            if(is_fireFox){//火狐关闭执行
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//火狐浏览器刷新
+            }
+        };
+    }
 
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {

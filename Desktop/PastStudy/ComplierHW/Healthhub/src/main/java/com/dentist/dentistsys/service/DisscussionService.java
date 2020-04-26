@@ -27,12 +27,13 @@ public class DisscussionService {
         disscussionMapper.insert(disscussion);
     }
 
-    public void updateStateById(String id,String state){
+    public void updateStateById(String id,String state,String citeInf){
         System.out.println(id);
         disscussionExample d = new disscussionExample();
         d.createCriteria().andDisidEqualTo(id);
         ArrayList<disscussion> disscussions= (ArrayList<disscussion>) disscussionMapper.selectByExample(d);
         disscussions.get(0).setDistype(state);
+        disscussions.get(0).setCiteinf(citeInf);
         disscussionMapper.updateByExample(disscussions.get(0),d);
     }
 
@@ -63,7 +64,7 @@ public class DisscussionService {
         return arrayList;
     }
 
-    public ArrayList<disscussion> Searchdisscussions(String type,String Date,String Username,String Topic){
+    public ArrayList<disscussion> Searchdisscussions(String type,String Date,String Username,String Topic,String hour){
         disscussionExample d = new disscussionExample();
         disscussionExample.Criteria c = d.createCriteria();
         System.out.println("t "+type+" date "+Date+"name is"+Username+" Time"+Topic);
@@ -100,6 +101,20 @@ public class DisscussionService {
 //            System.out.println(Date.substring(0,4));
             if (arrayList.get(i).getDisdate().substring(0,2).equals(Date.substring(5,7))&&arrayList.get(i).getDisdate().substring(3,5).equals(Date.substring(8,10))&&arrayList.get(i).getDisdate().substring(6,10).equals(Date.substring(0,4))){
                 res.add(arrayList.get(i));
+            }
+        }
+        if (hour.length()>0){
+            for (int i = 0;i < arrayList.size(); i++) {
+           System.out.println(Date);
+            System.out.println(arrayList.get(i).getDisdate().substring(0,2));
+            System.out.println(Date.substring(5,7));
+            System.out.println(arrayList.get(i).getDisdate().substring(3,5));
+            System.out.println(Date.substring(8,10));
+            System.out.println(arrayList.get(i).getDisdate().substring(6,10));
+            System.out.println(Date.substring(0,4));
+//                if (arrayList.get(i).getDisdate().substring(0,2).equals(Date.substring(5,7))&&arrayList.get(i).getDisdate().substring(3,5).equals(Date.substring(8,10))&&arrayList.get(i).getDisdate().substring(6,10).equals(Date.substring(0,4))){
+//                    res.add(arrayList.get(i));
+//                }
             }
         }
         return res;

@@ -10,10 +10,6 @@
             outline: 0;
             background-color:#C0C0C0;
         }
-
-         .lowin .lowin-box label.error {
-      color: #ff0000;
-   }
     </style>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,8 +17,6 @@
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/Chart.min.js"></script>
     <script type="text/javascript" src="/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/main.js"></script>
-    <script type="text/javascript" src="/index.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
@@ -94,8 +88,7 @@
                         equalTo: "The two passwords you entered did not match"
                     },
                     email: "Please enter a valid email",
-                },
-                errorClass: "error"
+                }
             });
         });
     </script>
@@ -113,7 +106,7 @@
             <div class="lowin-box lowin-register">
                 <div class="lowin-box-inner">
                     <form action="/users/reg"  id="signupForm" method="post">
-                        <p>Create New Account</p>
+                        <p>Creat New Account</p>
 
                         <div class="lowin-group">
                             <label>UserName</label>
@@ -139,7 +132,7 @@
                         <select class="form-control" id="sel1" name="type">
                             <option>Patient</option>
                             <option>Nurse</option>
-                            <option id="do">Physician</option>
+                            <option id="do">Doctor</option>
                         </select>
 
                         <div id="sel2d">
@@ -167,14 +160,8 @@
 
 
 <script>
-        if (    $("#sel1 option:selected").text()=="Physician"){
-            $("#sel2d").attr("style","display:none;");
-        }
-        else {
-            $("#sel2d").attr("style","display:block;");
-        }
     $("#sel1").change(function(){
-        if (    $("#sel1 option:selected").text()=="Physician"){
+        if (    $("#sel1 option:selected").text()=="Doctor"){
             $("#sel2d").attr("style","display:none;");
         }
         else {

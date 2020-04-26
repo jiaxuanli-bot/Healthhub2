@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>You have No power to register</h1>
+User Have Been Login
 </body>
 </html>

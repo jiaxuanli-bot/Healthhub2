@@ -11,6 +11,7 @@
     <result column="dismessage" property="dismessage" jdbcType="VARCHAR" />
     <result column="disid" property="disid" jdbcType="VARCHAR" />
     <result column="disparentid" property="disparentid" jdbcType="VARCHAR" />
+    <result column="addinf" property="addinf" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disid, disparentid
+    disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disid, disparentid, 
+    addinf
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.reDisscussionExample" >
     select
@@ -96,12 +98,12 @@
   <insert id="insert" parameterType="com.dentist.dentistsys.entity.reDisscussion" >
     insert into reDisscussion (disname, disdate, distype, 
       disgroup, distopic, diskeyword, 
-      dismessage, disid, disparentid
-      )
+      dismessage, disid, disparentid, 
+      addinf)
     values (#{disname,jdbcType=VARCHAR}, #{disdate,jdbcType=VARCHAR}, #{distype,jdbcType=VARCHAR}, 
       #{disgroup,jdbcType=VARCHAR}, #{distopic,jdbcType=VARCHAR}, #{diskeyword,jdbcType=VARCHAR}, 
-      #{dismessage,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, #{disparentid,jdbcType=VARCHAR}
-      )
+      #{dismessage,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, #{disparentid,jdbcType=VARCHAR}, 
+      #{addinf,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.reDisscussion" >
     insert into reDisscussion
@@ -133,6 +135,9 @@
       <if test="disparentid != null" >
         disparentid,
       </if>
+      <if test="addinf != null" >
+        addinf,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="disname != null" >
@@ -161,6 +166,9 @@
       </if>
       <if test="disparentid != null" >
         #{disparentid,jdbcType=VARCHAR},
+      </if>
+      <if test="addinf != null" >
+        #{addinf,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -200,6 +208,9 @@
       <if test="record.disparentid != null" >
         disparentid = #{record.disparentid,jdbcType=VARCHAR},
       </if>
+      <if test="record.addinf != null" >
+        addinf = #{record.addinf,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -215,7 +226,8 @@
       diskeyword = #{record.diskeyword,jdbcType=VARCHAR},
       dismessage = #{record.dismessage,jdbcType=VARCHAR},
       disid = #{record.disid,jdbcType=VARCHAR},
-      disparentid = #{record.disparentid,jdbcType=VARCHAR}
+      disparentid = #{record.disparentid,jdbcType=VARCHAR},
+      addinf = #{record.addinf,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

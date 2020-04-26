@@ -31,15 +31,13 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Discussion Approve</div>
-            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
+            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
-            <div class="btn" data-toggle="modal" id="VD">View Discussion</div>
+            <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
-            <div class="btn" data-toggle="modal" id="AMD">Manage Discussion</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
-            <div class="btn" data-toggle="modal" id="AGP">Generate report</div>
-            <div class="btn" data-toggle="modal" id="123456">Private Conversation</div>
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -258,13 +256,6 @@
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
     })
-    $('#AGP').on('click' , function() {
-        window.location.href="/disscussion/adreport/${UID}";
-    })
-    $('#123456').on('click' , function() {
-       // alert("ampm")
-        window.location.href="/disscussion/ampm123456/${UID}";
-    })
 
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
@@ -296,7 +287,7 @@
                     "                                    <div class=\"panel-heading\"><a href=\"/blog/view/${UID}?ID="+blogs[i].disid+"\" class=\"pull-right\">View Detail</a> <h4>Topic:</h4>"+blogs[i].distopic+"</div>\n" +
                     "                                    <div class=\"panel-body\">\n" +
                     "                                        <p4><b>Name</b>:"+blogs[i].disname+"</p4>\n" +
-                    "                                        <p><b>Type of posting:</b>Discussion</p>\n" +
+                    "                                        <p><b>Type of posting:</b>dessimination</p>\n" +
                     "                                        <div class=\"clearfix\"></div>\n" +
                     "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                     "                                        <hr>\n" +

@@ -19,6 +19,8 @@ public class dissemination {
 
     private String disid;
 
+    private String citeinf;
+
     public String getDisname() {
         return disname;
     }
@@ -91,6 +93,14 @@ public class dissemination {
         this.disid = disid;
     }
 
+    public String getCiteinf() {
+        return citeinf;
+    }
+
+    public void setCiteinf(String citeinf) {
+        this.citeinf = citeinf;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,6 +116,7 @@ public class dissemination {
         sb.append(", dismessage=").append(dismessage);
         sb.append(", disstate=").append(disstate);
         sb.append(", disid=").append(disid);
+        sb.append(", citeinf=").append(citeinf);
         sb.append("]");
         return sb.toString();
     }

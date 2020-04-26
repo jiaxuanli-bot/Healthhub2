@@ -21,6 +21,10 @@ public class disscussion {
 
     private String disterminate;
 
+    private String img;
+
+    private String citeinf;
+
     public String getDisname() {
         return disname;
     }
@@ -101,6 +105,22 @@ public class disscussion {
         this.disterminate = disterminate;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getCiteinf() {
+        return citeinf;
+    }
+
+    public void setCiteinf(String citeinf) {
+        this.citeinf = citeinf;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -117,6 +137,8 @@ public class disscussion {
         sb.append(", disstate=").append(disstate);
         sb.append(", disid=").append(disid);
         sb.append(", disterminate=").append(disterminate);
+        sb.append(", img=").append(img);
+        sb.append(", citeinf=").append(citeinf);
         sb.append("]");
         return sb.toString();
     }

@@ -30,11 +30,12 @@ public class DisseminationService {
         arrayList = (ArrayList<dissemination>) disseminationMapper.selectByExample(d);
         return arrayList;
     }
-    public void updateStateById(String id,String state){
+    public void updateStateById(String id,String state,String aditional){
         disseminationExample d =new disseminationExample();
         d.createCriteria().andDisidEqualTo(id);
         ArrayList<dissemination> disseminations= (ArrayList<dissemination>) disseminationMapper.selectByExample(d);
         disseminations.get(0).setDistype(state);
+        disseminations.get(0).setCiteinf(aditional);
         disseminationMapper.updateByExample(disseminations.get(0),d);
     }
 
@@ -45,7 +46,7 @@ public class DisseminationService {
         return arrayList;
     }
 
-    public ArrayList<dissemination> Searchdesseminations(String type,String Date,String Username,String Topic){
+    public ArrayList<dissemination> Searchdesseminations(String type,String Date,String Username,String Topic,String hour){
         disseminationExample d = new disseminationExample();
         disseminationExample.Criteria c =d.createCriteria();
         System.out.println("t "+type+" date "+Date+"name is"+Username+" Time"+Topic);
@@ -69,7 +70,12 @@ public class DisseminationService {
             ArrayList res = new ArrayList();
             for (int i = 0;i < arrayList.size(); i++) {
                 if (arrayList.get(i).getDisdate().substring(0,2).equals(Date.substring(5,7))&&arrayList.get(i).getDisdate().substring(3,5).equals(Date.substring(8,10))&&arrayList.get(i).getDisdate().substring(6,10).equals(Date.substring(0,4))){
-                    res.add(arrayList.get(i));
+                    if (hour.length()>0){
+                        if (hour.equals(arrayList.get(i).getDisdate().substring(11,13))){
+                            res.add(arrayList.get(i));
+                        }
+                    }else {
+                    res.add(arrayList.get(i));}
                 }
             }
             return res;}

@@ -12,6 +12,8 @@
     <result column="disstate" property="disstate" jdbcType="VARCHAR" />
     <result column="disid" property="disid" jdbcType="VARCHAR" />
     <result column="disterminate" property="disterminate" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="citeinf" property="citeinf" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     disname, disdate, distype, disgroup, distopic, diskeyword, dismessage, disstate, 
-    disid, disterminate
+    disid, disterminate, img, citeinf
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dentist.dentistsys.entity.disscussionExample" >
     select
@@ -99,11 +101,13 @@
     insert into disscussion (disname, disdate, distype, 
       disgroup, distopic, diskeyword, 
       dismessage, disstate, disid, 
-      disterminate)
+      disterminate, img, citeinf
+      )
     values (#{disname,jdbcType=VARCHAR}, #{disdate,jdbcType=VARCHAR}, #{distype,jdbcType=VARCHAR}, 
       #{disgroup,jdbcType=VARCHAR}, #{distopic,jdbcType=VARCHAR}, #{diskeyword,jdbcType=VARCHAR}, 
       #{dismessage,jdbcType=VARCHAR}, #{disstate,jdbcType=VARCHAR}, #{disid,jdbcType=VARCHAR}, 
-      #{disterminate,jdbcType=VARCHAR})
+      #{disterminate,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{citeinf,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dentist.dentistsys.entity.disscussion" >
     insert into disscussion
@@ -138,6 +142,12 @@
       <if test="disterminate != null" >
         disterminate,
       </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="citeinf != null" >
+        citeinf,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="disname != null" >
@@ -169,6 +179,12 @@
       </if>
       <if test="disterminate != null" >
         #{disterminate,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="citeinf != null" >
+        #{citeinf,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +227,12 @@
       <if test="record.disterminate != null" >
         disterminate = #{record.disterminate,jdbcType=VARCHAR},
       </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citeinf != null" >
+        citeinf = #{record.citeinf,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -227,7 +249,9 @@
       dismessage = #{record.dismessage,jdbcType=VARCHAR},
       disstate = #{record.disstate,jdbcType=VARCHAR},
       disid = #{record.disid,jdbcType=VARCHAR},
-      disterminate = #{record.disterminate,jdbcType=VARCHAR}
+      disterminate = #{record.disterminate,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      citeinf = #{record.citeinf,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

@@ -20,11 +20,11 @@
     <div class="lowin-wrapper">
         <div class="lowin-box lowin-login">
 
-        <div class="lowin-box lowin-register">
+            <div class="lowin-box lowin-register">
             <div class="lowin-box-inner">
                 <form id="myForm" method="post" action="/users/login/id">
                     <p>Signin to continue</p>
-                    <div class="lowin-group">
+                            <div class="lowin-group">
                         <label>Name</label>
                         <input type="text" name="id" id="id" autocomplete="name" class="lowin-input">
                     </div>

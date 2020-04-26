@@ -50,11 +50,21 @@ public class RedisscussionService {
         return comments;
     }
 
-    public void updateStateById(String id,String state){
+
+    public ArrayList<reDisscussion> GetReplyByItsID(String ID){
+        reDisscussionExample d= new reDisscussionExample();
+        d.createCriteria().andDisidEqualTo(ID);
+        ArrayList<reDisscussion> comments =new ArrayList<reDisscussion>();
+        comments = (ArrayList<reDisscussion>) reDisscussionMapper.selectByExample(d);
+        return comments;
+    }
+
+    public void updateStateById(String id,String state,String addinf){
         reDisscussionExample d =new reDisscussionExample();
         d.createCriteria().andDisidEqualTo(id);
         ArrayList<reDisscussion> reDisscussions= (ArrayList<reDisscussion>) reDisscussionMapper.selectByExample(d);
         reDisscussions.get(0).setDistype(state);
+        reDisscussions.get(0).setAddinf(addinf);
         reDisscussionMapper.updateByExample(reDisscussions.get(0),d);
     }
     public void ins(reDisscussion reDisscussion){

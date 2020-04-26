@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<input type="hidden" id="tid" name="type" value=${UID}>
 <div id="topbar">
     <span id="unamnebtn" >${UID}</span>
     <button class="btn btn-primary btn-sm my-2 my-sm-0" type="submit" id="signoutbtn" >Log out</button>
@@ -31,21 +32,20 @@
         </div>
         <div role="tabpanel" class="tab-pane active" id="sour">
             <div class="btn" data-toggle="modal" data-target="#addSource" id="sendMB">Create  Dissemination</div>
-            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Discussion Approve</div>
-            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Discussion</div>
+            <div class="btn" data-toggle="modal" id="postMan" onclick="disMan()">Disscussion Approve</div>
+            <div class="btn" data-toggle="modal" data-target="#creatDisM" id="creatDis">Create  Disscussion</div>
             <div class="btn" data-toggle="modal" onclick="DMV()">View Dissemination</div>
-            <div class="btn" data-toggle="modal" id="VD">View Discussion</div>
+            <div class="btn" data-toggle="modal" id="VD">View Disscussion</div>
             <div class="btn" data-toggle="modal" id="VCB">View Citation</div>
-            <div class="btn" data-toggle="modal" id="AMD">Manage Discussion</div>
+            <div class="btn" data-toggle="modal" id="AMD">Manage Disscussion</div>
             <div class="btn" data-toggle="modal" id="ASP">Search Posting</div>
-           
         </div>
         <div class="modal fade" id="creatDisM" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create Discussion</h4>
+                        <h4 class="modal-title">Creat Discussion</h4>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -70,6 +70,7 @@
                                         <input type="hidden" id="ddate" name="type">
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Group:</label>
                                     <div class="col-xs-5 ">
@@ -81,16 +82,26 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-xs-3 control-label">Photo: </label> 
+                                    <div class="col-xs-4 ">
+                                        <input id="file" type="file" name="file" text="Add Photo"  /> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-xs-3 control-label">Topic:</label>
                                     <div class="col-xs-3">
-                                        <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        <input type="input" name="topic" id="dtopic" class="form-control col-xs-3 input-sm context-input duiqi" list="kws"></input>
+                                        <datalist id="kws">
+
+                                        </datalist>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Message:</label>
-                                    <div class="col-xs-5">
-                                        <textarea type="text" name="message" id="dmessage" class="form-control context-input duiqi"></textarea>
+                                    <div class="col-xs-3">
+                                        <textarea name="message" id="dmessage" class="duiqi" rows="4" cols="25"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -149,7 +160,10 @@
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Topic:</label>
                                     <div class="col-xs-3">
-                                        <input type="input" name="topic" id="topic" class="form-control col-xs-3 input-sm context-input duiqi"></input>
+                                        <input type="input" name="topic" id="topic" class="form-control col-xs-3 input-sm context-input duiqi" list="kws2"></input>
+                                        <datalist id="kws2">
+
+                                        </datalist>
                                     </div>
                                 </div>
 
@@ -224,6 +238,77 @@
 </div>
 <script src="js/jquery.nouislider.js"></script>
 <script type="text/javascript">
+    var dic = [
+        'kidney', 'renal disease','intervention' ,'lupus' ,'transplant' ,
+        'transplantation', 'anemia', 'parathyroidism', 'hyperparathyroidism','CKD',
+        'chronic kidney disease', 'kidney disease','nutrition' ,'blood pressure' ,'hypertension' ,
+        'diabetes','CVD' ,'PVD' ,'cardiovascular disease' ,'peripheral vascular disease' ,
+        'hemoglobin','calcium' ,'potassium' ,'serum calcium' ,'PTH' ,
+        'blood urea nitrogen','creatinine' ,'GFR' ,'eGFR' ,'Glomerular filteration rate' ,
+        'albumin','ischemic heart disease' ,'typhoid' ,'erythropoietin' ,'nephrology' ,
+        'nephrologist','comorbidity','atrial fibrillation','mortality','diabetology',
+        'hemodialysis','dialysis','peritoneal','nephropathy','renal',
+        'amyloidosis','angiotensin','bicarbonate','boen disease','mineral bone disease',
+        'coagulation','cyclosporine','diabetes mellitus','endothelin','endotoxin','epidemiology',
+        'erythropoiesis','fibrosis','malignancy','neuropathy','osmolarity','parathyroid','phosphate','phosphorus',
+        'proteinuria','reflux','urea','vitamin D','urinalysis','kidney biopsy','catheter','catheter tube','NKF','National Kidney Foundation'
+    ];
+    function    setCookie (name,value,iDay) {//存储cookie
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=name+'='+value+';expires='+oDate;
+    };
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isIE11 = userAgent.indexOf("rv:11.0") > -1; //判断是否是IE11浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+    if(!isIE && !isEdge && !isIE11) {//兼容chrome和firefox
+        var _beforeUnload_time = 0, _gap_time = 0;
+        var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器
+        window.onunload = function (){
+            _gap_time = new Date().getTime() - _beforeUnload_time;
+            if(_gap_time <= 5){
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//谷歌浏览器刷新
+            }
+        }
+        window.onbeforeunload = function (){
+            _beforeUnload_time = new Date().getTime();
+            if(is_fireFox){//火狐关闭执行
+                $.ajax({
+                    url:"/ajax/logout",
+                    type:"POST",
+                    data: {
+                        "id":$("#tid").val()
+                    },
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            alert("succ in database");
+                        } else{
+                            alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            }else{//火狐浏览器刷新
+            }
+        };
+    }
+
+
 
     $("#signoutbtn").on('click' , function() {
         window.location.href="http://138.49.101.84";
@@ -249,8 +334,22 @@
     $('#ASP').on('click' , function() {
         window.location.href="/disscussion/adsearch/${UID}";
     })
-   
-
+    $("#herf").on('click' , function() {
+        window.location.href = "http://138.49.101.84";
+        $.ajax({
+            url:"/ajax/logout",
+            type:"POST",
+            data: {
+                "id":$("#tid").val()
+            },
+            success:function (text) {
+                if (text != null && text != ""){
+                } else{
+                    alert("获取失败，请重新获取")
+                }
+            }
+        });
+    })
     Date.prototype.Format = function (fmt) { // author: meizz
         var o = {
             "M+": this.getMonth() + 1, // 月份
@@ -327,6 +426,7 @@
         })
 
         $('#sendpost').on('click' , function() {
+            if (dic.indexOf($("#topic").val())>=0){
             if ($("#sel2 option:selected").text()=="physicians, nurses and administrators") {
                 sendtoNurse();
                 $.ajax({
@@ -374,63 +474,154 @@
                         alert("发生错误："+ jqXHR.status);
                     }
                 });
+            }}else {
+                window.alert("The topic is illegal")
             }
 
         })
+
 
         $('#dsenddis').on('click' , function() {
-            if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
-                senddistoNurse();
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"nurse",
-                        "status":"1",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
+            var illegal =0;
+            var txt = $("#dtopic").val().toString();
+            for (var j=0;j < dic.length;j++){
+                if(txt.indexOf(dic[j])>=0){
+                    illegal =1;
+                }
             }
-            else {
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/disscussion",
-                    data: {
-                        "time":""+$("#ddate").val(),
-                        "username":""+$("#duname").val(),
-                        "message":""+$("#dmessage").val(),
-                        "topic":""+$("#dtopic").val(),
-                        "keyword":""+$("#dkeyword").val(),
-                        "group":"patient",
-                        "status":"1",
-                    },
-                    success:function(data){
-                        if (data == "1"){
-                            $("#"+id).remove();
-                        }
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
-            }
+            if (illegal ==1){
 
+
+                var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+
+                var tokenv="ssssssss";
+
+                //var data = {"token":token,"file":fileObj};
+
+                var formData = new FormData();
+
+                formData.append("file",fileObj);
+
+                formData.append("token",tokenv);
+
+                $.ajax({
+
+                    url: '/img/upload',
+
+                    type: 'POST',
+
+                    cache: false,
+
+                    data: formData,
+
+                    processData: false,
+
+                    contentType: false
+
+                }).done(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                }).fail(function(res) {
+                    if ($("#dsel2 option:selected").text()=="physicians, nurses and administrators") {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"nurse",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/disscussion",
+                            data: {
+                                "time":""+$("#ddate").val(),
+                                "username":""+$("#duname").val(),
+                                "message":""+$("#dmessage").val(),
+                                "topic":""+$("#dtopic").val(),
+                                "keyword":""+$("#dkeyword").val(),
+                                "group":"patient",
+                                "status":"0",
+                                "pic":res.toString()
+                            },
+                            success:function(data){
+                                if (data == "1"){
+                                    $("#"+id).remove();
+                                }
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                });
+
+            }else {
+                window.alert("The topic is illegal!")
+            }
         })
-
-
-
 
         $('.approve').on('click' , function() {
             var id = ""+this.name;
@@ -475,6 +666,13 @@
     var websocket=null;
 
     $(function(){
+        for (var i=0;i<dic.length;i++ ) {
+            $("#kws").append('<option value="'+dic[i]+'">')
+        }
+
+        for (var i=0;i<dic.length;i++ ) {
+            $("#kws2").append('<option value="'+dic[i]+'">')
+        }
         connectWebSocket();
     })
 

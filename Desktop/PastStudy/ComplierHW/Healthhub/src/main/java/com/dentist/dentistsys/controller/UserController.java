@@ -3,11 +3,13 @@ package com.dentist.dentistsys.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.dentist.dentistsys.entity.LU;
 import com.dentist.dentistsys.entity.dissemination;
 import com.dentist.dentistsys.entity.hospitalInfo;
 import com.dentist.dentistsys.entity.user;
 import com.dentist.dentistsys.service.DisseminationService;
 import com.dentist.dentistsys.service.HospitalService;
+import com.dentist.dentistsys.service.LUService;
 import com.dentist.dentistsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private DisseminationService disseminationService;
+    @Autowired
+    private LUService luService;
     ArrayList<dissemination> disseminations;
     private user user;
     private String id;
@@ -63,7 +67,7 @@ public class UserController {
                     mav.addObject("blogID","123");
                     mav.addObject("blogs",jsonblogs);
                     System.out.println("userID:    "+user.getId());
-                    mav.setViewName("verificationCode");
+                   mav.setViewName("verificationCode");
                 } else if (user.getType().equals("tnurse")){
                     mav.addObject("ID",user.getPhysicion());
                     mav.addObject("blogID","123");
@@ -87,19 +91,23 @@ public class UserController {
         return mav;
     }
 
-
-
-
     @RequestMapping(value = "/verification", method = {RequestMethod.GET})
     public ModelAndView verification(HttpServletRequest request) {
         id = request.getParameter("id");
         user = userService.Sel(id);
         ModelAndView mav=new ModelAndView();
+        ArrayList<LU> lus =luService.selByID(id);
+        System.out.println(lus);
+        if (lus.size()>0){
+            mav.setViewName("dum");
+            return mav;
+        }
         if(user != null){
             if (user.getPassword().equals(password) ) {
                 mav.setViewName("wrongpassword");
                 mav.addObject("user",user);
                 if (user.getType().equals("tpatient")){
+                    luService.ins(id);
                     disseminations = disseminationService.getdesseminationforPatient();
                     mav.addObject("ID",user.getPhysicion());
                     mav.addObject("blogID",disseminationService.getAlldessemination().size());
@@ -110,6 +118,7 @@ public class UserController {
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("Main");
                 } else if (user.getType().equals("tdoctor")){
+                    luService.ins(id);
                     disseminations = disseminationService.getAlldessemination();
                     mav.addObject("ID",user.getId());
                     mav.addObject("blogID",disseminationService.getAlldessemination().size());
@@ -120,6 +129,7 @@ public class UserController {
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("dec-index");
                 } else if (user.getType().equals("tnurse")){
+                    luService.ins(id);
                     disseminations = disseminationService.getdesseminationforNurse();
                     mav.addObject("ID",user.getPhysicion());
                     mav.addObject("blogID",disseminationService.getAlldessemination().size());
@@ -130,9 +140,12 @@ public class UserController {
                     System.out.println("userID:    "+user.getId());
                     mav.setViewName("Nurse");
                 }else if(user.getType().equals("admin")){
+                    ArrayList<hospitalInfo> members  = new ArrayList<hospitalInfo>();
+                    members = hospitalService.getAll();
                     mav.addObject("UName",user.getRealname());
                     mav.addObject("UID",user.getId());
                     ArrayList<user> users =  userService.SelAllF();
+                    mav.addObject("member",JSON.toJSONString(members));
                     mav.addObject("users", JSON.toJSONString(users));
                     mav.setViewName("admin");
                 }else {
@@ -146,14 +159,10 @@ public class UserController {
         return mav;
     }
 
-
-
-
     @RequestMapping(value = "/reg", method = {RequestMethod.POST})
     public ModelAndView userregister(HttpServletRequest request, @ModelAttribute("form") user user) {
         user user1 =userService.Sel(user.getId());
         ModelAndView mav=new ModelAndView();
-        System.out.println("add a user++++++++++++++++++++++++");
         String lastname = "";
         if (user.getRealname().split(" ").length > 1){
           lastname = user.getRealname().split( " ")[1];
@@ -164,15 +173,9 @@ public class UserController {
         System.out.println("______________"+hospitalInfos.size());
         System.out.println(hospitalInfos);
         if (user1 == null) {
-            if (hospitalInfos.size()>0) {
             userService.Ins(user);
             mav.setViewName("index");
             return mav;
-            }else {
-                mav.setViewName("NoPower");
-                return mav;
-            }
-
         }
 
         mav.setViewName("alreadyexist");

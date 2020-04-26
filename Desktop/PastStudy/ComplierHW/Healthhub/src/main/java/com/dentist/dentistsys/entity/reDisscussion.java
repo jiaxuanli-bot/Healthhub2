@@ -19,6 +19,8 @@ public class reDisscussion {
 
     private String disparentid;
 
+    private String addinf;
+
     public String getDisname() {
         return disname;
     }
@@ -91,6 +93,14 @@ public class reDisscussion {
         this.disparentid = disparentid;
     }
 
+    public String getAddinf() {
+        return addinf;
+    }
+
+    public void setAddinf(String addinf) {
+        this.addinf = addinf;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,6 +116,7 @@ public class reDisscussion {
         sb.append(", dismessage=").append(dismessage);
         sb.append(", disid=").append(disid);
         sb.append(", disparentid=").append(disparentid);
+        sb.append(", addinf=").append(addinf);
         sb.append("]");
         return sb.toString();
     }
