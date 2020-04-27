@@ -99,7 +99,8 @@ public class UserController {
         ArrayList<LU> lus =luService.selByID(id);
         System.out.println(lus);
         if (lus.size()>0){
-            mav.setViewName("dum");
+            mav.addObject("switch",'1');
+            mav.setViewName("index");
             return mav;
         }
         if(user != null){

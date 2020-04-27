@@ -590,7 +590,7 @@
                 "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
                 "                                        <hr>\n" +
 
-                "                                        <p><img src=/upload/imgs/"+blogs[i].img+"></p>\n" +
+                "                                        <p><img src=/"+blogs[i].img+"></p>\n" +
                 "                                        <div class=\"input-group-btn\">\n" +
                 "                                        <button class=\"btn-danger btn-sm\" onclick='s("+blogs[i].disid+")' data-toggle=\"modal\" data-target=\"#reply2\">cite</button>\n" +
                 "                                    </div>\n" +

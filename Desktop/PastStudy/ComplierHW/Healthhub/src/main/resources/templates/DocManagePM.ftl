@@ -157,6 +157,13 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="col-xs-3 control-label">Photo: </label> 
+                                        <div class="col-xs-4 ">
+                                            <input id="file2" type="file" name="file2" text="Add Photo"  /> 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-xs-3 control-label">Topic:</label>
                                         <div class="col-xs-3">
                                             <input type="input" name="topic" id="topic" class="form-control col-xs-3 input-sm context-input duiqi" list="kws2"></input>
@@ -719,76 +726,190 @@
                 window.alert("The topic is illegal!")
             }
         })
+
         $('#sendpost').on('click' , function() {
-            if (dic.indexOf($("#topic").val())>=0){
-            if ($("#sel2 option:selected").text()=="physicians, nurses and administrators") {
-                var postValue = {};
-                postValue.id = "1234";//$("#blogID").val();
-                postValue.name = "nurse";
-                var date = {};
-                date.time = $("#date").val();
-                date.username  = $("#uname").val();
-                date.message = $("#message").val();
-                date.topic = $("#topic").val();
-                date.keyword = $("#keyword").val();
-                date.type = "dissemination";
-                //var dateStr = JSON.stringify(date);
-                postValue.text=date;
-                websocket.send(JSON.stringify(postValue));
-                $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/dissemination",
-                    data: {
-                        "time":""+$("#date").val(),
-                        "username":""+$("#uname").val(),
-                        "message":""+$("#message").val(),
-                        "topic":""+$("#topic").val(),
-                        "keyword":""+$("#keyword").val(),
-                        "group":"nurse",
-                        "status":"1",
-                    },
-                    success:function(data){
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
-                    }
-                });
+            var illegal =0;
+            var txt = $("#topic").val().toString();
+            for (var j=0;j < dic.length;j++){
+                if(txt.indexOf(dic[j])>=0){
+                    illegal =1;
+                }
             }
-            else {
-                var postValue = {};
-                postValue.id = "1234";//$("#blogID").val();
-                postValue.name = "patient";
-                var date = {};
-                date.time = $("#date").val();
-                date.username  = $("#uname").val();
-                date.message = $("#message").val();
-                date.topic = $("#topic").val();
-                date.keyword = $("#keyword").val();
-                date.type = "dissemination";
-                //var dateStr = JSON.stringify(date);
-                // date.topic =
-                postValue.text=date;
-                websocket.send(JSON.stringify(postValue));
+
+            if (illegal ==1){
+
+                var fileObj = document.getElementById("file2").files[0]; // js 获取文件对象
+
+                var tokenv="ssssssss";
+
+                //var data = {"token":token,"file":fileObj};
+
+                var formData = new FormData();
+
+                formData.append("file",fileObj);
+
+                formData.append("token",tokenv);
+
                 $.ajax({
-                    type:"POST",
-                    url:"/ajax/admin/dissemination",
-                    data: {
-                        "time":""+$("#date").val(),
-                        "username":""+$("#uname").val(),
-                        "message":""+$("#message").val(),
-                        "topic":""+$("#topic").val(),
-                        "keyword":""+$("#keyword").val(),
-                        "group":"patient",
-                        "status":"1",
-                    },
-                    success:function(data){
-                    },
-                    error:function(jqXHR){
-                        alert("发生错误："+ jqXHR.status);
+
+                    url: '/img/upload',
+
+                    type: 'POST',
+
+                    cache: false,
+
+                    data: formData,
+
+                    processData: false,
+
+                    contentType: false
+
+                }).done(function(res) {
+
+                    if ($("#sel2 option:selected").text()=="physicians, nurses and administrators") {
+                        var postValue = {};
+                        postValue.id = "1234";//$("#blogID").val();
+                        postValue.name = "nurse";
+                        var date = {};
+                        date.time = $("#date").val();
+                        date.username  = $("#uname").val();
+                        date.message = $("#message").val();
+                        date.topic = $("#topic").val();
+                        date.keyword = $("#keyword").val();
+                        date.type = "dissemination";
+                        //var dateStr = JSON.stringify(date);
+                        postValue.text=date;
+                        websocket.send(JSON.stringify(postValue));
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/dissemination",
+                            data: {
+                                "time":""+$("#date").val(),
+                                "username":""+$("#uname").val(),
+                                "message":""+$("#message").val(),
+                                "topic":""+$("#topic").val(),
+                                "keyword":""+$("#keyword").val(),
+                                "group":"nurse",
+                                "status":"1",
+                                "pic":res.toString(),
+                            },
+                            success:function(data){
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+                        var postValue = {};
+                        postValue.id = "1234";//$("#blogID").val();
+                        postValue.name = "patient";
+                        var date = {};
+                        date.time = $("#date").val();
+                        date.username  = $("#uname").val();
+                        date.message = $("#message").val();
+                        date.topic = $("#topic").val();
+                        date.keyword = $("#keyword").val();
+                        date.type = "dissemination";
+                        //var dateStr = JSON.stringify(date);
+                        // date.topic =
+                        postValue.text=date;
+                        websocket.send(JSON.stringify(postValue));
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/dissemination",
+                            data: {
+                                "time":""+$("#date").val(),
+                                "username":""+$("#uname").val(),
+                                "message":""+$("#message").val(),
+                                "topic":""+$("#topic").val(),
+                                "keyword":""+$("#keyword").val(),
+                                "group":"patient",
+                                "status":"1",
+                                "pic":res.toString(),
+                            },
+                            success:function(data){
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+
+                }).fail(function(res) {
+
+                    if ($("#sel2 option:selected").text()=="physicians, nurses and administrators") {
+
+                        var postValue = {};
+                        postValue.id = "1234";//$("#blogID").val();
+                        postValue.name = "nurse";
+                        var date = {};
+                        date.time = $("#date").val();
+                        date.username  = $("#uname").val();
+                        date.message = $("#message").val();
+                        date.topic = $("#topic").val();
+                        date.keyword = $("#keyword").val();
+                        date.type = "dissemination";
+                        //var dateStr = JSON.stringify(date);
+                        postValue.text=date;
+                        websocket.send(JSON.stringify(postValue));
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/dissemination",
+                            data: {
+                                "time":""+$("#date").val(),
+                                "username":""+$("#uname").val(),
+                                "message":""+$("#message").val(),
+                                "topic":""+$("#topic").val(),
+                                "keyword":""+$("#keyword").val(),
+                                "group":"nurse",
+                                "status":"1",
+                            },
+                            success:function(data){
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
+                    }
+                    else {
+
+                        var postValue = {};
+                        postValue.id = "1234";//$("#blogID").val();
+                        postValue.name = "patient";
+                        var date = {};
+                        date.time = $("#date").val();
+                        date.username  = $("#uname").val();
+                        date.message = $("#message").val();
+                        date.topic = $("#topic").val();
+                        date.keyword = $("#keyword").val();
+                        date.type = "dissemination";
+                        //var dateStr = JSON.stringify(date);
+                        // date.topic =
+                        postValue.text=date;
+                        websocket.send(JSON.stringify(postValue));
+                        $.ajax({
+                            type:"POST",
+                            url:"/ajax/admin/dissemination",
+                            data: {
+                                "time":""+$("#date").val(),
+                                "username":""+$("#uname").val(),
+                                "message":""+$("#message").val(),
+                                "topic":""+$("#topic").val(),
+                                "keyword":""+$("#keyword").val(),
+                                "group":"patient",
+                                "status":"1",
+                            },
+                            success:function(data){
+                            },
+                            error:function(jqXHR){
+                                alert("发生错误："+ jqXHR.status);
+                            }
+                        });
                     }
                 });
-            }}else {
-                window.alert("The topic is illegal!")
+            }else {
+                window.alert("The topic is illegal")
             }
         })
     });

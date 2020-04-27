@@ -23,7 +23,7 @@
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.dentist.dentistsys.mapper" targetProject="src/main/java" />
 
-        <table tableName="reDisscussion" domainObjectName="reDisscussion" />
+        <table tableName="dissemination" domainObjectName="dissemination" />
     </context>
 
 </generatorConfiguration>

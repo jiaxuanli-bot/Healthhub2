@@ -3,14 +3,14 @@ package com.dentist.dentistsys.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class disseminationExample {
+public class dissemiantionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public disseminationExample() {
+    public dissemiantionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

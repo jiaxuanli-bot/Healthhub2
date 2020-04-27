@@ -32,7 +32,7 @@
                         <label>Password</label>
                         <input type="password" name="password"id="password" autocomplete="current-password" class="lowin-input">
                     </div>
-                    <button class="lowin-btn" type="submit" id="loggin">
+                    <button class="lowin-btn" type="submit" onclick="check()" id="loggin">
                         Login
                     </button>
                     <div class="text-foot">
@@ -44,5 +44,11 @@
     </div>
 </div>
 </div>
+<script>
+    window.onload = function (ev) {
+        if (${switch}) {
+        window.alert("The user have been login")}
+    }
+</script>
 </body>
 </html>

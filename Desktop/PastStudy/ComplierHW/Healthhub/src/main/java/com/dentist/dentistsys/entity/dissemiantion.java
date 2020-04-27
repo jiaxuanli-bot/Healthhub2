@@ -1,6 +1,6 @@
 package com.dentist.dentistsys.entity;
 
-public class reDisscussion {
+public class dissemiantion {
     private String disname;
 
     private String disdate;
@@ -15,11 +15,11 @@ public class reDisscussion {
 
     private String dismessage;
 
+    private String disstate;
+
     private String disid;
 
-    private String disparentid;
-
-    private String addinf;
+    private String citeinf;
 
     private String img;
 
@@ -79,6 +79,14 @@ public class reDisscussion {
         this.dismessage = dismessage;
     }
 
+    public String getDisstate() {
+        return disstate;
+    }
+
+    public void setDisstate(String disstate) {
+        this.disstate = disstate;
+    }
+
     public String getDisid() {
         return disid;
     }
@@ -87,20 +95,12 @@ public class reDisscussion {
         this.disid = disid;
     }
 
-    public String getDisparentid() {
-        return disparentid;
+    public String getCiteinf() {
+        return citeinf;
     }
 
-    public void setDisparentid(String disparentid) {
-        this.disparentid = disparentid;
-    }
-
-    public String getAddinf() {
-        return addinf;
-    }
-
-    public void setAddinf(String addinf) {
-        this.addinf = addinf;
+    public void setCiteinf(String citeinf) {
+        this.citeinf = citeinf;
     }
 
     public String getImg() {
@@ -124,9 +124,9 @@ public class reDisscussion {
         sb.append(", distopic=").append(distopic);
         sb.append(", diskeyword=").append(diskeyword);
         sb.append(", dismessage=").append(dismessage);
+        sb.append(", disstate=").append(disstate);
         sb.append(", disid=").append(disid);
-        sb.append(", disparentid=").append(disparentid);
-        sb.append(", addinf=").append(addinf);
+        sb.append(", citeinf=").append(citeinf);
         sb.append(", img=").append(img);
         sb.append("]");
         return sb.toString();

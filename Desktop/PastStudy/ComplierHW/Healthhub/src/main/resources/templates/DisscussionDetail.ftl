@@ -246,6 +246,15 @@
                                                                 <input type="hidden" id="rdate" name="type">
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-xs-3 control-label">Photo: </label> 
+                                                            <div class="col-xs-4 ">
+                                                                <input id="rfile" type="file" name="rfile" text="Add Photo"  /> 
+                                                            </div>
+                                                        </div>
+
+
                                                         <div class="form-group">
                                                             <label class="col-xs-3 control-label">Topic:</label>
                                                             <div class="col-xs-3">
@@ -658,6 +667,7 @@
                 "                                        <p><b>Time:</b>"+blogs[i].disdate+"</p>\n" +
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>"+blogs[i].dismessage+"</p>\n" +
+                "                                        <p><img src=/"+blogs[i].img+"></p>\n" +
                 "                                    </div>\n" +
                 "                                </div>";
             $("#context").append(html);
@@ -674,6 +684,7 @@
                 "                                        <hr>\n" +
                 "                                        <p><b>Message:</b>" + replys[j].dismessage + "</p>\n" +
                 "                                        <hr>\n" +
+                "                                        <p><img src=/"+replys[j].img+"></p>\n" +
                 "                                        <div class=\"input-group-btn\">\n" +
                 "                                        <button class=\"btn-danger btn-sm\" onclick='s("+replys[j].disid+")' data-toggle=\"modal\" data-target=\"#reply2\">cite</button>\n" +
                 "                                    </div>" +
@@ -686,8 +697,14 @@
         connectWebSocket();
 
         $('#rdis').on('click' , function() {
-
-            if (dic.indexOf($("#rtopic").val())>=0){
+            var illegal = 0;
+            var txt = $("#rtopic").val().toString();
+            for (var j=0;j < dic.length;j++){
+                if(txt.indexOf(dic[j])>=0){
+                    illegal =1;
+                }
+            }
+            if (illegal ==1){
             var postValue = {};
             postValue.id = "1234";//$("#blogID").val();
             postValue.name = "dis";
@@ -703,34 +720,91 @@
             postValue.text=date;
             websocket.send(JSON.stringify(postValue));
             var parentid;
+
             if ($("#isre").val()=="t") {
                 parentid = "r"+$("#DisscussionID").val();
             }
             else {
                 parentid = $("#DisscussionID").val();
             }
-            $.ajax({
-                type:"POST",
-                url:"/ajax/replyDisscussion",
-                data: {
-                    "time":""+$("#rdate").val(),
-                    "username":""+$("#runame").val(),
-                    "message":""+ $("#rmessage").val(),
-                    "topic":""+$("#rtopic").val(),
-                    "keyword":""+$("#rkeyword").val(),
-                    "parentid": parentid
-                },
-                success:function(data){
-                    if (data == "1"){
-                        $("#"+id).remove();
-                    }
-                },
-                error:function(jqXHR){
-                    alert("发生错误："+ jqXHR.status);
-                }
-            });
+
+
+                var fileObj = document.getElementById("rfile").files[0]; // js 获取文件对象
+
+                var tokenv="ssssssss";
+
+                //var data = {"token":token,"file":fileObj};
+
+                var formData = new FormData();
+
+                formData.append("file",fileObj);
+
+                formData.append("token",tokenv);
+
+                $.ajax({
+
+                    url: '/img/upload',
+
+                    type: 'POST',
+
+                    cache: false,
+
+                    data: formData,
+
+                    processData: false,
+
+                    contentType: false
+
+                }).done(function(res) {
+                    $.ajax({
+                        type:"POST",
+                        url:"/ajax/replyDisscussion",
+                        data: {
+                            "pic":res.toString(),
+                            "time":""+$("#rdate").val(),
+                            "username":""+$("#runame").val(),
+                            "message":""+ $("#rmessage").val(),
+                            "topic":""+$("#rtopic").val(),
+                            "keyword":""+$("#rkeyword").val(),
+                            "parentid": parentid
+                        },
+                        success:function(data){
+                            if (data == "1"){
+                                $("#"+id).remove();
+                            }
+                        },
+                        error:function(jqXHR){
+                            alert("发生错误："+ jqXHR.status);
+                        }
+                    });
+                }).fail(function(res) {
+                    $.ajax({
+                        type:"POST",
+                        url:"/ajax/replyDisscussion",
+                        data: {
+                            "pic":res.toString(),
+                            "time":""+$("#rdate").val(),
+                            "username":""+$("#runame").val(),
+                            "message":""+ $("#rmessage").val(),
+                            "topic":""+$("#rtopic").val(),
+                            "keyword":""+$("#rkeyword").val(),
+                            "parentid": parentid
+                        },
+                        success:function(data){
+                            if (data == "1"){
+                                $("#"+id).remove();
+                            }
+                        },
+                        error:function(jqXHR){
+                            alert("发生错误："+ jqXHR.status);
+                        }
+                    });
+                });
+
+
+
             size = size+1;}else {
-                window.alert("the topic is illegal")
+                window.alert("the topic is illegal aaaaa")
             }
 
         })

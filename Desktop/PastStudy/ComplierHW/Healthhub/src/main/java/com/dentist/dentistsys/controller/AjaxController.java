@@ -182,6 +182,7 @@ public class AjaxController {
        String group=request.getParameter("group");
         System.out.println(group);
         String status=request.getParameter("status");
+        String pic = request.getParameter("pic");
         dissemination dissemination=new dissemination();
         dissemination.setDisstate(status);
         dissemination.setDisdate(time);
@@ -191,6 +192,7 @@ public class AjaxController {
         dissemination.setDiskeyword(keyword);
         dissemination.setDisgroup(group);
         dissemination.setDisid(status);
+        dissemination.setImg(pic);
         disseminationService.ins(dissemination);
         return "1";
     }
@@ -285,6 +287,7 @@ public class AjaxController {
         System.out.println(keyword);
         String parentid=request.getParameter("parentid");
         System.out.println(parentid);
+        String pic = request.getParameter("pic");
 
         reDisscussion disscussion =new reDisscussion();
         disscussion.setDisdate(time);
@@ -293,6 +296,7 @@ public class AjaxController {
         disscussion.setDistopic(topic);
         disscussion.setDiskeyword(keyword);
         disscussion.setDisparentid(parentid);
+        disscussion.setImg(pic);
         redisscussionService.ins(disscussion);
         //disseminationService.ins(dissemination);
         return "1";
